@@ -1,103 +1,267 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { motion } from "framer-motion";
+import { IoMdHand } from "react-icons/io";
+import { IoIosArrowDown } from "react-icons/io";
+import { FaGithub, FaLinkedin, FaEnvelope, FaFileDownload } from "react-icons/fa"; // Importing file icon
+
+export default function Portfolio() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+    <div className="relative min-h-screen bg-gray-900 text-white px-6 md:px-16 lg:px-32">
+      {/* Background Images */}
+      <div
+        className="absolute top-0 left-0 w-full h-screen"
+        style={{
+          backgroundImage: "url('/bg1.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "top center",
+        }}
+      />
+      <div
+        className="absolute top-[100vh] left-0 w-full h-screen"
+        style={{
+          backgroundImage: "url('/bg2.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "top center",
+        }}
+      />
+      <div
+        className="absolute top-[200vh] left-0 w-full h-screen"
+        style={{
+          backgroundImage: "url('/bg3.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "top center",
+        }}
+      />
+      <div
+        className="absolute top-[300vh] left-0 w-full h-screen"
+        style={{
+          backgroundImage: "url('/bg4.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "top center",
+        }}
+      />
+      <div
+        className="absolute top-[400vh] left-0 w-full h-screen"
+        style={{
+          backgroundImage: "url('/bg5.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "top center",
+        }}
+      />
+      {/* Content Sections */}
+      <div className='relative z-1'>
+        <HeroSection />
+        <AboutSection />
+        <ContactSection />
+        <ProjectsSection />
+      </div>
     </div>
+  );
+}
+
+function HeroSection() {
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: -50 }} 
+      animate={{ opacity: 1, y: 0 }} 
+      transition={{ duration: 1 }}
+      className="flex flex-col items-center justify-center h-screen text-center"
+    >
+      <h1 className="text-5xl md:text-7xl font-bold flex items-center gap-2 animate-pulse">
+        Welcome to My Corner! 
+        <motion.div 
+          animate={{ rotate: [0, 20, 0, -20, 0] }} 
+          transition={{ repeat: Infinity, duration: 1.2 }}
+        >
+          <IoMdHand className="text-yellow-400 text-11xl" />
+        </motion.div>
+      </h1>
+      <motion.div 
+        animate={{ y: [0, 10, 0] }} 
+        transition={{ repeat: Infinity, duration: 1.5 }}
+        className="mt-10 flex items-center gap-2"
+      >
+        <IoIosArrowDown className="text-4xl text-gray-400" />
+        <span className="text-lg text-gray-400">Scroll Down</span>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+function AboutSection() {
+  return (
+    <motion.div 
+      initial={{ opacity: 0, x: -100 }} 
+      whileInView={{ opacity: 1, x: 0 }} 
+      transition={{ duration: 1 }}
+      className="py-20"
+    >
+      <h2 className="text-4xl text-center font-bold mb-6">About Me</h2>
+      <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+        <div className="flex items-center gap-6 border-b-4 border-gray-700 pb-6 mb-6">
+          <img 
+            src="/me.jpg" 
+            alt="My Picture" 
+            className="w-40 h-40 rounded-full object-cover border-4 border-gray-700 shadow-lg" 
+          />
+          <div>
+            <p className="text-gray-400 text-lg">
+              Hey, I'm Cooper! I am a student at Montgomery Blair High School always eager to learn more about robotics, debate, AI, and climate change.
+              <span className="text-yellow-300"> I love trying new things and building new projects. Reach out!</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+function ContactSection() {
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: 100 }} 
+      animate={{ opacity: 1, y: 0 }} 
+      transition={{ duration: 1 }}
+      className="py-20"
+    >
+      <h2 className="text-4xl font-bold mb-6 text-center">Contact/Resume</h2>
+      <div>
+        <motion.div 
+          animate={{ scale: [1, 1.1, 1] }} 
+          transition={{ repeat: Infinity, duration: 2 }}
+          className="flex justify-center"
+        >
+          <div className="flex gap-10 justify-center items-center p-6 border-4 border-gray-700 rounded-full hover:bg-gray-800 transition duration-300">
+            <a 
+              href="mailto:copperli1234@gmail.com" 
+              className="text-3xl text-gray-400 hover:text-yellow-400 transition duration-300"
+            >
+              <FaEnvelope />
+            </a>
+            <a 
+              href="https://github.com/CooperLi1" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-3xl text-gray-400 hover:text-yellow-400 transition duration-300"
+            >
+              <FaGithub />
+            </a>
+            <a 
+              href="https://www.linkedin.com/in/cooper-li-483672341" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-3xl text-gray-400 hover:text-yellow-400 transition duration-300"
+            >
+              <FaLinkedin />
+            </a>
+            <a 
+              href="https://drive.google.com/file/d/1xJ2eMiS8GXGEpoGaKvoetEYNhwGyPBSp/view?usp=sharing" 
+              download
+              className="text-3xl text-gray-400 hover:text-yellow-400 transition duration-300"
+            >
+              <FaFileDownload />
+            </a>
+          </div>
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+}
+
+function ProjectsSection() {
+  const projects = [
+    { 
+      title: "Homemade CNC Machine | 2024-Now", 
+      description: "Custom designed machine to cut wood/aluminum.", 
+      image: "/cncpic.png",
+      link: "/projects/cnc" 
+    },
+    { 
+      title: "InvestorBriefs | 2025", 
+      description: "Website providing real-time stock insights using AI. Built with NextJS.",
+      image: "/investorbriefs.png",
+      link: "https://investorbriefs.vercel.app" 
+    },
+    {
+      title: "Polyformer | 2024-2025", 
+      description: "Recyling water-bottles into 3D Printer filament.",
+      image: "/polyformerpic.png",
+      link: "/projects/polyformer" 
+    }, 
+    {
+      title: "Wartortle | 2024-2025", 
+      description: "Telescoping arm robot with 2-stage hang for FIRST Tech Challenge Into the Deep Season. Peaked 6th OPR worldwide, 1st OPR Chesapeake, finals at Chesapeake states.",
+      image: "/wartortle.jpg",
+      link: "/projects/wartortle" 
+    }, 
+    {
+      title: "Rechargable Flashlight | 2024", 
+      description: "Flashlight with 3 recharging mechanisms: ripcord, barreljack, battery.",
+      image: "/flashlightexternal.png",
+      link: "/projects/flashlight" 
+    }, 
+    {
+      title: "ESP32 Breakout Board | 2024", 
+      description: "Compact PCB custom designed in Altium for JHU APL Internship",
+      image: "/images/next-authentication.jpg",
+      link: "/projects/investorbriefs" 
+    }, 
+    {
+      title: "Nash | 2023-2024", 
+      description: "Dual Extension differential arm robot for FIRST Tech Challenge Centerstage Season. Top 4 winner at World hampionship and Chesapeake state champion.",
+      image: "/images/next-authentication.jpg",
+      link: "/projects/investorbriefs" 
+    }, 
+    {
+      title: "Diffy | 2023", 
+      description: "Differential drive pod built as a gift to my friend.",
+      image: "/diffy.jpg",
+      link: "/projects/diffy" 
+    }, 
+    {
+      title: "Nutmeg | 2022-2023", 
+      description: "Turret crane robot for FIRST Tech Challenge Powerplay Season. Alabama state champion.",
+      image: "/images/next-authentication.jpg",
+      link: "/projects/investorbriefs" 
+    }, 
+    {
+      title: "Macadamia | 2021-2022", 
+      description: "Suspension robot for FIRST Tech Challenge Freight Frenzy Season. World championship division semifinalist, Chesapeake state champion.",
+      image: "/images/next-authentication.jpg",
+      link: "/projects/investorbriefs" 
+    }, 
+  ];
+
+  return (
+    <motion.div 
+      initial={{ opacity: 0, x: 100 }} 
+      whileInView={{ opacity: 1, x: 0 }} 
+      transition={{ duration: 1 }}
+      className="py-20"
+    >
+      <h2 className="text-4xl font-bold mb-6 text-center">Projects</h2>
+      <div className="space-y-6 divide-y divide-gray-700">
+        {projects.map((project, index) => (
+          <motion.a 
+            key={index}
+            href={project.link} // Link to the project
+            target="_blank" // Opens in a new tab
+            whileHover={{ scale: 1.05 }}
+            className="bg-gray-800 p-6 rounded-lg shadow-lg flex flex-col md:flex-row items-start gap-6"
+          >
+            <img 
+              src={project.image} 
+              alt={project.title} 
+              className="w-40 h-40 object-cover rounded-lg mb-4 md:mb-0"
+            />
+            <div>
+              <h3 className="text-2xl font-semibold">{project.title}</h3>
+              <p className="text-gray-400 mt-2">{project.description}</p>
+            </div>
+          </motion.a>
+        ))}
+      </div>
+    </motion.div>
   );
 }
