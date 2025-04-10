@@ -216,7 +216,7 @@ function ProjectsSection() {
     {
       title: "Diffy | 2023", 
       description: "Differential drive pod built as a gift to my friend.",
-      image: "/diffy.jpg",
+      image: "/differential.jpg",
       link: "/projects/diffy" 
     }, 
     {

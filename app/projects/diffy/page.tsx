@@ -6,7 +6,7 @@ export default function ProjectPage() {
     media: [
       {
         type: "image",
-        src: "/diffy.jpg",
+        src: "/differential.jpg",
         alt: "Demo Image 1",
         description: "Differential drive pod built as a gift to my friend.",
       },
