@@ -32,7 +32,7 @@ export default function ProjectPage() {
   return (
     <div className="bg-gray-800 min-h-screen text-white p-4">
       <h1 className="text-4xl font-bold mb-8">{project.name}</h1>
-
+ 
       <div className="space-y-12">
         {project.media.map((item, index) => (
           <div key={index} className="rounded-xl overflow-hidden shadow-lg bg-gray-700">
