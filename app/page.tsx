@@ -101,13 +101,13 @@ function AboutSection() {
       <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
         <div className="flex items-center gap-6 border-b-4 border-gray-700 pb-6 mb-6">
           <img 
-            src="/me.jpg" 
+            src="/cooper1.png" 
             alt="My Picture" 
             className="w-40 h-40 rounded-full object-cover border-4 border-gray-700 shadow-lg" 
           />
           <div>
             <p className="text-gray-400 text-lg">
-              Hey, I'm Cooper! I am a student at Montgomery Blair High School always eager to learn more about robotics, debate, AI, and climate change.
+              Hey, I'm Cooper! I am a student at Montgomery Blair High School always eager to learn more about robotics, debate, AI, and climate change. My goal is to one day become a "full-stack" maker, experienced in everything from manufacturing to web dev to CAD.
               <span className="text-yellow-300"> I love trying new things and building new projects. Reach out!</span>
             </p>
           </div>
@@ -171,29 +171,35 @@ function ContactSection() {
 
 function ProjectsSection() {
   const projects = [
+    {
+      title: "📌 Wartortle | 2024-2025", 
+      description: "Telescoping arm robot with 2-stage hang for FIRST Tech Challenge Into the Deep Season. Peaked 6th OPR worldwide, 1st OPR Chesapeake, finals at Chesapeake states.",
+      image: "/wartortle.png",
+      link: "/projects/wartortle" 
+    }, 
+    { 
+      title: "📌 InvestorBriefs | 2025", 
+      description: "Website providing real-time stock insights using AI. Built with NextJS.",
+      image: "/investorbriefs.png",
+      link: "https://investorbriefs.vercel.app" 
+    },
+    {
+      title: "📌 Nash | 2023-2024", 
+      description: "Dual Extension differential arm robot for FIRST Tech Challenge Centerstage Season. Top 4 winner at FIRST world championship and Chesapeake state champion.",
+      image: "/nash.png",
+      link: "/projects/nash" 
+    }, 
     { 
       title: "Homemade CNC Machine | 2024-Now", 
       description: "Custom designed machine to cut wood/aluminum.", 
       image: "/cncpic.png",
       link: "/projects/cnc" 
     },
-    { 
-      title: "InvestorBriefs | 2025", 
-      description: "Website providing real-time stock insights using AI. Built with NextJS.",
-      image: "/investorbriefs.png",
-      link: "https://investorbriefs.vercel.app" 
-    },
     {
       title: "Polyformer | 2024-2025", 
       description: "Recyling water-bottles into 3D Printer filament.",
       image: "/polyformerpic.png",
       link: "/projects/polyformer" 
-    }, 
-    {
-      title: "Wartortle | 2024-2025", 
-      description: "Telescoping arm robot with 2-stage hang for FIRST Tech Challenge Into the Deep Season. Peaked 6th OPR worldwide, 1st OPR Chesapeake, finals at Chesapeake states.",
-      image: "/wartortle.jpg",
-      link: "/projects/wartortle" 
     }, 
     {
       title: "Rechargable Flashlight | 2024", 
@@ -204,14 +210,8 @@ function ProjectsSection() {
     {
       title: "ESP32 Breakout Board | 2024", 
       description: "Compact PCB custom designed in Altium for JHU APL Internship",
-      image: "/images/next-authentication.jpg",
-      link: "/projects/investorbriefs" 
-    }, 
-    {
-      title: "Nash | 2023-2024", 
-      description: "Dual Extension differential arm robot for FIRST Tech Challenge Centerstage Season. Top 4 winner at World hampionship and Chesapeake state champion.",
-      image: "/images/next-authentication.jpg",
-      link: "/projects/investorbriefs" 
+      image: "/board.png",
+      link: "/projects/esp32" 
     }, 
     {
       title: "Diffy | 2023", 
@@ -222,14 +222,14 @@ function ProjectsSection() {
     {
       title: "Nutmeg | 2022-2023", 
       description: "Turret crane robot for FIRST Tech Challenge Powerplay Season. Alabama state champion.",
-      image: "/images/next-authentication.jpg",
-      link: "/projects/investorbriefs" 
+      image: "/nutmeg.png",
+      link: "/projects/nutmeg" 
     }, 
     {
       title: "Macadamia | 2021-2022", 
       description: "Suspension robot for FIRST Tech Challenge Freight Frenzy Season. World championship division semifinalist, Chesapeake state champion.",
-      image: "/images/next-authentication.jpg",
-      link: "/projects/investorbriefs" 
+      image: "/mac.png",
+      link: "/projects/mac" 
     }, 
   ];
 
