@@ -10,22 +10,22 @@ export default function ProjectPage() {
         alt: "Demo Image 1",
         description: "The polyformer recycles plastic water bottles into 3D printer filament. The build was based on Reiten Cheng's open source Polyformer design.",
       },
-      {
-        type: "image",
-        src: "/images/demo2.jpg",
-        alt: "Demo Image 2",
-        description: "Bottles are first shredded before they are fed into the machine.",
-      },
+      // {
+      //   type: "image",
+      //   src: "/images/demo2.jpg",
+      //   alt: "Demo Image 2",
+      //   description: "Bottles are first shredded before they are fed into the machine.",
+      // },
       {
         type: "video",
         src: "/polyformer.mov",
         description: "Polyformer in action!",
       },
-      {
-        type: "image",
-        src: "",
-        description: "Printed benchy using polyformer filament.",
-      }
+      // {
+      //   type: "image",
+      //   src: "",
+      //   description: "Printed benchy using polyformer filament.",
+      // }
     ],
   };
 
