@@ -180,7 +180,7 @@ function ProjectsSection() {
     { 
       title: "📌 InvestorBriefs | 2025", 
       description: "Website providing real-time stock insights using AI. Built with NextJS.",
-      image: "/investorbriefs.png",
+      image: "/investorbriefs1.png",
       link: "https://investorbriefs.vercel.app" 
     },
     {
