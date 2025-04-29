@@ -125,18 +125,78 @@ function HeroSection() {
 
 function ProjectsSection() {
   const projects = [
-    { title: "📌 Wartortle | 2024–25", description: "Telescoping arm FTC robot, top Chesapeake OPR.", image: "/wartortle.png", link: "/projects/wartortle" },
-    { title: "📌 InvestorBriefs | 2025", description: "Real-time stock insights using AI.", image: "/investorbriefs1.png", link: "https://investorbriefs.vercel.app" },
-    { title: "📌 Nash | 2023–24", description: "Dual-extension FTC robot, Worlds finalist.", image: "/nash.png", link: "/projects/nash" },
-    { title: "Debatify | 2025–Now", description: "Debate search engine powered by Supabase.", image: "/debatify.png", link: "https://debat-ify.vercel.app" },
-    { title: "CNC Machine | 2024–Now", description: "Custom wood/aluminum cutting platform.", image: "/cncpic.png", link: "/projects/cnc" },
-    { title: "Polyformer | 2024–25", description: "PET recycling to 3D filament.", image: "/polyformerpic.png", link: "/projects/polyformer" },
-    { title: "Backbrace | 2024", description: "TPU + tubing support design.", image: "/backbrace2.png", link: "/projects/backbrace" },
-    { title: "Rechargeable Flashlight | 2024", description: "Triple charging flashlight concept.", image: "/flashlightexternal.png", link: "/projects/flashlight" },
-    { title: "ESP32 Board | 2024", description: "Custom Altium PCB, JHU APL internship.", image: "/board.png", link: "/projects/esp32" },
-    { title: "Diffy | 2023", description: "Gifted differential drive bot.", image: "/differential.jpg", link: "/projects/diffy" },
-    { title: "Nutmeg | 2022–23", description: "FTC turret crane, AL state champ.", image: "/nutmeg.png", link: "/projects/nutmeg" },
-    { title: "Macadamia | 2021–22", description: "FTC suspension bot, Worlds semi-finalist.", image: "/mac.png", link: "/projects/mac" },
+    {
+      title: "📌 Wartortle | 2024-2025", 
+      description: "Telescoping arm robot with 2-stage hang for FIRST Tech Challenge Into the Deep Season. Peaked 6th OPR worldwide, 1st OPR Chesapeake, finals at Chesapeake states.",
+      image: "/wartortle.png",
+      link: "/projects/wartortle" 
+    }, 
+    { 
+      title: "📌 InvestorBriefs | 2025", 
+      description: "Website providing real-time stock insights using AI. Built with NextJS.",
+      image: "/investorbriefs1.png",
+      link: "https://investorbriefs.vercel.app" 
+    },
+    {
+      title: "📌 Nash | 2023-2024", 
+      description: "Dual Extension differential arm robot for FIRST Tech Challenge Centerstage Season. Top 4 winner at FIRST world championship and Chesapeake state champion.",
+      image: "/nash.png",
+      link: "/projects/nash" 
+    }, 
+    { 
+      title: "Debatify | 2025-Now", 
+      description: "Debate search engine built with NextJS, Supabase, and Stripe. In Progress.", 
+      image: "/debatify.png",
+      link: "https://debat-ify.vercel.app" 
+    },
+    { 
+      title: "Homemade CNC Machine | 2024-Now", 
+      description: "Custom designed machine to cut wood/aluminum. In Progress.", 
+      image: "/cncpic.png",
+      link: "/projects/cnc" 
+    },
+    {
+      title: "Polyformer | 2024-2025", 
+      description: "Recyling water-bottles into 3D Printer filament.",
+      image: "/polyformerpic.png",
+      link: "/projects/polyformer" 
+    }, 
+    {
+      title: "Backbrace | 2024", 
+      description: "Custom designed+built backbrace out of TPU and surgical tubing.",
+      image: "/backbrace2.png",
+      link: "/projects/backbrace" 
+    }, 
+    {
+      title: "Rechargable Flashlight | 2024", 
+      description: "Flashlight with 3 recharging mechanisms: ripcord, barreljack, battery.",
+      image: "/flashlightexternal.png",
+      link: "/projects/flashlight" 
+    }, 
+    {
+      title: "ESP32 Breakout Board | 2024", 
+      description: "Compact PCB custom designed in Altium for JHU APL Internship",
+      image: "/board.png",
+      link: "/projects/esp32" 
+    }, 
+    {
+      title: "Diffy | 2023", 
+      description: "Differential drive pod built as a gift to my friend.",
+      image: "/differential.jpg",
+      link: "/projects/diffy" 
+    }, 
+    {
+      title: "Nutmeg | 2022-2023", 
+      description: "Turret crane robot for FIRST Tech Challenge Powerplay Season. Alabama state champion.",
+      image: "/nutmeg.png",
+      link: "/projects/nutmeg" 
+    }, 
+    {
+      title: "Macadamia | 2021-2022", 
+      description: "Suspension robot for FIRST Tech Challenge Freight Frenzy Season. World championship division semifinalist, Chesapeake state champion.",
+      image: "/mac.png",
+      link: "/projects/mac" 
+    }, 
   ];
 
   return (
