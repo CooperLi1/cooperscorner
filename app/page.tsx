@@ -150,6 +150,12 @@ function ProjectsSection() {
       link: "https://debat-ify.vercel.app" 
     },
     { 
+      title: "Stirling Engine | 2025-Now", 
+      description: "Homemade stirling engine. In Progress.", 
+      image: "/stirlingcad.png",
+      link: "/projects/stirling" 
+    },
+    { 
       title: "Homemade CNC Machine | 2024-Now", 
       description: "Custom designed machine to cut wood/aluminum. In Progress.", 
       image: "/cncpic.png",

@@ -201,7 +201,7 @@ function ProjectsSection() {
       title: "Debatify | 2025-Now", 
       description: "Debate search engine built with NextJS, Supabase, and Stripe. In Progress.", 
       image: "/debatify.png",
-      link: "https://debat-ify.vercel.app" 
+      link: "https://debat-ify.vercel.app/main/ai" 
     },
     { 
       title: "Homemade CNC Machine | 2024-Now", 

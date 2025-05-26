@@ -2,21 +2,27 @@ import React from "react";
 
 export default function ProjectPage() {
   const project = {
-    name: "CNC Machine (In progress)",
+    name: "Stirling Engine",
     media: [
       {
         type: "image",
-        src: "/cncpic.png",
+        src: "/stirlingv1.png",
         alt: "Demo Image 1",
-        description: "My CAD design for the CNC Machine. Currently working on assembly!",
+        description: "First version of striling engine. It didn't work, too inefficient :(",
       },
+      {
+        type: "image",
+        src: "/stirlingcad.png",
+        alt: "Demo Image 1",
+        description: "CAD for new version of stirling engine. Waiting for parts to arrive.",
+      }
     ],
   };
 
   return (
     <div className="bg-gray-800 min-h-screen text-white p-4">
       <h1 className="text-4xl font-bold mb-8">{project.name}</h1>
-
+ 
       <div className="space-y-12">
         {project.media.map((item, index) => (
           <div key={index} className="rounded-xl overflow-hidden shadow-lg bg-gray-700">
