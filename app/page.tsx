@@ -168,6 +168,12 @@ function ProjectsSection() {
       link: "/projects/polyformer" 
     }, 
     {
+      title: "Mini Me | 2024-2025", 
+      description: "Custom 60 cent educational robotics kit. Small robot with a big personality! Inspired by Hello Robot.",
+      image: "/minime.png",
+      link: "https://minimerobotics.vercel.app/" 
+    }, 
+    {
       title: "Backbrace | 2024", 
       description: "Custom designed+built backbrace out of TPU and surgical tubing.",
       image: "/backbrace2.png",
