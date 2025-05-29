@@ -8,18 +8,22 @@ import { FaGithub, FaLinkedin, FaEnvelope, FaFileDownload } from "react-icons/fa
 export default function Portfolio() {
   return (
     <div className="relative min-h-screen bg-gray-900 text-white px-4 md:px-8 lg:px-16 overflow-hidden">
-      <div className="relative flex flex-col lg:flex-row h-screen">
-        <div className="w-full lg:w-1/2 lg:pr-8 overflow-y-auto">
-          <HeroSection />
-          <AboutSection />
-          <ContactSection />
+      <div className="flex flex-col lg:flex-row lg:h-screen gap-8 lg:gap-0">
+        <div className="w-full lg:w-1/2 lg:pr-8 lg:overflow-y-auto">
+          <div className="">
+            <HeroSection />
+            <AboutSection />
+            <ContactSection />
+          </div>
         </div>
 
         <div
-          className="ml-4 w-full lg:w-1/2 lg:pl-8 overflow-y-auto bg-gray-800 rounded-xl mt-14 mb-12 p-3"
-          style={{ height: "calc(100vh - 6rem)" }}
+          className="w-full lg:w-1/2 bg-gray-800 rounded-xl p-4 shadow-lg mt-8 lg:mt-14 lg:mb-12 lg:overflow-y-auto"
+          style={{ maxHeight: "none", height: "auto" }} // mobile
         >
+          <div className="lg:h-[calc(100vh-6rem)]">
             <ProjectsSection />
+          </div>
         </div>
       </div>
     </div>
