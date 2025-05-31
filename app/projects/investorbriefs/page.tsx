@@ -21,9 +21,6 @@ export default function ProjectPage() {
       <div className="space-y-12">
         {project.media.map((item, index) => (
           <div key={index} className="rounded-xl overflow-hidden shadow-lg bg-gray-700">
-            {item.type === "image" && (
-              <img src={item.src} alt={item.alt} className="w-full object-cover" />
-            )}
             {item.type === "video" && (
                 <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0 }}>
                 <iframe
