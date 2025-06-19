@@ -148,6 +148,12 @@ function ProjectsSection() {
       link: "/projects/nash" 
     }, 
     { 
+      title: "Homemade CNC Machine | 2024-Now", 
+      description: "Custom designed machine to cut wood/aluminum. In Progress.", 
+      image: "/cncmech.png",
+      link: "/projects/cnc" 
+    },
+    { 
       title: "Debatify | 2025-Now", 
       description: "Debate search engine built with NextJS, Supabase, and Stripe. In Progress.", 
       image: "/debatify.png",
@@ -158,12 +164,6 @@ function ProjectsSection() {
       description: "Homemade stirling engine. In Progress.", 
       image: "/stirlingcad.png",
       link: "/projects/stirling" 
-    },
-    { 
-      title: "Homemade CNC Machine | 2024-Now", 
-      description: "Custom designed machine to cut wood/aluminum. In Progress.", 
-      image: "/cncpic.png",
-      link: "/projects/cnc" 
     },
     {
       title: "Polyformer | 2024-2025", 

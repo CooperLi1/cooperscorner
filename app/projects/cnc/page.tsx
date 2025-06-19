@@ -8,8 +8,14 @@ export default function ProjectPage() {
         type: "image",
         src: "/cncpic.png",
         alt: "Demo Image 1",
-        description: "My CAD design for the CNC Machine. Currently working on assembly!",
+        description: "My CAD for the CNC Machine.",
       },
+      {
+        type: "image",
+        src: "/cncmech.png",
+        alt: "Demo Image 1",
+        description: "Mechanically finished after a messy late night grind! Now working on electronics.",
+      }
     ],
   };
 
