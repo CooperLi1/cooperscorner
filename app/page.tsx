@@ -160,9 +160,9 @@ function ProjectsSection() {
       link: "https://debat-ify.vercel.app" 
     },
     { 
-      title: "Stirling Engine | 2025-Now", 
-      description: "Homemade stirling engine. In Progress.", 
-      image: "/stirlingcad.png",
+      title: "Stirling Engine | 2025", 
+      description: "Homemade stirling engine.", 
+      image: "/stirling.png",
       link: "/projects/stirling" 
     },
     {

@@ -14,7 +14,13 @@ export default function ProjectPage() {
         type: "image",
         src: "/stirlingcad.png",
         alt: "Demo Image 1",
-        description: "CAD for new version of stirling engine. Waiting for parts to arrive.",
+        description: "CAD for new version of stirling engine.",
+      },
+      {
+        type: "image",
+        src: "/stirling.png",
+        alt: "Demo Image 1",
+        description: "Stirling engine v2. I did a lot of tinkering but it isn't working and I'm not sure why. Maybe I'll revist it later.",
       }
     ],
   };
