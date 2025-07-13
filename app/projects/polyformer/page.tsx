@@ -21,11 +21,11 @@ export default function ProjectPage() {
         src: "/polyformer.mov",
         description: "Polyformer in action!",
       },
-      // {
-      //   type: "image",
-      //   src: "",
-      //   description: "Printed benchy using polyformer filament.",
-      // }
+      {
+        type: "image",
+        src: "/rpet.png",
+        description: "Printed benchy using polyformer filament.",
+      }
     ],
   };
 
