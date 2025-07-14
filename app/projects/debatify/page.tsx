@@ -7,28 +7,30 @@ export default function ProjectPage() {
   const playerRef = useRef<any>(null);
 
   const project = {
-    name: "InvestorBriefs",
+    name: "Debatify",
     media: [
       {
         type: "video",
-        src: "https://www.youtube.com/watch?v=Fxuv3Z0Ggsw",
+        src: "https://www.youtube.com/watch?v=mmJlVw_wZig",
         description:
-          "InvestorBriefs demo video. Uses finance APIs like AlphaVantage and yfinance, as well as NewsAPI. AI using OpenAI API, graphing with ReCharts, and authentication with Clerk.",
+          "Debatify demo video. Uses NextJS and Supabase. DebatifyAI pipeline uses search with brave search, scraping with cheerio, and AI using fine-tuned gemini model.",
       },
     ],
   };
 
   useEffect(() => {
+    // Load the YouTube IFrame API
     const tag = document.createElement("script");
     tag.src = "https://www.youtube.com/iframe_api";
     document.body.appendChild(tag);
 
+    // This function will be called by the YouTube API
     (window as any).onYouTubeIframeAPIReady = () => {
       playerRef.current = new (window as any).YT.Player("youtube-player", {
-        videoId: "Fxuv3Z0Ggsw",
+        videoId: "mmJlVw_wZig", // Extracted from the URL
         events: {
           onReady: (event: any) => {
-            event.target.setPlaybackRate(2);
+            event.target.setPlaybackRate(2); // Set to 2x speed
           },
         },
         playerVars: {
@@ -76,7 +78,7 @@ export default function ProjectPage() {
       <div className="h-[30px]" />
 
       <a
-        href={"https://investorbriefs.vercel.app/"}
+        href={"https://www.debatify.app/"}
         target="_blank"
         rel="noopener noreferrer"
         className="block w-full bg-gray-700 hover:bg-gray-600 text-sky-300 text-2xl underline py-3 rounded-lg font-semibold text-center flex items-center justify-center gap-2 transition"

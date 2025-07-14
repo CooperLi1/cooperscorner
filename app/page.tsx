@@ -136,10 +136,10 @@ function ProjectsSection() {
       link: "/projects/wartortle" 
     }, 
     { 
-      title: "📌 InvestorBriefs | 2025", 
-      description: "Website providing real-time stock insights using AI. Built with NextJS.",
-      image: "/investorbriefs1.png",
-      link: "/projects/investorbriefs" 
+      title: "📌 Debatify | 2025", 
+      description: "AI-powered debate search engine built with NextJS, VertexAI, Supabase, and Stripe. In Progress.", 
+      image: "/debatify.png",
+      link: "/projects/debatify" 
     },
     {
       title: "📌 Nash | 2023-2024", 
@@ -154,10 +154,10 @@ function ProjectsSection() {
       link: "/projects/cnc" 
     },
     { 
-      title: "Debatify | 2025-Now", 
-      description: "Debate search engine built with NextJS, Supabase, and Stripe. In Progress.", 
-      image: "/debatify.png",
-      link: "https://debat-ify.vercel.app" 
+      title: "InvestorBriefs | 2025", 
+      description: "Website providing real-time stock insights using AI. Built with NextJS.",
+      image: "/investorbriefs1.png",
+      link: "/projects/investorbriefs" 
     },
     { 
       title: "Stirling Engine | 2025", 
@@ -177,11 +177,11 @@ function ProjectsSection() {
       image: "/minime.png",
       link: "https://minimerobotics.vercel.app/" 
     }, 
-    {
-      title: "Backbrace | 2024", 
-      description: "Custom designed+built backbrace out of TPU and surgical tubing.",
-      image: "/backbrace2.png",
-      link: "/projects/backbrace" 
+        {
+      title: "ESP32 Breakout Board | 2024", 
+      description: "Compact PCB custom designed in Altium for JHU APL Internship",
+      image: "/board.png",
+      link: "/projects/esp32" 
     }, 
     {
       title: "Rechargable Flashlight | 2024", 
@@ -190,10 +190,10 @@ function ProjectsSection() {
       link: "/projects/flashlight" 
     }, 
     {
-      title: "ESP32 Breakout Board | 2024", 
-      description: "Compact PCB custom designed in Altium for JHU APL Internship",
-      image: "/board.png",
-      link: "/projects/esp32" 
+      title: "Backbrace | 2024", 
+      description: "Custom designed+built backbrace out of TPU and surgical tubing.",
+      image: "/backbrace2.png",
+      link: "/projects/backbrace" 
     }, 
     {
       title: "Diffy | 2023", 
