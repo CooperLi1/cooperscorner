@@ -1,21 +1,27 @@
-// app/layout.tsx
 import type { Metadata } from "next";
-import { mont } from '@/app/ui/fonts';
-import { Analytics } from "@vercel/analytics/next";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import ClientWrapper from "@/app/client-wrapper"; // new component you'll create
+import { mont } from '@/app/ui/fonts';
+import Logo from "@/app/ui/images/Logo";
+import DarkModeToggle from "@/app/components/darkmodetoggle";
+import "./globals.css";
+import { Analytics } from "@vercel/analytics/next"
 
+ 
 export const metadata: Metadata = {
   title: {
     template: "%s | Cooper's Corner",
     default: "Cooper's Corner",
   },
   description: 'Maker Portfolio | High School Student at Montgomery Blair.',
+
+  // Icons for the Browser Tab (Favicon)
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon-32x32.png',
-    apple: '/apple-touch-icon.png',
+    icon: '/favicon.ico', // Standard favicon (default)
+    shortcut: '/favicon-32x32.png', // Common shortcut icon
+    apple: '/apple-touch-icon.png', // Apple Touch Icon for mobile
   },
+
 };
 
 export default function RootLayout({
@@ -26,9 +32,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${mont.className} antialiased`}>
-        <ClientWrapper /> {/* Handles client-side geolocation */}
-        {children}
-        <Analytics />
+          {children}
+          <Analytics/>
       </body>
     </html>
   );
