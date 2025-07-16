@@ -5,6 +5,7 @@ import { mont } from '@/app/ui/fonts';
 import Logo from "@/app/ui/images/Logo";
 import DarkModeToggle from "@/app/components/darkmodetoggle";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next"
 
  
 export const metadata: Metadata = {
@@ -32,6 +33,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${mont.className} antialiased`}>
           {children}
+          <Analytics/>
       </body>
     </html>
   );
