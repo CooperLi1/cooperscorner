@@ -131,7 +131,7 @@ function ProjectsSection() {
   const projects = [
     {
       title: "📌 Wartortle | 2024-2025", 
-      description: "Telescoping arm robot with 2-stage hang for FIRST Tech Challenge Into the Deep Season. Peaked 6th OPR worldwide, 1st OPR Chesapeake, finals at Chesapeake states.",
+      description: "Telescoping arm robot with 2-stage hang for FIRST Tech Challenge Into the Deep Season. Peaked 7th OPR worldwide, 1st OPR Chesapeake, finals at Chesapeake states.",
       image: "/wartortle.png",
       link: "/projects/wartortle" 
     }, 
