@@ -20,7 +20,7 @@ export default function ProjectPage() {
         {project.media.map((item, index) => (
           <div key={index} className="rounded-xl overflow-hidden shadow-lg bg-gray-700">
             {item.type === "image" && (
-              <img src={item.src} alt={item.alt} className="w-full object-cover" />
+              <img src={item.src} className="w-full object-cover" />
             )}
             {item.type === "video" && (
               <video controls className="w-full">
