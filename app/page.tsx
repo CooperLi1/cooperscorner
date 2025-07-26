@@ -165,6 +165,12 @@ function ProjectsSection() {
       image: "/stirling.png",
       link: "/projects/stirling" 
     },
+    { 
+      title: "Medalarm | 2025", 
+      description: "Alarm for morning meds. Built with my friend to help him keep healthy!", 
+      image: "/medalarm.png",
+      link: "/projects/medalarm" 
+    },
     {
       title: "Polyformer | 2024-2025", 
       description: "Recyling water-bottles into 3D Printer filament.",
