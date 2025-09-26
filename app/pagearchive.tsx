@@ -177,19 +177,19 @@ function ContactSection() {
   );
 }
 
-function ProjectsSection() {
+  function ProjectsSection() {
   const projects = [
     {
       title: "📌 Wartortle | 2024-2025", 
-      description: "Telescoping arm robot with 2-stage hang for FIRST Tech Challenge Into the Deep Season. Peaked 6th OPR worldwide, 1st OPR Chesapeake, finals at Chesapeake states.",
+      description: "Telescoping arm robot with 2-stage hang for FIRST Tech Challenge Into the Deep Season. Peaked 7th OPR worldwide, 1st OPR Chesapeake, finals at Chesapeake states.",
       image: "/wartortle.png",
       link: "/projects/wartortle" 
     }, 
     { 
-      title: "📌 InvestorBriefs | 2025", 
-      description: "Website providing real-time stock insights using AI. Built with NextJS.",
-      image: "/investorbriefs1.png",
-      link: "https://investorbriefs.vercel.app" 
+      title: "📌 Debatify | 2025", 
+      description: "AI-powered debate search engine built with NextJS, VertexAI, Supabase, and Stripe. 3000+ users.", 
+      image: "/debatify.png",
+      link: "/projects/debatify" 
     },
     {
       title: "📌 Nash | 2023-2024", 
@@ -198,16 +198,34 @@ function ProjectsSection() {
       link: "/projects/nash" 
     }, 
     { 
-      title: "Debatify | 2025-Now", 
-      description: "Debate search engine built with NextJS, Supabase, and Stripe. In Progress.", 
-      image: "/debatify.png",
-      link: "https://debat-ify.vercel.app/main/ai" 
-    },
-    { 
       title: "Homemade CNC Machine | 2024-Now", 
       description: "Custom designed machine to cut wood/aluminum. In Progress.", 
-      image: "/cncpic.png",
+      image: "/cncmech.png",
       link: "/projects/cnc" 
+    },
+    {
+      title: "Pipe Traversing Robot | 2025", 
+      description: "Robot to climb through pipes with custom PCB. Solo project for Arculus Solutions.",
+      image: "/arculusbot.png",
+      link: "/projects/pipebot" 
+    }, 
+    { 
+      title: "InvestorBriefs | 2025", 
+      description: "Website providing real-time stock insights using AI. Built with NextJS.",
+      image: "/investorbriefs1.png",
+      link: "/projects/investorbriefs" 
+    },
+    { 
+      title: "Stirling Engine | 2025", 
+      description: "Homemade stirling engine.", 
+      image: "/stirling.png",
+      link: "/projects/stirling" 
+    },
+    { 
+      title: "Medalarm | 2025", 
+      description: "Alarm for morning meds. Built with my friend to help him keep healthy!", 
+      image: "/medalarm.png",
+      link: "/projects/medalarm" 
     },
     {
       title: "Polyformer | 2024-2025", 
@@ -216,10 +234,16 @@ function ProjectsSection() {
       link: "/projects/polyformer" 
     }, 
     {
-      title: "Backbrace | 2024", 
-      description: "Custom designed+built backbrace out of TPU and surgical tubing.",
-      image: "/backbrace2.png",
-      link: "/projects/backbrace" 
+      title: "Mini Me | 2024-2025", 
+      description: "Custom 60 cent educational robotics kit. Small robot with a big personality! Inspired by Hello Robot.",
+      image: "/minime.png",
+      link: "https://minimerobotics.vercel.app/" 
+    }, 
+        {
+      title: "ESP32 Breakout Board | 2024", 
+      description: "Compact PCB custom designed in Altium for JHU APL Internship",
+      image: "/board.png",
+      link: "/projects/esp32" 
     }, 
     {
       title: "Rechargable Flashlight | 2024", 
@@ -228,10 +252,10 @@ function ProjectsSection() {
       link: "/projects/flashlight" 
     }, 
     {
-      title: "ESP32 Breakout Board | 2024", 
-      description: "Compact PCB custom designed in Altium for JHU APL Internship",
-      image: "/board.png",
-      link: "/projects/esp32" 
+      title: "Backbrace | 2024", 
+      description: "Custom designed+built backbrace out of TPU and surgical tubing.",
+      image: "/backbrace2.png",
+      link: "/projects/backbrace" 
     }, 
     {
       title: "Diffy | 2023", 

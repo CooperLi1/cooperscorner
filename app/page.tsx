@@ -137,7 +137,7 @@ function ProjectsSection() {
     }, 
     { 
       title: "📌 Debatify | 2025", 
-      description: "AI-powered debate search engine built with NextJS, VertexAI, Supabase, and Stripe. In Progress.", 
+      description: "AI-powered debate search engine built with NextJS, VertexAI, Supabase, and Stripe. 3k+ Users.", 
       image: "/debatify.png",
       link: "/projects/debatify" 
     },
@@ -147,12 +147,36 @@ function ProjectsSection() {
       image: "/nash.png",
       link: "/projects/nash" 
     }, 
+    // { 
+    //   title: "CAD Only Projects", 
+    //   description: "Swerve drivetrain, pipe robot, and ___ more.", 
+    //   image: "/turretbot.png",
+    //   link: "/projects/cad" 
+    // },
     { 
       title: "Homemade CNC Machine | 2024-Now", 
       description: "Custom designed machine to cut wood/aluminum. In Progress.", 
       image: "/cncmech.png",
       link: "/projects/cnc" 
     },
+    // {
+    //   title: "Recycla | 2025-Now", 
+    //   description: "Robot to climb through pipes with custom PCB. Solo project for Arculus Solutions.",
+    //   image: "/arculusbot.png",
+    //   link: "/projects/pipebot" 
+    // }, 
+    {
+      title: "Pipe Traversing Robot | 2025", 
+      description: "Robot to climb through pipes with custom PCB. Solo project for Arculus Solutions.",
+      image: "/arculusbot.png",
+      link: "/projects/pipebot" 
+    }, 
+    {
+      title: "Sensor Interface PCB | 2025", 
+      description: "Sensor interface PCB designed for Arculus Solutions.",
+      image: "/interface.png",
+      link: "/projects/interface" 
+    }, 
     { 
       title: "InvestorBriefs | 2025", 
       description: "Website providing real-time stock insights using AI. Built with NextJS.",
@@ -202,6 +226,12 @@ function ProjectsSection() {
       link: "/projects/backbrace" 
     }, 
     {
+      title: "Linear Odometry | 2023", 
+      description: "Custom designed+built odometry pod for tracking robot position.",
+      image: "/odo.png",
+      link: "/projects/odo" 
+    }, 
+    {
       title: "Diffy | 2023", 
       description: "Differential drive pod built as a gift to my friend.",
       image: "/differential.jpg",
@@ -219,6 +249,18 @@ function ProjectsSection() {
       image: "/mac.png",
       link: "/projects/mac" 
     }, 
+    // {
+    //   title: "Rube Goldberg | 2021", 
+    //   description: "Rube goldberg machine for science olympiad.",
+    //   image: "/mac.png",
+    //   link: "/projects/mac" 
+    // }, 
+    // {
+    //   title: "Collision Preventer | 2019-2020", 
+    //   description: "Collision Prevention.",
+    //   image: "/mac.png",
+    //   link: "/projects/mac" 
+    // }, 
   ];
 
   return (
