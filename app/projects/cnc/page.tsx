@@ -14,7 +14,13 @@ export default function ProjectPage() {
         type: "image",
         src: "/cncmech.png",
         alt: "Demo Image 1",
-        description: "Mechanically finished after a messy late night grind! Now working on electronics.",
+        description: "Mechanically finished after a messy late night grind!",
+      },
+      {
+        type: "image",
+        src: "/cncenclosure.png",
+        alt: "Demo Image 1",
+        description: "Electronics enclosure! Modified off open source design from PrintNC.",
       }
     ],
   };

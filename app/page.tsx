@@ -167,10 +167,9 @@ function ContactSection() {
 
 function ProjectsSection() {
   const projects = [
-    { title: "📌 Wartortle | 2024-2025", description: "Telescoping arm robot with 2-stage hang for FIRST Tech Challenge Into the Deep Season. Peaked 7th OPR worldwide, 1st OPR Chesapeake, finals at Chesapeake states.", image: "/wartortle.png", link: "/projects/wartortle" },
-    { title: "📌 Debatify | 2025", description: "AI-powered debate search engine built with NextJS, VertexAI, Supabase, and Stripe. 3k+ Users.", image: "/debatify.png", link: "/projects/debatify" },
+    { title: "📌 Debatify | 2025", description: "AI-powered debate search engine built with NextJS, VertexAI, Supabase, and Stripe. 4k+ Users.", image: "/debatify.png", link: "/projects/debatify" },
     { title: "📌 Nash | 2023-2024", description: "Dual Extension differential arm robot for FIRST Tech Challenge Centerstage Season. Top 4 at worlds; Chesapeake state champion.", image: "/nash.png", link: "/projects/nash" },
-    { title: "Homemade CNC Machine | 2024-Now", description: "Custom designed machine to cut wood/aluminum. In progress.", image: "/cncmech.png", link: "/projects/cnc" },
+    { title: "📌 Homemade CNC Machine | 2024-Now", description: "Custom designed machine to cut wood/aluminum. In progress.", image: "/cncmech.png", link: "/projects/cnc" },
     { title: "Recycla V1 | 2025-Now", description: "Custom designed water bottle to filament recycler with a split ring compound planetary gearbox. In progress", image: "/recycla.png", link: "/projects/recycla" },
     { title: "Pipe Traversing Robot | 2025", description: "Robot to climb through pipes with custom PCB. Solo project for Arculus Solutions.", image: "/arculusbot.png", link: "/projects/pipebot" },
     { title: "Sensor Interface PCB | 2025", description: "Sensor interface PCB designed for Arculus Solutions.", image: "/interface.png", link: "/projects/interface" },
@@ -178,6 +177,7 @@ function ProjectsSection() {
     { title: "Stirling Engine | 2025", description: "Homemade stirling engine.", image: "/stirling.png", link: "/projects/stirling" },
     { title: "Medalarm | 2025", description: "Alarm for morning meds. Built with my friend to keep healthy!", image: "/medalarm.png", link: "/projects/medalarm" },
     { title: "MathMadeSimple Site | 2025", description: "Website made for my friend's nonprofit", image: "/mathmadesimple.png", link: "https://mathmadesimple.vercel.app/" },
+    { title: "Wartortle | 2024-2025", description: "Telescoping arm robot with 2-stage hang for FIRST Tech Challenge Into the Deep Season. Peaked 7th OPR worldwide, 1st OPR Chesapeake, finals at Chesapeake states.", image: "/wartortle.png", link: "/projects/wartortle" },
     { title: "Polyformer | 2024-2025", description: "Recycling water-bottles into 3D printer filament.", image: "/polyformerpic.png", link: "/projects/polyformer" },
     { title: "Mini Me | 2024-2025", description: "Custom 60-cent educational robotics kit. Small robot, big personality!", image: "/minime.png", link: "https://minimerobotics.vercel.app/" },
     { title: "ESP32 Breakout Board | 2024", description: "Compact PCB designed in Altium for JHU APL internship.", image: "/board.png", link: "/projects/esp32" },
