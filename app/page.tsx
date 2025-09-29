@@ -167,11 +167,11 @@ function ContactSection() {
 
 function ProjectsSection() {
   const projects = [
+    { title: "📌 Homemade CNC Machine | 2024-Now", description: "Custom designed machine to cut wood/aluminum. In progress.", image: "/cncmech.png", link: "/projects/cnc" },
     { title: "📌 Debatify | 2025", description: "AI-powered debate search engine built with NextJS, VertexAI, Supabase, and Stripe. 4k+ Users.", image: "/debatify.png", link: "/projects/debatify" },
     { title: "📌 Nash | 2023-2024", description: "Dual Extension differential arm robot for FIRST Tech Challenge Centerstage Season. Top 4 at worlds; Chesapeake state champion.", image: "/nash.png", link: "/projects/nash" },
-    { title: "📌 Homemade CNC Machine | 2024-Now", description: "Custom designed machine to cut wood/aluminum. In progress.", image: "/cncmech.png", link: "/projects/cnc" },
     { title: "Recycla V1 | 2025-Now", description: "Custom designed water bottle to filament recycler with a split ring compound planetary gearbox. In progress", image: "/recycla.png", link: "/projects/recycla" },
-    { title: "Pipe Traversing Robot | 2025", description: "Robot to climb through pipes with custom PCB. Solo project for Arculus Solutions.", image: "/arculusbot.png", link: "/projects/pipebot" },
+    { title: "Pipe Traversing Robot | 2025", description: "Robot to climb through pipes with custom PCB. Designed for Arculus Solutions.", image: "/arculusbot.png", link: "/projects/pipebot" },
     { title: "Sensor Interface PCB | 2025", description: "Sensor interface PCB designed for Arculus Solutions.", image: "/interface.png", link: "/projects/interface" },
     { title: "InvestorBriefs | 2025", description: "Website providing real-time stock insights using AI. Built with NextJS.", image: "/investorbriefs1.png", link: "/projects/investorbriefs" },
     { title: "Stirling Engine | 2025", description: "Homemade stirling engine.", image: "/stirling.png", link: "/projects/stirling" },
