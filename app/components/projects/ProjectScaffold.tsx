@@ -7,10 +7,10 @@ export type MediaItem =
   | { type: 'image'; src: string; alt?: string; description?: string }
   | {
       type: 'video';
-      src: string;                    // primary src (kept for backward compat)
+      src: string; // primary src (works alone)
       description?: string;
-      poster?: string;                // optional poster image
-      sources?: { src: string; type?: string }[]; // optional multiple sources
+      poster?: string;
+      sources?: { src: string; type?: string }[]; // optional extra encodes
     };
 
 export function toEmbed(url: string) {
@@ -25,9 +25,9 @@ function guessMime(src: string) {
   const s = src.split('?')[0].toLowerCase();
   if (s.endsWith('.mp4')) return 'video/mp4';
   if (s.endsWith('.webm')) return 'video/webm';
-  if (s.endsWith('.mov')) return 'video/quicktime';
+  if (s.endsWith('.mov')) return 'video/quicktime'; // Safari-friendly, Chrome often says “no”
   if (s.endsWith('.m4v')) return 'video/x-m4v';
-  return undefined;
+  return '';
 }
 
 export function ProjectHeader({
@@ -94,14 +94,27 @@ export function MediaList({ items }: { items: MediaItem[] }) {
                   poster={('poster' in item && item.poster) || undefined}
                   className="w-full max-w-full bg-black/20"
                 >
-                  {/* prefer provided sources; otherwise fall back to single src */}
-                  {'sources' in item && item.sources && item.sources.length > 0 ? (
-                    item.sources.map((s, idx) => (
-                      <source key={idx} src={s.src} type={s.type || guessMime(s.src)} />
-                    ))
-                  ) : (
-                    <source src={item.src} type={guessMime(item.src)} />
-                  )}
+                  {/*
+                    IMPORTANT: put an *untyped* source FIRST to let browsers sniff.
+                    This mirrors your working example and helps with .mov in Chrome when decodable.
+                  */}
+                  <source src={item.src} />
+
+                  {/* Then include known-good typed sources for broader compatibility */}
+                  {('sources' in item && item.sources && item.sources.length > 0)
+                    ? item.sources.map((s, idx) => (
+                        s.type
+                          ? <source key={idx} src={s.src} type={s.type} />
+                          : <source key={idx} src={s.src} />
+                      ))
+                    : (() => {
+                        const mime = guessMime(item.src);
+                        // if it’s a widely supported mime, add a typed duplicate as a fallback
+                        if (mime === 'video/mp4' || mime === 'video/webm') {
+                          return <source src={item.src} type={mime} />;
+                        }
+                        return null;
+                      })()}
                   Your browser does not support the video tag.
                 </video>
               )}
