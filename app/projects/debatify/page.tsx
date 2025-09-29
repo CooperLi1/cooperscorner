@@ -2,6 +2,9 @@
 import React, { useEffect, useRef } from "react";
 import { FaGithub, FaLinkedin, FaEnvelope, FaFileDownload } from "react-icons/fa";
 import { Link as LinkIcon } from "lucide-react";
+import { ProjectHeader, MediaList, type MediaItem, MediaCard } from '@/app/components/projects/ProjectScaffold';
+import { Card } from '@/app/components/ui/Card';
+
 
 export default function ProjectPage() {
   const playerRef = useRef<any>(null);
@@ -42,49 +45,32 @@ export default function ProjectPage() {
     };
   }, []);
 
-  return (
-    <div className="bg-gray-800 min-h-screen text-white p-4">
-      <h1 className="text-4xl font-bold mb-8">{project.name}</h1>
-
-      <div className="space-y-12">
-        {project.media.map((item, index) => (
-          <div
-            key={index}
-            className="rounded-xl overflow-hidden shadow-lg bg-gray-700"
-          >
-            {item.type === "video" && (
-              <div
-                style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}
-              >
-                <div
-                  id="youtube-player"
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
-                  }}
-                />
+          return (
+            <div className="min-h-screen text-white px-4 md:px-8 lg:px-16">
+              <div className="max-w-5xl mx-auto space-y-6">
+                {/* Header card */}
+                <Card className="p-6 md:p-8">
+                  <ProjectHeader title={project.name} />
+                </Card>
+        
+                {/* Media card (NO nested scroll) */}
+                <Card className="p-0">
+                  <MediaCard /* scrollable={false} default */>
+                    <MediaList items={project.media as MediaItem[]} />
+                  </MediaCard>
+                </Card>
+        
+                {/* Separate More Info */}
+                <a
+                  href="https://www.debatify.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-white/15 ring-1 ring-white/10 bg-white/10 hover:bg-white/15 py-3 font-semibold text-sky-200 transition"
+                >
+                  <LinkIcon size={18} />
+                  Try it for yourself!
+                </a>
               </div>
-            )}
-            <div className="p-4">
-              <p className="text-gray-300">{item.description}</p>
             </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="h-[30px]" />
-
-      <a
-        href={"https://www.debatify.app/"}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block w-full bg-gray-700 hover:bg-gray-600 text-sky-300 text-2xl underline py-3 rounded-lg font-semibold text-center flex items-center justify-center gap-2 transition"
-      >
-        <LinkIcon size={20} /> Try it for yourself!
-      </a>
-    </div>
-  );
+          );
 }

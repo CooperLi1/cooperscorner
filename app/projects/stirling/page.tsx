@@ -1,4 +1,6 @@
 import React from "react";
+import { ProjectHeader, MediaList, type MediaItem, MediaCard } from '@/app/components/projects/ProjectScaffold';
+import { Card } from '@/app/components/ui/Card';
 
 export default function ProjectPage() {
   const project = {
@@ -26,26 +28,21 @@ export default function ProjectPage() {
   };
 
   return (
-    <div className="bg-gray-800 min-h-screen text-white p-4">
-      <h1 className="text-4xl font-bold mb-8">{project.name}</h1>
- 
-      <div className="space-y-12">
-        {project.media.map((item, index) => (
-          <div key={index} className="rounded-xl overflow-hidden shadow-lg bg-gray-700">
-            {item.type === "image" && (
-              <img src={item.src} alt={item.alt} className="w-full object-cover" />
-            )}
-            {item.type === "video" && (
-              <video controls className="w-full">
-                <source src={item.src} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            )}
-            <div className="p-4">
-              <p className="text-gray-300">{item.description}</p>
-            </div>
-          </div>
-        ))}
+    <div className="min-h-screen text-white px-4 md:px-8 lg:px-16">
+      <div className="max-w-5xl mx-auto space-y-6">
+        {/* Header card */}
+        <Card className="p-6 md:p-8">
+          <ProjectHeader title={project.name} />
+        </Card>
+
+        {/* Media card (NO nested scroll) */}
+        <Card className="p-0">
+          <MediaCard /* scrollable={false} default */>
+            <MediaList items={project.media as MediaItem[]} />
+          </MediaCard>
+        </Card>
+
+        {/* Separate More Info */}
       </div>
     </div>
   );
