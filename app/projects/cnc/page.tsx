@@ -15,15 +15,15 @@ export default function ProjectPage() {
       },
       {
         type: "image",
-        src: "/cncmech.png",
-        alt: "Demo Image 1",
-        description: "Mechanically finished after a messy late night grind!",
-      },
-      {
-        type: "image",
         src: "/cncenclosure.png",
         alt: "Demo Image 1",
         description: "Electronics enclosure! Modified off open source design from PrintNC.",
+      },
+      {
+        type: "image",
+        src: "/cnc930.png",
+        alt: "Demo Image 1",
+        description: "CNC as of 9/30/2025.",
       }
     ],
   };
