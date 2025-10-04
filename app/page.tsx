@@ -170,7 +170,7 @@ function ProjectsSection() {
     { title: "📌 Homemade CNC Machine | 2024-Now", description: "Custom designed machine to cut wood/aluminum. In progress.", image: "/cnc930.png", link: "/projects/cnc" },
     { title: "📌 Debatify | 2025", description: "AI-powered debate search engine built with NextJS, VertexAI, Supabase, and Stripe. 4k+ Users.", image: "/debatify.png", link: "/projects/debatify" },
     { title: "📌 Nash | 2023-2024", description: "Dual Extension differential arm robot for FIRST Tech Challenge Centerstage Season. Top 4 at worlds; Chesapeake state champion.", image: "/nash.png", link: "/projects/nash" },
-    { title: "Recycla V1 | 2025-Now", description: "Custom designed water bottle to filament recycler with a split ring compound planetary gearbox. In progress", image: "/recycla.png", link: "/projects/recycla" },
+    { title: "Recycla V1 | 2025", description: "Custom designed water bottle to filament recycler with a split ring compound planetary gearbox. ", image: "/recyclav1.png", link: "/projects/recycla" },
     { title: "Pipe Traversing Robot | 2025", description: "Robot to climb through pipes with custom PCB. Designed for Arculus Solutions.", image: "/arculusbot.png", link: "/projects/pipebot" },
     { title: "Sensor Interface PCB | 2025", description: "Sensor interface PCB designed for Arculus Solutions.", image: "/interface.png", link: "/projects/interface" },
     { title: "InvestorBriefs | 2025", description: "Website providing real-time stock insights using AI. Built with NextJS.", image: "/investorbriefs1.png", link: "/projects/investorbriefs" },
@@ -211,7 +211,7 @@ function ProjectsSection() {
         viewport={{ once: true, amount: 0.1 }}
         transition={{ duration: 0.6 }}
         // fixed height on large screens so scrolling happens inside the card
-        className="h-auto lg:h-[calc(100vh-6rem)] overflow-y-auto"
+className="h-auto lg:h-[calc(100vh-6rem)] lg:overflow-y-auto"
       >
         <div className="p-6 md:p-7">
           <h2 className="text-3xl font-semibold text-center mb-6">Projects</h2>
@@ -243,7 +243,7 @@ function ProjectsSection() {
 /* ───────────────── Page ───────────────── */
 export default function Page() {
   return (
-    <div className="relative min-h-screen text-white overflow-hidden">
+    <div className="relative min-h-screen text-white">
       <Background />
       {/* content above background */}
       <div className="relative z-30 px-4 md:px-8 lg:px-16">

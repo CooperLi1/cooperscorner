@@ -5,7 +5,7 @@ import { Card } from '@/app/components/ui/Card';
 
 export default function ProjectPage() {
   const project = {
-    name: "Recycla V1 (In Progress)",
+    name: "Recycla V1",
     media: [
       {
         type: "image",
@@ -18,6 +18,12 @@ export default function ProjectPage() {
         src: "/recycla.png",
         alt: "Demo Image 1",
         description: "Full design.",
+      },
+                  {
+        type: "image",
+        src: "/recyclav1.png",
+        alt: "Demo Image 1",
+        description: "Recycla build.",
       },
     ],
   };

@@ -15,6 +15,12 @@ export default function ProjectPage() {
         description: "Robot built for FIRST Tech Challenge as part of a team. I fully designed the robot myself, programmed the robot's driver controls/automations, and helped with autonomous pathing.",
       },
       {
+        type: "image",
+        src: "/nashiterations.png",
+        alt: "Demo Image 1",
+        description: "Box of past iterations for Nash.",
+      },
+      {
         type: "video",
         src: "https://www.youtube.com/watch?v=XB2RzayVRN8",
         description: "Nash in action! (our robot is the black and blue one)",
