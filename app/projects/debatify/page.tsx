@@ -14,7 +14,7 @@ export default function ProjectPage() {
     media: [
       {
         type: "video",
-        src: "https://www.youtube.com/watch?v=mmJlVw_wZig",
+        src: "https://www.youtube.com/watch?v=lM5UHqI8PZ8",
         description:
           "Debatify demo video. Uses NextJS and Supabase. DebatifyAI pipeline uses search with brave search, scraping with cheerio, and AI using fine-tuned gemini model.",
       },
