@@ -175,7 +175,7 @@ function ProjectsSection() {
     { title: "Sensor Interface PCB | 2025", description: "Sensor interface PCB designed for Arculus Solutions.", image: "/interface.png", link: "/projects/interface" },
     { title: "InvestorBriefs | 2025", description: "Website providing real-time stock insights using AI. Built with NextJS.", image: "/investorbriefs1.png", link: "/projects/investorbriefs" },
     { title: "Stirling Engine | 2025", description: "Homemade stirling engine.", image: "/stirling.png", link: "/projects/stirling" },
-    // { title: "Medalarm | 2025", description: "Alarm for morning meds. Built with my friend to keep healthy!", image: "/medalarm.png", link: "/projects/medalarm" },
+    { title: "Medalarm | 2025", description: "Alarm for morning meds. Built with my friend to keep healthy!", image: "/medalarm.png", link: "/projects/medalarm" },
     { title: "MathMadeSimple Site | 2025", description: "Website made for my friend's nonprofit", image: "/mathmadesimple.png", link: "https://mathmadesimple.vercel.app/" },
     { title: "Wartortle | 2024-2025", description: "Telescoping arm robot with 2-stage hang for FIRST Tech Challenge Into the Deep Season. Peaked 7th OPR worldwide, 1st OPR Chesapeake, finals at Chesapeake states.", image: "/wartortle.png", link: "/projects/wartortle" },
     { title: "Polyformer | 2024-2025", description: "Recycling water-bottles into 3D printer filament.", image: "/polyformerpic.png", link: "/projects/polyformer" },

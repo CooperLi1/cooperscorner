@@ -11,7 +11,7 @@ export default function ProjectPage() {
         type: "image",
         src: "/cadarculusbot.png",
         alt: "Demo Image 1",
-        description: "Robot CAD in OnShape.",
+        description: "Robot CAD in Onshape.",
       },
 
       {
