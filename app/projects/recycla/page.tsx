@@ -19,12 +19,27 @@ export default function ProjectPage() {
         alt: "Demo Image 1",
         description: "Full design.",
       },
-                  {
+      {
         type: "image",
         src: "/recyclav1.png",
         alt: "Demo Image 1",
         description: "Recycla build.",
       },
+      {
+        type: "video",
+        src: "/cut.mov",
+        description: "Bottle cutter",
+      },
+      {
+        type: "video",
+        src: "/recycle.mov",
+        description: "Recycla in action!",
+      },
+      {
+        type: "image",
+        src: "/rpet.png",
+        description: "Recycled bottle Benchy.",
+      }
     ],
   };
 

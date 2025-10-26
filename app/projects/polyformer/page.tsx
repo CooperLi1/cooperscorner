@@ -22,11 +22,6 @@ export default function ProjectPage() {
         type: "video",
         src: "/polyformer.mov",
         description: "Polyformer in action!",
-      },
-      {
-        type: "image",
-        src: "/rpet.png",
-        description: "Printed benchy using polyformer filament.",
       }
     ],
   };
