@@ -5,7 +5,7 @@ import { Card } from '@/app/components/ui/Card';
 
 export default function ProjectPage() {
   const project = {
-    name: "CNC Machine (In Progress)",
+    name: "CNC Machine",
     media: [
       {
         type: "image",
@@ -21,9 +21,15 @@ export default function ProjectPage() {
       },
       {
         type: "image",
-        src: "/cnc930.png",
+        src: "/cncdone.png",
         alt: "Demo Image 1",
-        description: "CNC as of 9/30/2025.",
+        description: "Finally finished!",
+      },
+      {
+        type: "video",
+        src: "/cncfirstcut.mov",
+        alt: "Demo Image 1",
+        description: "First cut!",
       }
     ],
   };

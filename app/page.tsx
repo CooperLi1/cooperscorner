@@ -167,10 +167,12 @@ function ContactSection() {
 
 function ProjectsSection() {
   const projects = [
-    { title: "📌 Homemade CNC Machine | 2024-Now", description: "Custom designed machine to cut wood/aluminum. In progress.", image: "/cnc930.png", link: "/projects/cnc" },
+    { title: "📌 Homemade CNC Machine | 2024-2025", description: "Custom designed machine to cut wood/aluminum.", image: "/cncdone.png", link: "/projects/cnc" },
     { title: "📌 Debatify | 2025", description: "AI-powered debate search engine built with NextJS, VertexAI, Supabase, and Stripe. 7k+ Users.", image: "/debatify.png", link: "/projects/debatify" },
     { title: "📌 Recycla V1 | 2025", description: "Custom designed water bottle to filament recycler with a split ring compound planetary gearbox. ", image: "/recyclav1.png", link: "/projects/recycla" },
     { title: "📌 Nash | 2023-2024", description: "Dual Extension differential arm robot for FIRST Tech Challenge Centerstage Season. Top 4 at worlds; Chesapeake state champion.", image: "/nash.png", link: "/projects/nash" },
+    { title: "Nudge Smartwatch | 2025-Now", description: "Custom smartwatch with touchscreen, vibration, buzzer. In Progress.", image: "/nudgejlcpcb.png", link: "/projects/nudge" },
+    { title: "Rope Climbing Robot | 2025-Now", description: "Robot to climb rope designed for my physics teacher's class demo. In Progress.", image: "/ropecad.png", link: "/projects/rope" },
     { title: "Pipe Traversing Robot | 2025", description: "Robot to climb through pipes with custom PCB. Designed for Arculus Solutions.", image: "/arculusbot.png", link: "/projects/pipebot" },
     { title: "Sensor Interface PCB | 2025", description: "Sensor interface PCB designed for Arculus Solutions.", image: "/interface.png", link: "/projects/interface" },
     { title: "InvestorBriefs | 2025", description: "Website providing real-time stock insights using AI. Built with NextJS.", image: "/investorbriefs1.png", link: "/projects/investorbriefs" },
