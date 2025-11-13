@@ -167,7 +167,7 @@ function ContactSection() {
 
 function ProjectsSection() {
   const projects = [
-    { title: "📌 Homemade CNC Machine | 2024-2025", description: "Custom designed machine to cut wood/aluminum.", image: "/cncdone.png", link: "/projects/cnc" },
+    { title: "📌 CoopCNC | 2024-2025", description: "Custom designed CNC machine with 1x1 meter bed to cut wood/aluminum.", image: "/cncdone.png", link: "/projects/cnc" },
     { title: "📌 Debatify | 2025", description: "AI-powered debate search engine built with NextJS, VertexAI, Supabase, and Stripe. 7k+ Users.", image: "/debatify.png", link: "/projects/debatify" },
     { title: "📌 Recycla V1 | 2025", description: "Custom designed water bottle to filament recycler with a split ring compound planetary gearbox. ", image: "/recyclav1.png", link: "/projects/recycla" },
     { title: "📌 Nash | 2023-2024", description: "Dual Extension differential arm robot for FIRST Tech Challenge Centerstage Season. Top 4 at worlds; Chesapeake state champion.", image: "/nash.png", link: "/projects/nash" },
