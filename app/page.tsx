@@ -172,6 +172,7 @@ function ProjectsSection() {
     { title: "📌 Recycla V1 | 2025", description: "Custom designed water bottle to filament recycler with a split ring compound planetary gearbox. ", image: "/recyclav1.png", link: "/projects/recycla" },
     { title: "📌 Nash | 2023-2024", description: "Dual Extension differential arm robot for FIRST Tech Challenge Centerstage Season. Top 4 at worlds; Chesapeake state champion.", image: "/nash.png", link: "/projects/nash" },
     { title: "Nudge Smartwatch | 2025-Now", description: "Custom smartwatch with touchscreen, vibration, buzzer. In Progress.", image: "/nudgejlcpcb.png", link: "/projects/nudge" },
+    { title: "Bobo | 2025-Now", description: "Wheeled bipedal robot with coaxial powered legs. In Progress.", image: "/nudgejlcpcb.png", link: "/projects/nudge" },
     { title: "Rope Climbing Robot | 2025-Now", description: "Robot to climb rope designed for my physics teacher's class demo. In Progress.", image: "/ropecad.png", link: "/projects/rope" },
     { title: "Pipe Traversing Robot | 2025", description: "Robot to climb through pipes with custom PCB. Designed for Arculus Solutions.", image: "/arculusbot.png", link: "/projects/pipebot" },
     { title: "Sensor Interface PCB | 2025", description: "Sensor interface PCB designed for Arculus Solutions.", image: "/interface.png", link: "/projects/interface" },
