@@ -26,11 +26,23 @@ export default function ProjectPage() {
         description: "Finally finished!",
       },
       {
-        type: "video",
-        src: "/cncfirstcut.mov",
+        type: "image",
+        src: "/cncsetup.png",
         alt: "Demo Image 1",
-        description: "First cut!",
-      }
+        description: "Full setup",
+      },
+      {
+        type: "video",
+        src: "/cncdemo2.mov",
+        alt: "Demo Image 1",
+        description: "CNC in action!",
+      },
+      {
+        type: "image",
+        src: "/coopcnccut.png",
+        alt: "Demo Image 1",
+        description: "Success!",
+      },
     ],
   };
 

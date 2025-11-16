@@ -11,7 +11,7 @@ export default function ProjectPage() {
         type: "image",
         src: "/bobocad.png",
         alt: "Demo Image 1",
-        description: "Wheeled bipedal robot using coaxial powered legs.",
+        description: "Wheeled bipedal robot with coaxial powered legs.",
       },
     ],
   };
