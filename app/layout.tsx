@@ -4,10 +4,11 @@ import "./globals.css";
 import { mont } from '@/app/ui/fonts';
 import Logo from "@/app/ui/images/Logo";
 import DarkModeToggle from "@/app/components/darkmodetoggle";
+import { ServiceWorkerUnregister } from "@/app/components/ServiceWorkerUnregister";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next"
 
- 
+
 export const metadata: Metadata = {
   title: {
     template: "%s | Cooper's Corner",
@@ -32,8 +33,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${mont.className} antialiased`}>
-          {children}
-          <Analytics/>
+        <ServiceWorkerUnregister />
+        {children}
+        <Analytics />
       </body>
     </html>
   );

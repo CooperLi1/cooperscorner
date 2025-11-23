@@ -6,6 +6,8 @@ import { motion } from 'framer-motion';
 import { IoMdHand } from 'react-icons/io';
 import { FaGithub, FaLinkedin, FaEnvelope, FaFileDownload } from 'react-icons/fa';
 
+import Image from 'next/image';
+
 /* ───────────────── Typewriter ───────────────── */
 function useTypewriter(fullText: string, speedMs = 34) {
   const [text, setText] = useState('');
@@ -81,9 +83,11 @@ function HeroSection() {
         transition={{ duration: 0.7 }}
         className="flex items-start gap-5"
       >
-        <img
+        <Image
           src="/cooper1.png"
           alt="Cooper"
+          width={96}
+          height={96}
           className="h-20 w-20 md:h-24 md:w-24 rounded-full object-cover border border-white/25 shadow-lg"
         />
         <div className="flex-1">
@@ -120,9 +124,11 @@ function AboutSection() {
         transition={{ duration: 0.55 }}
         className="flex gap-5 items-center"
       >
-        <img
+        <Image
           src="/cooper1.png"
           alt="Profile"
+          width={96}
+          height={96}
           className="h-20 w-20 md:h-24 md:w-24 rounded-full object-cover border border-white/20 shadow-md"
         />
         <div>
@@ -168,7 +174,7 @@ function ContactSection() {
 function ProjectsSection() {
   const projects = [
     { title: "📌 CoopCNC | 2024-2025", description: "Custom designed CNC machine with 1x1 meter bed to cut wood/aluminum.", image: "/cncdone.png", link: "/projects/cnc" },
-    { title: "📌 Debatify | 2025", description: "AI-powered personal assistant for competitive debate. Includes debate search engines, evidence archives, reformatters. 8k+ Users, 5k+ ARR.", image: "/debatifyhome.png", link: "/projects/debatify" },
+    { title: "📌 Debatify | 2025", description: "AI-powered personal assistant for competitive debate. Includes debate search engines, evidence archives, reformatters. 11k+ Users, ~7k ARR.", image: "/debatifyhome.png", link: "/projects/debatify" },
     { title: "📌 Recycla V1 | 2025", description: "Custom designed water bottle to filament recycler with a split ring compound planetary gearbox. ", image: "/recyclav1.png", link: "/projects/recycla" },
     { title: "📌 Nash | 2023-2024", description: "Dual Extension differential arm robot for FIRST Tech Challenge Centerstage Season. Top 4 at worlds; Chesapeake state champion.", image: "/nash.png", link: "/projects/nash" },
     { title: "Nudge Smartwatch | 2025-Now", description: "Custom smartwatch with touchscreen, vibration, buzzer. In Progress.", image: "/nudgejlcpcb.png", link: "/projects/nudge" },
@@ -176,6 +182,7 @@ function ProjectsSection() {
     { title: "Rope Climbing Robot | 2025-Now", description: "Robot to climb rope designed for my physics teacher's class demo. In Progress.", image: "/ropecad.png", link: "/projects/rope" },
     { title: "Pipe Traversing Robot | 2025", description: "Robot to climb through pipes with custom PCB. Designed for Arculus Solutions.", image: "/arculusbot.png", link: "/projects/pipebot" },
     { title: "Sensor Interface PCB | 2025", description: "Sensor interface PCB designed for Arculus Solutions.", image: "/interface.png", link: "/projects/interface" },
+    { title: "Robot in 12 Hours | 2025", description: "Design->build->electronics->programming in under 12 hours. Built as a demonstration robot to take to Uganda.", image: "/ri12h.png", link: "/projects/ri12h" },
     { title: "InvestorBriefs | 2025", description: "Website providing real-time stock insights using AI. Built with NextJS.", image: "/investorbriefs1.png", link: "/projects/investorbriefs" },
     { title: "Stirling Engine | 2025", description: "Homemade stirling engine.", image: "/stirling.png", link: "/projects/stirling" },
     { title: "Medalarm | 2025", description: "Alarm for morning meds. Built with my friend to keep healthy!", image: "/medalarm.png", link: "/projects/medalarm" },
@@ -191,17 +198,17 @@ function ProjectsSection() {
     { title: "Nutmeg | 2022-2023", description: "Turret crane robot for FTC Powerplay Season. Alabama state champion.", image: "/nutmeg.png", link: "/projects/nutmeg" },
     { title: "Macadamia | 2021-2022", description: "Suspension robot for FTC Freight Frenzy. Worlds division semifinalist; state champion.", image: "/mac.png", link: "/projects/mac" },
     {
-      title: "Rube Goldberg | 2021", 
+      title: "Rube Goldberg | 2021",
       description: "Rube goldberg machine for science olympiad.",
       image: "/rubegoldberg.png",
-      link: "/projects/rubegoldberg" 
-    }, 
+      link: "/projects/rubegoldberg"
+    },
     {
-      title: "Collision Preventer | 2019-2020", 
+      title: "Collision Preventer | 2019-2020",
       description: "Detects and warns of collisions in hallway deadzones.",
       image: "/collision.png",
-      link: "/projects/collision" 
-    }, 
+      link: "/projects/collision"
+    },
   ];
 
   return (
@@ -214,7 +221,7 @@ function ProjectsSection() {
         viewport={{ once: true, amount: 0.1 }}
         transition={{ duration: 0.6 }}
         // fixed height on large screens so scrolling happens inside the card
-className="h-auto lg:h-[calc(100vh-6rem)] lg:overflow-y-auto"
+        className="h-auto lg:h-[calc(100vh-6rem)] lg:overflow-y-auto"
       >
         <div className="p-6 md:p-7">
           <h2 className="text-3xl font-semibold text-center mb-6">Projects</h2>
@@ -222,9 +229,11 @@ className="h-auto lg:h-[calc(100vh-6rem)] lg:overflow-y-auto"
             {projects.map((p, i) => (
               <a key={i} href={p.link} target="_blank" className="block group pt-5 first:pt-0">
                 <div className="flex flex-col md:flex-row gap-5 items-start">
-                  <img
+                  <Image
                     src={p.image}
                     alt={p.title}
+                    width={112}
+                    height={112}
                     className="w-28 h-28 object-cover rounded-lg border border-white/20 shadow-md group-hover:scale-[1.03] transition"
                   />
                   <div>
@@ -260,7 +269,7 @@ export default function Page() {
           </div>
           <div className="w-full lg:w-1/2 lg:pl-2 lg:overflow-y-auto mt-2 lg:mt-12 lg:mb-10">
             {/* <div className="lg:h-[calc(100vh-6rem)]"> */}
-              <ProjectsSection />
+            <ProjectsSection />
             {/* </div> */}
           </div>
         </div>

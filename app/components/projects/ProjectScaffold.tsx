@@ -1,17 +1,18 @@
 'use client';
 
 import * as React from 'react';
+import Image from 'next/image';
 import { Link as LinkIcon } from 'lucide-react';
 
 export type MediaItem =
   | { type: 'image'; src: string; alt?: string; description?: string }
   | {
-      type: 'video';
-      src: string; // primary src (works alone)
-      description?: string;
-      poster?: string;
-      sources?: { src: string; type?: string }[]; // optional extra encodes
-    };
+    type: 'video';
+    src: string; // primary src (works alone)
+    description?: string;
+    poster?: string;
+    sources?: { src: string; type?: string }[]; // optional extra encodes
+  };
 
 export function toEmbed(url: string) {
   return url.includes('watch?v=') ? url.replace('watch?v=', 'embed/') : url;
@@ -65,10 +66,13 @@ export function MediaList({ items }: { items: MediaItem[] }) {
       {items.map((item, i) => (
         <div key={i} className="bg-white/5 border border-white/10 rounded-xl overflow-hidden shadow-md">
           {item.type === 'image' && (
-            <img
+            <Image
               src={item.src}
               alt={item.alt || 'project image'}
-              className="w-full max-w-full object-contain bg-black/20"
+              width={0}
+              height={0}
+              sizes="100vw"
+              className="w-full h-auto object-contain bg-black/20"
             />
           )}
 
@@ -103,18 +107,18 @@ export function MediaList({ items }: { items: MediaItem[] }) {
                   {/* Then include known-good typed sources for broader compatibility */}
                   {('sources' in item && item.sources && item.sources.length > 0)
                     ? item.sources.map((s, idx) => (
-                        s.type
-                          ? <source key={idx} src={s.src} type={s.type} />
-                          : <source key={idx} src={s.src} />
-                      ))
+                      s.type
+                        ? <source key={idx} src={s.src} type={s.type} />
+                        : <source key={idx} src={s.src} />
+                    ))
                     : (() => {
-                        const mime = guessMime(item.src);
-                        // if it’s a widely supported mime, add a typed duplicate as a fallback
-                        if (mime === 'video/mp4' || mime === 'video/webm') {
-                          return <source src={item.src} type={mime} />;
-                        }
-                        return null;
-                      })()}
+                      const mime = guessMime(item.src);
+                      // if it’s a widely supported mime, add a typed duplicate as a fallback
+                      if (mime === 'video/mp4' || mime === 'video/webm') {
+                        return <source src={item.src} type={mime} />;
+                      }
+                      return null;
+                    })()}
                   Your browser does not support the video tag.
                 </video>
               )}
