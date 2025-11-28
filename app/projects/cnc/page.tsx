@@ -43,27 +43,31 @@ export default function ProjectPage() {
         alt: "Demo Image 1",
         description: "Success!",
       },
+      {
+        type: "video",
+        src: "https://youtube.com/shorts/xiHRgKjZxGk",
+        description: "Short video I made about my CNC.",
+      },
     ],
   };
 
-    return (
-      <div className="min-h-screen text-white px-4 md:px-8 lg:px-16">
-        <div className="max-w-5xl mx-auto space-y-6">
-          {/* Header card */}
-          <Card className="p-6 md:p-8">
-            <ProjectHeader title={project.name} />
-          </Card>
-  
-          {/* Media card (NO nested scroll) */}
-          <Card className="p-0">
-            <MediaCard /* scrollable={false} default */>
-              <MediaList items={project.media as MediaItem[]} />
-            </MediaCard>
-          </Card>
-  
-          {/* Separate More Info */}
-        </div>
+  return (
+    <div className="min-h-screen text-white px-4 md:px-8 lg:px-16">
+      <div className="max-w-5xl mx-auto space-y-6">
+        {/* Header card */}
+        <Card className="p-6 md:p-8">
+          <ProjectHeader title={project.name} />
+        </Card>
+
+        {/* Media card (NO nested scroll) */}
+        <Card className="p-0">
+          <MediaCard /* scrollable={false} default */>
+            <MediaList items={project.media as MediaItem[]} />
+          </MediaCard>
+        </Card>
+
+        {/* Separate More Info */}
       </div>
-    );
-  }
-  
+    </div>
+  );
+}

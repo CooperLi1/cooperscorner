@@ -15,7 +15,13 @@ export type MediaItem =
   };
 
 export function toEmbed(url: string) {
-  return url.includes('watch?v=') ? url.replace('watch?v=', 'embed/') : url;
+  if (url.includes('watch?v=')) {
+    return url.replace('watch?v=', 'embed/');
+  }
+  if (url.includes('shorts/')) {
+    return url.replace('shorts/', 'embed/');
+  }
+  return url;
 }
 
 function isYouTube(url: string) {
