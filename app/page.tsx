@@ -218,8 +218,7 @@ function ProjectsSection() {
       {/* Put padding on inner content and make THAT the scroller */}
       <motion.section
         initial={{ opacity: 0, x: 42 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, amount: 0.1 }}
+        animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6 }}
         // fixed height on large screens so scrolling happens inside the card
         className="h-auto lg:h-[calc(100vh-6rem)] lg:overflow-y-auto"
