@@ -5,11 +5,11 @@ import Image from 'next/image';
 import { Link as LinkIcon } from 'lucide-react';
 
 export type MediaItem =
-  | { type: 'image'; src: string; alt?: string; description?: string }
+  | { type: 'image'; src: string; alt?: string; description?: React.ReactNode }
   | {
     type: 'video';
     src: string; // primary src (works alone)
-    description?: string;
+    description?: React.ReactNode;
     poster?: string;
     sources?: { src: string; type?: string }[]; // optional extra encodes
   };
