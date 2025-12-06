@@ -178,7 +178,7 @@ function ProjectsSection() {
     { title: "📌 Recycla V1 | 2025", description: "Custom designed water bottle to filament recycler with a split ring compound planetary gearbox. ", image: "/recyclav1.png", link: "/projects/recycla" },
     { title: "📌 Nash | 2023-2024", description: "Dual extension differential arm robot for FIRST Tech Challenge Centerstage Season. Top 4 at worlds; Chesapeake state champion.", image: "/nash.png", link: "/projects/nash" },
     { title: "Nudge Wristphone | 2025-Now", description: "Custom wristphone with touchscreen, vibration, buzzer. V2 of Nudge Smartwatch.", image: "/wristphoneui1.png", link: "/projects/wristphone" },
-    { title: "Bobo | 2025-Now", description: "Wheeled bipedal robot with coaxial powered legs and custom PCB. In Progress.", image: "/bobocad.png", link: "/projects/bobo" },
+    { title: "Lucky | 2025-Now", description: "Wheeled bipedal robot with coaxial powered legs and custom PCB. In Progress.", image: "/bobocad.png", link: "/projects/lucky" },
     { title: "Dugtrio | 2025-Now", description: "Triple shooter robot for FIRST Tech Challenge Decode. In Progress.", image: "/dugtrio.png", link: "/projects/dugtrio" },
     { title: "Rope Climbing Robot | 2025-Now", description: "Robot to climb rope designed for my physics teacher's class demo. In Progress.", image: "/ropecad.png", link: "/projects/rope" },
     { title: "Nudge Smartwatch | 2025", description: "Custom smartwatch with touchscreen, vibration, buzzer. PCB had leakage current (not enough clearance), pivoted to Nudge Wristphone.", image: "/nudgev1.png", link: "/projects/nudge" },
