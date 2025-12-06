@@ -16,7 +16,17 @@ export default function ProjectPage() {
             },
             {
                 type: "image",
-                src: "/wristphoneepcb.png",
+                src: "/wristphoneboard.png",
+                description: "PCB Board!",
+            },
+            {
+                type: "image",
+                src: "/wristphoneui1.png",
+                description: "First UI design.",
+            },
+            {
+                type: "image",
+                src: "/wristphonepcb.png",
                 description: "PCB design in KiCad.",
             },
             {
