@@ -6,7 +6,7 @@ import { Card } from '@/app/components/ui/Card';
 
 export default function ProjectPage() {
     const project = {
-        name: "Nudge Wristphone (In Progress)",
+        name: "Nudge Wristphone",
         media: [
             {
                 type: "image",
@@ -17,12 +17,13 @@ export default function ProjectPage() {
             {
                 type: "image",
                 src: "/wristphoneboard.png",
-                description: "PCB Board!",
+                description: "PCB!",
             },
             {
-                type: "image",
-                src: "/wristphoneui1.png",
-                description: "First UI design.",
+                type: "video",
+                src: "/demovidnudge.mov",
+                description: "Demo Video.",
+                className: "rotate-90",
             },
             {
                 type: "image",

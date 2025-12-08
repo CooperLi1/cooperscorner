@@ -5,13 +5,14 @@ import Image from 'next/image';
 import { Link as LinkIcon } from 'lucide-react';
 
 export type MediaItem =
-  | { type: 'image'; src: string; alt?: string; description?: React.ReactNode }
+  | { type: 'image'; src: string; alt?: string; description?: React.ReactNode; className?: string }
   | {
     type: 'video';
     src: string; // primary src (works alone)
     description?: React.ReactNode;
     poster?: string;
     sources?: { src: string; type?: string }[]; // optional extra encodes
+    className?: string;
   };
 
 export function toEmbed(url: string) {
@@ -78,7 +79,7 @@ export function MediaList({ items }: { items: MediaItem[] }) {
               width={0}
               height={0}
               sizes="100vw"
-              className="w-full h-auto object-contain bg-black/20"
+              className={`w-full h-auto object-contain bg-black/20 ${item.className || ''}`}
             />
           )}
 
@@ -102,7 +103,7 @@ export function MediaList({ items }: { items: MediaItem[] }) {
                   playsInline
                   preload="metadata"
                   poster={('poster' in item && item.poster) || undefined}
-                  className="w-full max-w-full bg-black/20"
+                  className={`w-full max-w-full bg-black/20 ${item.className || ''}`}
                 >
                   {/*
                     IMPORTANT: put an *untyped* source FIRST to let browsers sniff.
