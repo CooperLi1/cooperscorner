@@ -23,7 +23,6 @@ export default function ProjectPage() {
                 type: "video",
                 src: "/demovidnudge.mov",
                 description: "Demo Video.",
-                className: "rotate-90",
             },
             {
                 type: "image",

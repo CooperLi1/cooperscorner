@@ -174,7 +174,7 @@ function ContactSection() {
 function ProjectsSection() {
   const projects = [
     { title: "📌 CoopCNC | 2024-2025", description: "Custom designed CNC machine with 1x1 meter bed to cut wood/aluminum.", image: "/cncdone.png", link: "/projects/cnc" },
-    { title: "📌 Debatify | 2025", description: "AI-powered personal assistant for competitive debate. Includes debate search engines, evidence archives, reformatters. 11k+ Users, ~7k ARR.", image: "/debatifyhome.png", link: "/projects/debatify" },
+    { title: "📌 Debatify | 2025", description: "AI-powered personal assistant for competitive debate. Includes debate search engines, evidence archives, reformatters. 12k+ Users, ~7k ARR.", image: "/debatifyhome.png", link: "/projects/debatify" },
     { title: "📌 Recycla V1 | 2025", description: "Custom designed water bottle to filament recycler with a split ring compound planetary gearbox. ", image: "/recyclav1.png", link: "/projects/recycla" },
     { title: "📌 Nash | 2023-2024", description: "Dual extension differential arm robot for FIRST Tech Challenge Centerstage Season. Top 4 at worlds; Chesapeake state champion.", image: "/nash.png", link: "/projects/nash" },
     { title: "Lucky | 2025-Now", description: "Wheeled bipedal robot with coaxial powered legs and custom PCB. In Progress.", image: "/bobocad.png", link: "/projects/lucky" },
