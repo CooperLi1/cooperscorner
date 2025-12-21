@@ -24,6 +24,11 @@ export default function ProjectPage() {
       },
       {
         type: "image",
+        src: "/climberui.png",
+        description: "UI for controlling robot.",
+      },
+      {
+        type: "image",
         src: "/climbpcb.png",
         description: "PCB for rope-climbing bot.",
       },
