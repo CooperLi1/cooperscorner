@@ -6,7 +6,7 @@ import { Card } from '@/app/components/ui/Card';
 
 export default function ProjectPage() {
   const project = {
-    name: "Wartortle",
+    name: "Nash",
     media: [
       {
         type: "image",
