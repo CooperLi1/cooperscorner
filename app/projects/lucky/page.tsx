@@ -8,10 +8,46 @@ export default function ProjectPage() {
     name: "Lucky (In Progress)",
     media: [
       {
+        type: "video",
+        src: "/luckyik.mov",
+        alt: "Demo Image 1",
+        description: "Inverse kinematics + motion profiled PIDs demo.",
+      },
+      {
+        type: "video",
+        src: "/luckydances.mov",
+        alt: "Demo Image 1",
+        description: "Lucky performing actions on voice command for my AP Lit project (imitating Lucky from Waiting for Godot).",
+      },
+      {
+        type: "video",
+        src: "/luckybalance.mov",
+        alt: "Demo Image 1",
+        description: "Currently working on improving balancing code so I can remove Lucky's training wheels.",
+      },
+      {
+        type: "image",
+        src: "/luckycircuit.png",
+        alt: "Demo Image 1",
+        description: "Test circuit. Lucky is controlled by a PC communicating to ESP32 with UDP, and then the ESP32 communicating with the main Teensy microcontroler via UART.",
+      },
+      {
+        type: "image",
+        src: "/luckypcb.png",
+        alt: "Demo Image 1",
+        description: "PCB on the robot.",
+      },
+      {
+        type: "image",
+        src: "/luckyparts.png",
+        alt: "Demo Image 1",
+        description: "Parts for Lucky manufactured in house.",
+      },
+      {
         type: "image",
         src: "/bobocad.png",
         alt: "Demo Image 1",
-        description: "Wheeled bipedal robot with coaxial powered legs.",
+        description: "CAD in Onshape.",
       },
       {
         type: "image",

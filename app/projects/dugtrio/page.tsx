@@ -8,6 +8,11 @@ export default function ProjectPage() {
         name: "Dugtrio",
         media: [
             {
+                type: "video",
+                src: "https://www.youtube.com/shorts/lWrB92d1eBw",
+                description: "Dugtrio in action!",
+            },
+            {
                 type: "image",
                 src: "/dugtriocad.png",
                 alt: "Demo Image 1",
