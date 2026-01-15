@@ -179,6 +179,7 @@ function ProjectsSection() {
     { title: "📌 Nash | 2023-2024", description: "Dual extension differential arm robot for FIRST Tech Challenge Centerstage Season. Top 4 at worlds; Chesapeake state champion.", image: "/nash.png", link: "/projects/nash" },
     { title: "Lucky | 2025-Now", description: "Wheeled bipedal robot with coaxial powered legs and custom PCB. Controlled via inverse kinematics. In Progress.", image: "/luckybuild.png", link: "/projects/lucky" },
     { title: "Dugtrio | 2025-Now", description: "Triple shooter robot for FIRST Tech Challenge Decode. In Progress.", image: "/dugtrio.png", link: "/projects/dugtrio" },
+    { title: "Hamlet Game | 2026", description: "Turn based video game simulating Hamlet final fight made for AP Lit.", image: "/hamlet.png", link: "https://hamlet-game.vercel.app/" },
     { title: "Rope Climbing Robot | 2025", description: "Designed for my physics teacher's class demo.", image: "/climbthumbnail.png", link: "/projects/rope" },
     { title: "Nudge Wristphone | 2025", description: "Custom wristphone with touchscreen, vibration, buzzer. V2 of Nudge Smartwatch.", image: "/nudgeonwrist.png", link: "/projects/wristphone" },
     { title: "Nudge Smartwatch | 2025", description: "Custom smartwatch with touchscreen, vibration, buzzer. PCB had leakage current (not enough clearance), pivoted to Nudge Wristphone.", image: "/nudgev1.png", link: "/projects/nudge" },
