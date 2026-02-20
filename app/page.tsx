@@ -288,7 +288,7 @@ const projects: Project[] = [
   },
   {
     title: "Polyformer | 2024-2025",
-    description: <><strong>Recycling water-bottles into 3D printer filament.</strong></>,
+    description: <>Recycling water-bottles into 3D printer filament.</>,
     image: "/polyformerpic.png",
     link: "/projects/polyformer",
     tags: ["Mechatronics", "Manufacturing"]
@@ -337,7 +337,7 @@ const projects: Project[] = [
   },
   {
     title: "Nutmeg | 2022-2023",
-    description: <>Turret crane robot for FTC Powerplay Season. <strong>Alabama state champion.</strong></>,
+    description: <>Turret crane robot for FTC Powerplay Season. Alabama state champion.</>,
     image: "/nutmeg.png",
     link: "/projects/nutmeg",
     tags: ["Mechatronics", "Controls"]
