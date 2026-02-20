@@ -7,6 +7,7 @@ import { IoMdHand } from 'react-icons/io';
 import { FaGithub, FaLinkedin, FaEnvelope, FaFileDownload } from 'react-icons/fa';
 
 import Image from 'next/image';
+import VertexBackground from '@/app/components/VertexBackground';
 
 /* ───────────────── Typewriter ───────────────── */
 function useTypewriter(fullText: string, speedMs = 34) {
@@ -26,42 +27,6 @@ function useTypewriter(fullText: string, speedMs = 34) {
   return text;
 }
 
-/* ──────────────── Background (fixed, visible vignette) ──────────────── */
-function Background() {
-  return (
-    <>
-      {/* 1) Color wash */}
-      <div
-        aria-hidden
-        className="fixed inset-0 z-0 pointer-events-none transform-gpu will-change-transform
-                   bg-[radial-gradient(1200px_700px_at_12%_-10%,rgba(99,102,241,0.60),transparent),
-                       radial-gradient(1000px_600px_at_115%_10%,rgba(217,70,239,0.52),transparent),
-                       radial-gradient(900px_650px_at_50%_115%,rgba(34,211,238,0.54),transparent)]
-                   animate-[slow-pan_22s_ease-in-out_infinite]"
-      />
-      {/* 2) Sheen */}
-      <div
-        aria-hidden
-        className="fixed inset-0 z-10 pointer-events-none
-                   bg-[linear-gradient(140deg,rgba(255,255,255,0.07),transparent_40%,transparent_60%,rgba(0,0,0,0.12))]"
-      />
-      {/* 3) Strong vignette via SVG */}
-      <svg
-        aria-hidden
-        className="fixed inset-0 z-20 pointer-events-none w-screen h-screen"
-        preserveAspectRatio="none"
-      >
-        <defs>
-          <radialGradient id="vig" cx="50%" cy="42%" r="62%">
-            <stop offset="60%" stopColor="rgba(0,0,0,0)" />
-            <stop offset="100%" stopColor="rgba(0,0,0,0.46)" />
-          </radialGradient>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#vig)" />
-      </svg>
-    </>
-  );
-}
 
 /* ──────────────── Reusable glass card ──────────────── */
 function Card({ children, className = "" }: { children: React.ReactNode; className?: string }) {
@@ -104,9 +69,9 @@ function HeroSection() {
             </motion.div>
           </div>
           <p className="mt-3 text-zinc-100/90">
-            student at montgomery blair high school always eager to learn more about robotics, debate, ai, and climate change.
-            my goal is to one day become a "full-stack" maker, experienced in everything from manufacturing to web dev to cad.
-            <span className="text-yellow-200"> i love trying new things and building new projects. reach out!</span>
+            student at montgomery blair high school passionate about engineering.
+            my goal is to one day become a "full-stack" maker, experienced in everything from manufacturing to web dev to cad. i love trying new things and building new projects.
+            <span className="text-yellow-200">  i'm currently looking for an internship for summer 2026, reach out!</span>
           </p>
         </div>
       </motion.div>
@@ -176,9 +141,9 @@ function ProjectsSection() {
     { title: "📌 CoopCNC | 2024-2025", description: "Custom designed CNC machine with 1x1 meter bed to cut wood/aluminum.", image: "/cncdone.png", link: "/projects/cnc" },
     { title: "📌 Debatify | 2025", description: "AI-powered personal assistant for competitive debate. Includes debate search engines, evidence archives, reformatters. 12k+ Users, ~7k ARR.", image: "/debatifyhome.png", link: "/projects/debatify" },
     { title: "📌 Recycla V1 | 2025", description: "Custom designed water bottle to filament recycler with a split ring compound planetary gearbox. ", image: "/recyclav1.png", link: "/projects/recycla" },
-    { title: "📌 Nash | 2023-2024", description: "Dual extension differential arm robot for FIRST Tech Challenge Centerstage Season. Top 4 at worlds; Chesapeake state champion.", image: "/nash.png", link: "/projects/nash" },
+    { title: "📌 Nash | 2023-2024", description: "Dual extension differential arm robot for FIRST Tech Challenge Centerstage Season. Top 4 at worlds; Chesapeake regional champion.", image: "/nash.png", link: "/projects/nash" },
     { title: "Lucky | 2025-Now", description: "Wheeled bipedal robot with coaxial powered legs and custom PCB. Controlled via inverse kinematics. In Progress.", image: "/luckybuild.png", link: "/projects/lucky" },
-    { title: "Dugtrio | 2025-Now", description: "Triple shooter robot for FIRST Tech Challenge Decode. In Progress.", image: "/dugtrio.png", link: "/projects/dugtrio" },
+    { title: "Dugtrio | 2025-Now", description: "World's only 'triple shooter on a turret' robot for FIRST Tech Challenge Decode. Placed first overall in Chesapeake. In Progress.", image: "/dugtrio.png", link: "/projects/dugtrio" },
     { title: "Hamlet Game | 2026", description: "Turn based video game simulating Hamlet final fight made for AP Lit.", image: "/hamlet.png", link: "https://hamlet-game.vercel.app/" },
     { title: "Rope Climbing Robot | 2025", description: "Designed for my physics teacher's class demo.", image: "/climbthumbnail.png", link: "/projects/rope" },
     { title: "Nudge Wristphone | 2025", description: "Custom wristphone with touchscreen, vibration, buzzer. V2 of Nudge Smartwatch.", image: "/nudgeonwrist.png", link: "/projects/wristphone" },
@@ -258,7 +223,7 @@ function ProjectsSection() {
 export default function Page() {
   return (
     <div className="relative min-h-screen text-white">
-      <Background />
+      <VertexBackground />
       {/* content above background */}
       <div className="relative z-30 px-4 md:px-8 lg:px-16">
         <div className="flex flex-col lg:flex-row lg:h-screen gap-8 lg:gap-6">
@@ -279,11 +244,6 @@ export default function Page() {
 
       {/* Local keyframes (client-safe) */}
       <style jsx global>{`
-        @keyframes slow-pan {
-          0% { transform: translate3d(0,0,0) scale(1); }
-          50% { transform: translate3d(-2%, -1%, 0) scale(1.02); }
-          100% { transform: translate3d(0,0,0) scale(1); }
-        }
         @keyframes cursor { 0%,49% { opacity: 1 } 50%,100% { opacity: 0 } }
         .animate-cursor { animation: cursor 1.05s step-end infinite; }
       `}</style>

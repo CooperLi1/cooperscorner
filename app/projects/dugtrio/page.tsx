@@ -1,6 +1,7 @@
 import React from "react";
 import { ProjectHeader, MediaList, type MediaItem, MediaCard } from '@/app/components/projects/ProjectScaffold';
 import { Card } from '@/app/components/ui/Card';
+import { Link as LinkIcon } from "lucide-react";
 
 
 export default function ProjectPage() {
@@ -9,7 +10,7 @@ export default function ProjectPage() {
         media: [
             {
                 type: "video",
-                src: "https://www.youtube.com/shorts/lWrB92d1eBw",
+                src: "https://www.youtube.com/watch?v=c5ZM6A-tWvc",
                 description: "Dugtrio in action!",
             },
             {
@@ -18,23 +19,23 @@ export default function ProjectPage() {
                 alt: "Demo Image 1",
                 description: "CAD of Dugtrio.",
             },
-            {
-                type: "image",
-                src: "/dugtrio.png",
-                alt: "Demo Image 1",
-                description: "Triple shooter + turret robot.",
-            },
-            {
-                type: "video",
-                src: "/6wd.mov",
-                alt: "Demo Image 1",
-                description: "6WD chassis prevents pushing.",
-            },
+            // {
+            //     type: "image",
+            //     src: "/dugtrio.png",
+            //     alt: "Demo Image 1",
+            //     description: "Triple shooter + turret robot.",
+            // },
+            // {
+            //     type: "video",
+            //     src: "/6wd.mov",
+            //     alt: "Demo Image 1",
+            //     description: "6WD chassis prevents pushing.",
+            // },
             {
                 type: "video",
                 src: "/ratchetpto.mov",
                 alt: "Demo Image 1",
-                description: "Ratchet + power takeoff assembly to lift robot off the floor.",
+                description: "Old ratchet + power takeoff assembly to lift robot off the floor.",
             },
         ],
     };
@@ -55,6 +56,15 @@ export default function ProjectPage() {
                 </Card>
 
                 {/* Separate More Info */}
+                <a
+                    href="https://drive.google.com/file/d/1yZF7Rh9eeIUfDzdKA-Iqfd0n8_niBwGM/view?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-white/15 ring-1 ring-white/10 bg-white/10 hover:bg-white/15 py-3 font-semibold text-sky-200 transition"
+                >
+                    <LinkIcon size={18} />
+                    More Info
+                </a>
             </div>
         </div>
     );
