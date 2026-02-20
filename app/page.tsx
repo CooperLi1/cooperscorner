@@ -151,37 +151,52 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.42, ease: 'easeOut' } },
 };
 
+type Project = { title: string; description: React.ReactNode; image: string; link: string };
+
 function ProjectsSection() {
-  const projects = [
-    { title: "📌 CoopCNC | 2024-2025", description: "Custom designed CNC machine with 1x1 meter bed to cut wood/aluminum.", image: "/cncdone.png", link: "/projects/cnc" },
-    { title: "📌 Debatify | 2025", description: "AI-powered personal assistant for competitive debate. Includes debate search engines, evidence archives, reformatters. 15k+ Users, 8k+ ARR.", image: "/debatifyhome.png", link: "/projects/debatify" },
-    { title: "📌 Recycla V1 | 2025", description: "Custom designed water bottle to filament recycler with a split ring compound planetary gearbox. ", image: "/recyclav1.png", link: "/projects/recycla" },
-    { title: "📌 Nash | 2023-2024", description: "Dual extension differential arm robot for FIRST Tech Challenge Centerstage Season. Top 4 at worlds; Chesapeake regional champion.", image: "/nash.png", link: "/projects/nash" },
-    { title: "Lucky | 2025-Now", description: "Wheeled bipedal robot with coaxial powered legs and custom PCB. Controlled via inverse kinematics. In Progress.", image: "/luckybuild.png", link: "/projects/lucky" },
-    { title: "Dugtrio | 2025-Now", description: "World's only 'triple shooter on a turret' robot for FIRST Tech Challenge Decode. Placed first overall in Chesapeake. In Progress.", image: "/dugtrio.png", link: "/projects/dugtrio" },
-    { title: "Hamlet Game | 2026", description: "Turn based video game simulating Hamlet final fight made for AP Lit.", image: "/hamlet.png", link: "https://hamlet-game.vercel.app/" },
-    { title: "Rope Climbing Robot | 2025", description: "Designed for my physics teacher's class demo.", image: "/climbthumbnail.png", link: "/projects/rope" },
-    { title: "Nudge Wristphone | 2025", description: "Custom wristphone with touchscreen, vibration, buzzer. V2 of Nudge Smartwatch.", image: "/nudgeonwrist.png", link: "/projects/wristphone" },
-    { title: "Nudge Smartwatch | 2025", description: "Custom smartwatch with touchscreen, vibration, buzzer. PCB had leakage current (not enough clearance), pivoted to Nudge Wristphone.", image: "/nudgev1.png", link: "/projects/nudge" },
-    { title: "Pipe Traversing Robot | 2025", description: "Robot to climb through pipes with custom PCB. Designed for Arculus Solutions.", image: "/arculusbot.png", link: "/projects/pipebot" },
-    { title: "Sensor Interface PCB | 2025", description: "Sensor interface PCB designed for Arculus Solutions.", image: "/interface.png", link: "/projects/interface" },
-    { title: "Robot in 12 Hours | 2025", description: "Design->build->electronics->programming in under 12 hours. Built as a demonstration robot to take to Uganda.", image: "/ri12h.png", link: "/projects/ri12h" },
-    { title: "InvestorBriefs | 2025", description: "Website providing real-time stock insights using AI. Built with NextJS.", image: "/investorbriefs1.png", link: "/projects/investorbriefs" },
-    { title: "Stirling Engine | 2025", description: "Homemade stirling engine.", image: "/stirling.png", link: "/projects/stirling" },
-    { title: "Medalarm | 2025", description: "Alarm for morning meds. Built with my friend to keep healthy!", image: "/medalarm.png", link: "/projects/medalarm" },
-    { title: "MathMadeSimple Site | 2025", description: "Website made for my friend's nonprofit", image: "/mathmadesimple.png", link: "https://mathmadesimple.vercel.app/" },
-    { title: "Wartortle | 2024-2025", description: "Telescoping arm robot with 2-stage hang for FIRST Tech Challenge Into the Deep Season. Peaked 7th OPR worldwide, 1st OPR Chesapeake, finals at Chesapeake states.", image: "/wartortle.png", link: "/projects/wartortle" },
-    { title: "Polyformer | 2024-2025", description: "Recycling water-bottles into 3D printer filament.", image: "/polyformerpic.png", link: "/projects/polyformer" },
-    { title: "Mini Me | 2024-2025", description: "Custom 60-cent educational robotics kit. Small robot, big personality!", image: "/minime.png", link: "https://minimerobotics.vercel.app/" },
-    { title: "ESP32 Breakout Board | 2024", description: "Compact PCB designed in Altium for JHU APL internship.", image: "/board.png", link: "/projects/esp32" },
-    { title: "Rechargeable Flashlight | 2024", description: "Flashlight with 3 recharging mechanisms: ripcord, barreljack, battery.", image: "/flashlightexternal.png", link: "/projects/flashlight" },
-    { title: "Backbrace | 2024", description: "Custom designed+built backbrace out of TPU and surgical tubing.", image: "/backbrace2.png", link: "/projects/backbrace" },
-    { title: "Linear Odometry | 2023", description: "Custom designed odometry pod for tracking robot position.", image: "/odo.png", link: "/projects/odo" },
-    { title: "Diffy | 2023", description: "Differential drive pod built as a gift.", image: "/differential.jpg", link: "/projects/diffy" },
-    { title: "Nutmeg | 2022-2023", description: "Turret crane robot for FTC Powerplay Season. Alabama state champion.", image: "/nutmeg.png", link: "/projects/nutmeg" },
-    { title: "Macadamia | 2021-2022", description: "Suspension robot for FTC Freight Frenzy. Worlds division semifinalist; state champion.", image: "/mac.png", link: "/projects/mac" },
-    { title: "Rube Goldberg | 2021", description: "Rube goldberg machine for science olympiad.", image: "/rubegoldberg.png", link: "/projects/rubegoldberg" },
-    { title: "Collision Preventer | 2019-2020", description: "Detects and warns of collisions in hallway deadzones.", image: "/collision.png", link: "/projects/collision" },
+  const projects: Project[] = [
+    { title: "📌 CoopCNC | 2024-2025", description: <><strong>Custom designed CNC machine</strong> with 1x1 meter bed to cut wood/aluminum.</>, image: "/cncdone.png", link: "/projects/cnc" },
+    { title: "📌 Debatify | 2025", description: <>AI-powered personal assistant for competitive debate. Includes debate search engines, evidence archives, reformatters. <strong>15k+ Users, 8k+ ARR</strong>.</>, image: "/debatifyhome.png", link: "/projects/debatify" },
+    { title: "📌 Recycla V1 | 2025", description: <>Custom designed <strong>water bottle to filament recycler</strong> with a split ring compound planetary gearbox.</>, image: "/recyclav1.png", link: "/projects/recycla" },
+    { title: "📌 Nash | 2023-2024", description: <>Dual extension differential arm robot for FIRST Tech Challenge Centerstage Season. <strong>Top 4 at worlds</strong>; Chesapeake regional champion.</>, image: "/nash.png", link: "/projects/nash" },
+    { title: "Lucky | 2025-Now", description: <><strong>Wheeled bipedal robot</strong> with coaxial powered legs and custom PCB. Controlled via inverse kinematics. In Progress.</>, image: "/luckybuild.png", link: "/projects/lucky" },
+    { title: "Dugtrio | 2025-Now", description: <>World&apos;s only &apos;triple shooter on a turret&apos; robot for FIRST Tech Challenge Decode. Placed <strong>first overall in Chesapeake</strong>. In Progress.</>, image: "/dugtrio.png", link: "/projects/dugtrio" },
+    { title: "Hamlet Game | 2026", description: <>Turn based video game simulating Hamlet final fight made for AP Lit.</>, image: "/hamlet.png", link: "https://hamlet-game.vercel.app/" },
+    { title: "Rope Climbing Robot | 2025", description: <>Designed for my physics teacher&apos;s class demo.</>, image: "/climbthumbnail.png", link: "/projects/rope" },
+    { title: "Nudge Wristphone | 2025", description: <><strong>Custom wristphone</strong> with touchscreen, vibration, buzzer. V2 of Nudge Smartwatch.</>, image: "/nudgeonwrist.png", link: "/projects/wristphone" },
+    { title: "Nudge Smartwatch | 2025", description: <>Custom smartwatch with touchscreen, vibration, buzzer. PCB had leakage current (not enough clearance), pivoted to Nudge Wristphone.</>, image: "/nudgev1.png", link: "/projects/nudge" },
+    { title: "Pipe Traversing Robot | 2025", description: <>Robot to <strong>climb through pipes</strong> with custom PCB. Designed for Arculus Solutions.</>, image: "/arculusbot.png", link: "/projects/pipebot" },
+    { title: "Sensor Interface PCB | 2025", description: <>Sensor interface PCB designed for Arculus Solutions.</>, image: "/interface.png", link: "/projects/interface" },
+    { title: "Robot in 12 Hours | 2025", description: <>Design-&gt;build-&gt;electronics-&gt;programming <strong>in under 12 hours</strong>. Built as a demonstration robot to take to Uganda.</>, image: "/ri12h.png", link: "/projects/ri12h" },
+    { title: "InvestorBriefs | 2025", description: <>Website providing real-time stock insights using AI. Built with NextJS.</>, image: "/investorbriefs1.png", link: "/projects/investorbriefs" },
+    { title: "Stirling Engine | 2025", description: <>Homemade stirling engine.</>, image: "/stirling.png", link: "/projects/stirling" },
+    { title: "Medalarm | 2025", description: <>Alarm for morning meds. Built with my friend to keep healthy!</>, image: "/medalarm.png", link: "/projects/medalarm" },
+    { title: "MathMadeSimple Site | 2025", description: <>Website made for my friend&apos;s nonprofit</>, image: "/mathmadesimple.png", link: "https://mathmadesimple.vercel.app/" },
+    { title: "Wartortle | 2024-2025", description: <>Telescoping arm robot with 2-stage hang for FIRST Tech Challenge Into the Deep Season. <strong>Peaked 7th OPR worldwide</strong>, 1st OPR Chesapeake, finals at Chesapeake states.</>, image: "/wartortle.png", link: "/projects/wartortle" },
+    { title: "Polyformer | 2024-2025", description: <>Recycling water-bottles into 3D printer filament.</>, image: "/polyformerpic.png", link: "/projects/polyformer" },
+    { title: "Mini Me | 2024-2025", description: <>Custom <strong>60-cent educational robotics kit</strong>. Small robot, big personality!</>, image: "/minime.png", link: "https://minimerobotics.vercel.app/" },
+    { title: "ESP32 Breakout Board | 2024", description: <>Compact PCB designed in Altium for JHU APL internship.</>, image: "/board.png", link: "/projects/esp32" },
+    { title: "Rechargeable Flashlight | 2024", description: <>Flashlight with 3 recharging mechanisms: ripcord, barreljack, battery.</>, image: "/flashlightexternal.png", link: "/projects/flashlight" },
+    { title: "Backbrace | 2024", description: <>Custom designed+built backbrace out of TPU and surgical tubing.</>, image: "/backbrace2.png", link: "/projects/backbrace" },
+    { title: "Linear Odometry | 2023", description: <>Custom designed odometry pod for tracking robot position.</>, image: "/odo.png", link: "/projects/odo" },
+    { title: "Diffy | 2023", description: <>Differential drive pod built as a gift.</>, image: "/differential.jpg", link: "/projects/diffy" },
+    {
+      title: "Nutmeg | 2022-2023", description: <>Turret crane robot for FTC Powerplay Season. Alabama state champion.</>, image: "/nutmeg.png", link: "/projects/nutmeg"
+    },
+    { title: "Macadamia | 2021-2022", description: <>Suspension robot for FTC Freight Frenzy. <strong>Worlds division semifinalist</strong>; state champion.</>, image: "/mac.png", link: "/projects/mac" },
+
+    {
+      title: "Rube Goldberg | 2021",
+      description: <>Rube goldberg machine for science olympiad.</>,
+      image: "/rubegoldberg.png",
+      link: "/projects/rubegoldberg"
+    },
+    {
+      title: "Collision Preventer | 2019-2020",
+      description: <>Detects and warns of collisions in hallway deadzones.</>,
+      image: "/collision.png",
+      link: "/projects/collision"
+    },
   ];
 
   return (
@@ -224,7 +239,9 @@ function ProjectsSection() {
                     <h3 className="text-xl font-semibold leading-tight group-hover:text-yellow-200 transition">
                       {p.title}
                     </h3>
-                    <p className="text-zinc-100/80 text-sm mt-1">{p.description}</p>
+                    <p className="text-zinc-100/80 text-sm mt-1 [&_strong]:text-yellow-200 [&_strong]:font-semibold">
+                      {p.description}
+                    </p>
                   </div>
                 </div>
               </motion.a>
