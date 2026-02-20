@@ -151,51 +151,213 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.42, ease: 'easeOut' } },
 };
 
-type Project = { title: string; description: React.ReactNode; image: string; link: string };
+type Project = { title: string; description: React.ReactNode; image: string; link: string; tags?: string[] };
 
 function ProjectsSection() {
   const projects: Project[] = [
-    { title: "📌 CoopCNC | 2024-2025", description: <><strong>Custom designed CNC machine</strong> with 1x1 meter bed to cut wood/aluminum.</>, image: "/cncdone.png", link: "/projects/cnc" },
-    { title: "📌 Debatify | 2025", description: <>AI-powered personal assistant for competitive debate. Includes debate search engines, evidence archives, reformatters. <strong>15k+ Users, 8k+ ARR</strong>.</>, image: "/debatifyhome.png", link: "/projects/debatify" },
-    { title: "📌 Recycla V1 | 2025", description: <>Custom designed <strong>water bottle to filament recycler</strong> with a split ring compound planetary gearbox.</>, image: "/recyclav1.png", link: "/projects/recycla" },
-    { title: "📌 Nash | 2023-2024", description: <>Dual extension differential arm robot for FIRST Tech Challenge Centerstage Season. <strong>Top 4 at worlds</strong>; Chesapeake regional champion.</>, image: "/nash.png", link: "/projects/nash" },
-    { title: "Lucky | 2025-Now", description: <><strong>Wheeled bipedal robot</strong> with coaxial powered legs and custom PCB. Controlled via inverse kinematics. In Progress.</>, image: "/luckybuild.png", link: "/projects/lucky" },
-    { title: "Dugtrio | 2025-Now", description: <>World&apos;s only &apos;triple shooter on a turret&apos; robot for FIRST Tech Challenge Decode. Placed <strong>first overall in Chesapeake</strong>. In Progress.</>, image: "/dugtrio.png", link: "/projects/dugtrio" },
-    { title: "Hamlet Game | 2026", description: <>Turn based video game simulating Hamlet final fight made for AP Lit.</>, image: "/hamlet.png", link: "https://hamlet-game.vercel.app/" },
-    { title: "Rope Climbing Robot | 2025", description: <>Designed for my physics teacher&apos;s class demo.</>, image: "/climbthumbnail.png", link: "/projects/rope" },
-    { title: "Nudge Wristphone | 2025", description: <><strong>Custom wristphone</strong> with touchscreen, vibration, buzzer. V2 of Nudge Smartwatch.</>, image: "/nudgeonwrist.png", link: "/projects/wristphone" },
-    { title: "Nudge Smartwatch | 2025", description: <>Custom smartwatch with touchscreen, vibration, buzzer. PCB had leakage current (not enough clearance), pivoted to Nudge Wristphone.</>, image: "/nudgev1.png", link: "/projects/nudge" },
-    { title: "Pipe Traversing Robot | 2025", description: <>Robot to <strong>climb through pipes</strong> with custom PCB. Designed for Arculus Solutions.</>, image: "/arculusbot.png", link: "/projects/pipebot" },
-    { title: "Sensor Interface PCB | 2025", description: <>Sensor interface PCB designed for Arculus Solutions.</>, image: "/interface.png", link: "/projects/interface" },
-    { title: "Robot in 12 Hours | 2025", description: <>Design-&gt;build-&gt;electronics-&gt;programming <strong>in under 12 hours</strong>. Built as a demonstration robot to take to Uganda.</>, image: "/ri12h.png", link: "/projects/ri12h" },
-    { title: "InvestorBriefs | 2025", description: <>Website providing real-time stock insights using AI. Built with NextJS.</>, image: "/investorbriefs1.png", link: "/projects/investorbriefs" },
-    { title: "Stirling Engine | 2025", description: <>Homemade stirling engine.</>, image: "/stirling.png", link: "/projects/stirling" },
-    { title: "Medalarm | 2025", description: <>Alarm for morning meds. Built with my friend to keep healthy!</>, image: "/medalarm.png", link: "/projects/medalarm" },
-    { title: "MathMadeSimple Site | 2025", description: <>Website made for my friend&apos;s nonprofit</>, image: "/mathmadesimple.png", link: "https://mathmadesimple.vercel.app/" },
-    { title: "Wartortle | 2024-2025", description: <>Telescoping arm robot with 2-stage hang for FIRST Tech Challenge Into the Deep Season. <strong>Peaked 7th OPR worldwide</strong>, 1st OPR Chesapeake, finals at Chesapeake states.</>, image: "/wartortle.png", link: "/projects/wartortle" },
-    { title: "Polyformer | 2024-2025", description: <>Recycling water-bottles into 3D printer filament.</>, image: "/polyformerpic.png", link: "/projects/polyformer" },
-    { title: "Mini Me | 2024-2025", description: <>Custom <strong>60-cent educational robotics kit</strong>. Small robot, big personality!</>, image: "/minime.png", link: "https://minimerobotics.vercel.app/" },
-    { title: "ESP32 Breakout Board | 2024", description: <>Compact PCB designed in Altium for JHU APL internship.</>, image: "/board.png", link: "/projects/esp32" },
-    { title: "Rechargeable Flashlight | 2024", description: <>Flashlight with 3 recharging mechanisms: ripcord, barreljack, battery.</>, image: "/flashlightexternal.png", link: "/projects/flashlight" },
-    { title: "Backbrace | 2024", description: <>Custom designed+built backbrace out of TPU and surgical tubing.</>, image: "/backbrace2.png", link: "/projects/backbrace" },
-    { title: "Linear Odometry | 2023", description: <>Custom designed odometry pod for tracking robot position.</>, image: "/odo.png", link: "/projects/odo" },
-    { title: "Diffy | 2023", description: <>Differential drive pod built as a gift.</>, image: "/differential.jpg", link: "/projects/diffy" },
     {
-      title: "Nutmeg | 2022-2023", description: <>Turret crane robot for FTC Powerplay Season. Alabama state champion.</>, image: "/nutmeg.png", link: "/projects/nutmeg"
+      title: "📌 CoopCNC | 2024-2025",
+      description: <><strong>Custom designed CNC machine</strong> with 1x1 meter bed to cut wood/aluminum.</>,
+      image: "/cncdone.png",
+      link: "/projects/cnc",
+      tags: ["Mechatronics", "Manufacturing"]
     },
-    { title: "Macadamia | 2021-2022", description: <>Suspension robot for FTC Freight Frenzy. <strong>Worlds division semifinalist</strong>; state champion.</>, image: "/mac.png", link: "/projects/mac" },
+    {
+      title: "📌 Debatify | 2025",
+      description: <>AI-powered personal assistant for competitive debate. Includes debate search engines, evidence archives, reformatters. <strong>15k+ Users, 8k+ ARR</strong>.</>,
+      image: "/debatifyhome.png",
+      link: "/projects/debatify",
+      tags: ["WebDev", "AI", "Product"]
+    },
+    {
+      title: "📌 Recycla V1 | 2025",
+      description: <>Custom designed <strong>water bottle to filament recycler</strong> with a split ring compound planetary gearbox.</>,
+      image: "/recyclav1.png",
+      link: "/projects/recycla",
+      tags: ["Mechatronics", "Manufacturing", "Product"]
+    },
+    {
+      title: "📌 Nash | 2023-2024",
+      description: <>Dual extension differential arm robot for FIRST Tech Challenge Centerstage Season. <strong>Top 4 at worlds</strong>; Chesapeake regional champion.</>,
+      image: "/nash.png",
+      link: "/projects/nash",
+      tags: ["Mechatronics", "Controls"]
+    },
+    {
+      title: "Lucky | 2025-Now",
+      description: <><strong>Wheeled bipedal robot</strong> with coaxial powered legs and custom PCB. Controlled via inverse kinematics. In Progress.</>,
+      image: "/luckybuild.png",
+      link: "/projects/lucky",
+      tags: ["Mechatronics", "PCB Design", "Controls"]
+    },
+    {
+      title: "Dugtrio | 2025-Now",
+      description: <>World&apos;s only &apos;triple shooter on a turret&apos; robot for FIRST Tech Challenge Decode. Placed <strong>first overall in Chesapeake</strong>. In Progress.</>,
+      image: "/dugtrio.png",
+      link: "/projects/dugtrio",
+      tags: ["Mechatronics", "Controls"]
+    },
+    {
+      title: "Hamlet Game | 2026",
+      description: <>Turn based video game simulating Hamlet final fight made for AP Lit.</>,
+      image: "/hamlet.png",
+      link: "https://hamlet-game.vercel.app/",
+      tags: ["WebDev"]
+    },
+    {
+      title: "Rope Climbing Robot | 2025",
+      description: <>Designed for my physics teacher&apos;s class demo.</>,
+      image: "/climbthumbnail.png",
+      link: "/projects/rope",
+      tags: ["Mechatronics", "PCB Design"]
+    },
+    {
+      title: "Nudge Wristphone | 2025",
+      description: <><strong>Custom wristphone</strong> with touchscreen, vibration, buzzer. V2 of Nudge Smartwatch.</>,
+      image: "/nudgeonwrist.png",
+      link: "/projects/wristphone",
+      tags: ["PCB Design", "Product"]
+    },
+    {
+      title: "Nudge Smartwatch | 2025",
+      description: <>Custom smartwatch with touchscreen, vibration, buzzer. PCB had leakage current (not enough clearance), pivoted to Nudge Wristphone.</>,
+      image: "/nudgev1.png",
+      link: "/projects/nudge",
+      tags: ["PCB Design", "Product"]
+    },
+    {
+      title: "Pipe Traversing Robot | 2025",
+      description: <>Robot to <strong>climb through pipes</strong> with custom PCB. Designed for Arculus Solutions.</>,
+      image: "/arculusbot.png",
+      link: "/projects/pipebot",
+      tags: ["Mechatronics", "PCB Design"]
+    },
+    {
+      title: "Sensor Interface PCB | 2025",
+      description: <>Sensor interface PCB designed for Arculus Solutions.</>,
+      image: "/interface.png",
+      link: "/projects/interface",
+      tags: ["PCB Design"]
+    },
+    {
+      title: "Robot in 12 Hours | 2025",
+      description: <>Design-&gt;build-&gt;electronics-&gt;programming <strong>in under 12 hours</strong>. Built as a demonstration robot to take to Uganda.</>,
+      image: "/ri12h.png",
+      link: "/projects/ri12h",
+      tags: ["Mechatronics"]
+    },
+    {
+      title: "InvestorBriefs | 2025",
+      description: <>Website providing real-time stock insights using AI. Built with NextJS.</>,
+      image: "/investorbriefs1.png",
+      link: "/projects/investorbriefs",
+      tags: ["WebDev", "AI"]
+    },
+    {
+      title: "Stirling Engine | 2025",
+      description: <>Homemade stirling engine.</>,
+      image: "/stirling.png",
+      link: "/projects/stirling",
+      tags: ["Misc"]
+    },
+    {
+      title: "Medalarm | 2025",
+      description: <>Alarm for morning meds. Built with my friend to keep healthy!</>,
+      image: "/medalarm.png",
+      link: "/projects/medalarm",
+      tags: ["Misc"]
+    },
+    {
+      title: "MathMadeSimple Site | 2025",
+      description: <>Website made for my friend&apos;s nonprofit</>,
+      image: "/mathmadesimple.png",
+      link: "https://mathmadesimple.vercel.app/",
+      tags: ["WebDev"]
+    },
+    {
+      title: "Wartortle | 2024-2025",
+      description: <>Telescoping arm robot with 2-stage hang for FIRST Tech Challenge Into the Deep Season. <strong>Peaked 7th OPR worldwide</strong>, 1st OPR Chesapeake, finals at Chesapeake states.</>,
+      image: "/wartortle.png",
+      link: "/projects/wartortle",
+      tags: ["Mechatronics", "Controls"]
+    },
+    {
+      title: "Polyformer | 2024-2025",
+      description: <><strong>Recycling water-bottles into 3D printer filament.</strong></>,
+      image: "/polyformerpic.png",
+      link: "/projects/polyformer",
+      tags: ["Mechatronics", "Manufacturing"]
+    },
+    {
+      title: "Mini Me | 2024-2025",
+      description: <>Custom <strong>60-cent educational robotics kit</strong>. Small robot, big personality!</>,
+      image: "/minime.png",
+      link: "https://minimerobotics.vercel.app/",
+      tags: ["Mechatronics", "Product"]
+    },
+    {
+      title: "ESP32 Breakout Board | 2024",
+      description: <>Compact PCB designed in Altium for JHU APL internship.</>,
+      image: "/board.png",
+      link: "/projects/esp32",
+      tags: ["PCB Design"]
+    },
+    {
+      title: "Rechargeable Flashlight | 2024",
+      description: <>Flashlight with 3 recharging mechanisms: ripcord, barreljack, battery.</>,
+      image: "/flashlightexternal.png",
+      link: "/projects/flashlight",
+      tags: ["Product", "Mechatronics"]
+    },
+    {
+      title: "Backbrace | 2024",
+      description: <>Custom designed+built backbrace out of TPU and surgical tubing.</>,
+      image: "/backbrace2.png",
+      link: "/projects/backbrace",
+      tags: ["Misc"]
+    },
+    {
+      title: "Linear Odometry | 2023",
+      description: <>Custom designed odometry pod for tracking robot position.</>,
+      image: "/odo.png",
+      link: "/projects/odo",
+      tags: ["Mechatronics"]
+    },
+    {
+      title: "Diffy | 2023",
+      description: <>Differential drive pod built as a gift.</>,
+      image: "/differential.jpg",
+      link: "/projects/diffy",
+      tags: ["Mechatronics"]
+    },
+    {
+      title: "Nutmeg | 2022-2023",
+      description: <>Turret crane robot for FTC Powerplay Season. <strong>Alabama state champion.</strong></>,
+      image: "/nutmeg.png",
+      link: "/projects/nutmeg",
+      tags: ["Mechatronics", "Controls"]
+    },
+    {
+      title: "Macadamia | 2021-2022",
+      description: <>Suspension robot for FTC Freight Frenzy. <strong>Worlds division semifinalist</strong>; state champion.</>,
+      image: "/mac.png",
+      link: "/projects/mac",
+      tags: ["Mechatronics", "Controls"]
+    },
 
     {
       title: "Rube Goldberg | 2021",
       description: <>Rube goldberg machine for science olympiad.</>,
       image: "/rubegoldberg.png",
-      link: "/projects/rubegoldberg"
+      link: "/projects/rubegoldberg",
+      tags: ["Misc"]
     },
     {
       title: "Collision Preventer | 2019-2020",
       description: <>Detects and warns of collisions in hallway deadzones.</>,
       image: "/collision.png",
-      link: "/projects/collision"
+      link: "/projects/collision",
+      tags: ["Product"]
     },
   ];
 
@@ -218,14 +380,14 @@ function ProjectsSection() {
               />
             </h2>
           </div>
-          <div className="space-y-5 divide-y divide-white/10">
+          <div className="flex flex-col">
             {projects.map((p, i) => (
               <motion.a
                 key={i}
                 href={p.link}
                 target="_blank"
                 variants={itemVariants}
-                className="block group pt-5 first:pt-0"
+                className="block group py-4 border-b border-white/10 last:border-0"
               >
                 <div className="flex flex-col md:flex-row gap-5 items-start">
                   <Image
@@ -242,6 +404,19 @@ function ProjectsSection() {
                     <p className="text-zinc-100/80 text-sm mt-1 [&_strong]:text-yellow-200 [&_strong]:font-semibold">
                       {p.description}
                     </p>
+                    {/* Tags */}
+                    {p.tags && p.tags.length > 0 && (
+                      <div className="flex flex-wrap gap-3 mt-2.5">
+                        {p.tags.map(tag => (
+                          <span
+                            key={tag}
+                            className="text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded bg-white/10 border border-white/10 text-zinc-300 shadow-sm"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
               </motion.a>
