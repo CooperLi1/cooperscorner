@@ -8,6 +8,7 @@
   .largebox {
     @apply rounded-xl bg-white/70 shadow-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out;
   }
+
   .title {
     @apply text-5xl w-full text-center font-bold
   }
@@ -17,9 +18,11 @@
   0% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(10px);
   }
+
   100% {
     transform: translateY(0px);
   }
@@ -36,89 +39,85 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #888; /* Default thumb color */
+  background-color: #888;
+  /* Default thumb color */
   border-radius: 4px;
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); /* Shadow for the thumb */
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  /* Shadow for the thumb */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #555; /* Darker color on hover */
+  background-color: #555;
+  /* Darker color on hover */
 }
 
 ::-webkit-scrollbar-track {
-  background-color: #f1f1f1; /* Light track color */
+  background-color: #f1f1f1;
+  /* Light track color */
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-track:hover {
-  background-color: #e1e1e1; /* Slightly darker track color on hover */
+  background-color: #e1e1e1;
+  /* Slightly darker track color on hover */
 }
 
-/* --- Global animated wash + strong vignette, CSS-only --- */
+/* --- Base page color (matches canvas dark background, prevents flash) --- */
 :root {
-  --bg-base: #08080d;                 /* page base color */
-  --vig-edge: rgba(0, 0, 0, 0.50);    /* edge darkness */
-  --vig-center: rgba(255, 255, 255, 0.06); /* subtle center lift */
+  --bg-base: #0a0a23;
 }
 
-/* Base page color */
-html, body {
+html,
+body {
   background: var(--bg-base);
   min-height: 100%;
 }
 
-/* Animated color wash (behind everything) */
-html::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  will-change: transform;
-  background:
-    radial-gradient(1200px 700px at 12% -10%, rgba(99,102,241,0.60), transparent),
-    radial-gradient(1000px 600px at 115% 10%, rgba(217,70,239,0.52), transparent),
-    radial-gradient(900px 650px at 50% 115%, rgba(34,211,238,0.54), transparent);
-  animation: slow-pan 22s ease-in-out infinite;
-}
-
-/* Strong, reliable vignette overlay (above wash, below content) */
-html::after {
-  content: "";
-  position: fixed;
-  inset: -48px;                  /* extend slightly to avoid hard edge on mobile */
-  z-index: 1;
-  pointer-events: none;
-  /* combo: subtle center glow + dark edges */
-  background:
-    radial-gradient(60% 55% at 50% 40%,
-      var(--vig-center) 0%,
-      rgba(0,0,0,0) 45%),
-    radial-gradient(80% 70% at 50% 50%,
-      rgba(0,0,0,0) 55%,
-      var(--vig-edge) 100%);
-}
-
-/* Global keyframes (server-safe; no styled-jsx needed) */
-@keyframes slow-pan {
-  0%   { transform: translate3d(0,0,0) scale(1); }
-  50%  { transform: translate3d(-2%, -1%, 0) scale(1.02); }
-  100% { transform: translate3d(0,0,0) scale(1); }
-}
-
 /* Optional: blinking cursor utility used by your hero */
-@keyframes cursor { 0%,49% { opacity: 1 } 50%,100% { opacity: 0 } }
-.animate-cursor { animation: cursor 1.05s step-end infinite; }
+@keyframes cursor {
 
-/* app/globals.css */
-@layer components {
-  .glass {
-    @apply bg-white/10 backdrop-blur-xl border border-white/15 ring-1 ring-white/10 rounded-2xl shadow-[0_12px_45px_-12px_rgba(0,0,0,0.6)];
+  0%,
+  49% {
+    opacity: 1
   }
-  .glass-inner {
-    @apply bg-white/5 border border-white/10 rounded-xl overflow-hidden shadow-md;
+
+  50%,
+  100% {
+    opacity: 0
   }
-  .glass-btn {
-    @apply rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 ring-1 ring-white/10 text-sky-200 font-semibold;
-  }
+}
+
+.animate-cursor {
+  animation: cursor 1.05s step-end infinite;
+}
+
+
+/* Utility classes — written as plain CSS to avoid Tailwind v4 @apply parsing issues */
+.glass {
+  background-color: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.10), 0 12px 45px -12px rgba(0, 0, 0, 0.60);
+  border-radius: 1rem;
+}
+
+.glass-inner {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.glass-btn {
+  border-radius: 1rem;
+  background-color: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.10);
+  color: rgb(186, 230, 253);
+  font-weight: 600;
+}
+
+.glass-btn:hover {
+  background-color: rgba(255, 255, 255, 0.15);
 }

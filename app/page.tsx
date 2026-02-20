@@ -1,7 +1,7 @@
 // app/page.tsx
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { IoMdHand } from 'react-icons/io';
 import { FaGithub, FaLinkedin, FaEnvelope, FaFileDownload } from 'react-icons/fa';
@@ -30,12 +30,35 @@ function useTypewriter(fullText: string, speedMs = 34) {
 
 /* ──────────────── Reusable glass card ──────────────── */
 function Card({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  const ref = React.useRef<HTMLDivElement>(null);
+  const [pos, setPos] = React.useState({ x: 0, y: 0, visible: false });
+
+  const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = ref.current?.getBoundingClientRect();
+    if (!rect) return;
+    setPos({ x: e.clientX - rect.left, y: e.clientY - rect.top, visible: true });
+  };
+
   return (
-    <div className={`bg-white/10 backdrop-blur-xl border border-white/15 ring-1 ring-white/10 rounded-2xl shadow-[0_12px_45px_-12px_rgba(0,0,0,0.6)] ${className}`}>
-      {children}
+    <div
+      ref={ref}
+      onMouseMove={onMouseMove}
+      onMouseLeave={() => setPos(p => ({ ...p, visible: false }))}
+      className={`relative overflow-hidden bg-white/10 backdrop-blur-xl border border-white/15 ring-1 ring-white/10 rounded-2xl shadow-[0_12px_45px_-12px_rgba(0,0,0,0.6)] ${className}`}
+    >
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-300"
+        style={{
+          opacity: pos.visible ? 1 : 0,
+          background: `radial-gradient(400px circle at ${pos.x}px ${pos.y}px, rgba(180,140,255,0.13), transparent 70%)`,
+        }}
+      />
+      <div className="relative z-10">{children}</div>
     </div>
   );
 }
+
 
 /* ──────────────── Sections ──────────────── */
 function HeroSection() {
@@ -139,7 +162,7 @@ function ContactSection() {
 function ProjectsSection() {
   const projects = [
     { title: "📌 CoopCNC | 2024-2025", description: "Custom designed CNC machine with 1x1 meter bed to cut wood/aluminum.", image: "/cncdone.png", link: "/projects/cnc" },
-    { title: "📌 Debatify | 2025", description: "AI-powered personal assistant for competitive debate. Includes debate search engines, evidence archives, reformatters. 12k+ Users, ~7k ARR.", image: "/debatifyhome.png", link: "/projects/debatify" },
+    { title: "📌 Debatify | 2025", description: "AI-powered personal assistant for competitive debate. Includes debate search engines, evidence archives, reformatters. 15k+ Users, 8k+ ARR.", image: "/debatifyhome.png", link: "/projects/debatify" },
     { title: "📌 Recycla V1 | 2025", description: "Custom designed water bottle to filament recycler with a split ring compound planetary gearbox. ", image: "/recyclav1.png", link: "/projects/recycla" },
     { title: "📌 Nash | 2023-2024", description: "Dual extension differential arm robot for FIRST Tech Challenge Centerstage Season. Top 4 at worlds; Chesapeake regional champion.", image: "/nash.png", link: "/projects/nash" },
     { title: "Lucky | 2025-Now", description: "Wheeled bipedal robot with coaxial powered legs and custom PCB. Controlled via inverse kinematics. In Progress.", image: "/luckybuild.png", link: "/projects/lucky" },
