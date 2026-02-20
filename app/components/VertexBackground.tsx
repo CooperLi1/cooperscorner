@@ -2,10 +2,10 @@
 
 import { useEffect, useRef } from 'react';
 
-const NODE_COUNT = 80;
+const NODE_COUNT = 120;
 const MAX_EDGE_DIST = 160;
 const MOUSE_REPEL_DIST = 120;
-const MOUSE_REPEL_STRENGTH = 0.18;
+const MOUSE_REPEL_STRENGTH = 0.22;
 
 interface GraphNode {
     x: number; y: number;
@@ -28,8 +28,8 @@ export default function VertexBackground() {
             H = canvas.height = window.innerHeight;
             nodes.current = Array.from({ length: NODE_COUNT }, () => ({
                 x: Math.random() * W, y: Math.random() * H,
-                vx: (Math.random() - 0.5) * 0.4,
-                vy: (Math.random() - 0.5) * 0.4,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
             }));
         };
         resize();
@@ -63,7 +63,23 @@ export default function VertexBackground() {
                     n.vx += (dx / dist) * force * MOUSE_REPEL_STRENGTH;
                     n.vy += (dy / dist) * force * MOUSE_REPEL_STRENGTH;
                 }
-                n.vx *= 0.98; n.vy *= 0.98;
+
+                // slow automatic drift
+                n.vx += (Math.random() - 0.5) * 0.02;
+                n.vy += (Math.random() - 0.5) * 0.02;
+
+                // gentle damping to maintain slow speed
+                const speed = Math.sqrt(n.vx * n.vx + n.vy * n.vy);
+                const maxSpeed = 0.8;
+                if (speed > maxSpeed) {
+                    n.vx *= 0.95;
+                    n.vy *= 0.95;
+                } else if (speed < 0.2) {
+                    // maintain minimum movement
+                    n.vx *= 1.05;
+                    n.vy *= 1.05;
+                }
+
                 n.x += n.vx; n.y += n.vy;
                 if (n.x < 0) n.x += W; if (n.x > W) n.x -= W;
                 if (n.y < 0) n.y += H; if (n.y > H) n.y -= H;

@@ -396,8 +396,8 @@ function ProjectsSection() {
       >
         <div className="p-6 md:p-7">
           {/* heading with gradient underline accent + Filter Dropdown */}
-          <div className="flex items-center justify-center mb-6 relative">
-            <h2 className="text-3xl font-semibold inline-block relative">
+          <div className="flex items-center justify-between lg:justify-center mb-6 relative">
+            <h2 className="text-3xl font-semibold inline-block relative lg:absolute lg:left-1/2 lg:-translate-x-1/2">
               Projects
               <span
                 className="absolute -bottom-1 left-0 right-0 h-[2px] rounded-full"
@@ -407,7 +407,7 @@ function ProjectsSection() {
 
             {/* Filter Dropdown */}
             <div
-              className="absolute right-0 top-0 cursor-pointer"
+              className="relative lg:absolute lg:right-0 lg:top-0 cursor-pointer"
               onMouseEnter={() => setIsOpen(true)}
               onMouseLeave={() => setIsOpen(false)}
             >
@@ -569,14 +569,14 @@ export default function Page() {
       {/* content above background */}
       <div className="relative z-30 px-4 md:px-8 lg:px-16">
         <div className="flex flex-col lg:flex-row lg:h-screen gap-8 lg:gap-6">
-          <div className="w-full lg:w-1/2 lg:pr-2 lg:overflow-y-auto">
-            <div className="space-y-8 pt-12 pb-10">
+          <div className="w-full lg:w-1/2 lg:pr-2 lg:overflow-y-auto custom-scrollbar">
+            <div className="space-y-8 pt-12 pb-0 lg:pb-10">
               <HeroSection />
               <ContactSection />
               <PublicationsSection />
             </div>
           </div>
-          <div className="w-full lg:w-1/2 lg:pl-2 lg:overflow-y-auto mt-2 lg:mt-12 lg:mb-10">
+          <div className="w-full lg:w-1/2 lg:pl-2 lg:overflow-y-auto mt-0 lg:mt-12 lg:mb-10 custom-scrollbar">
             <ProjectsSection />
           </div>
         </div>
