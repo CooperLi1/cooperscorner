@@ -27,7 +27,6 @@ function useTypewriter(fullText: string, speedMs = 34) {
   return text;
 }
 
-
 /* ──────────────── Reusable glass card ──────────────── */
 function Card({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   const ref = React.useRef<HTMLDivElement>(null);
@@ -80,9 +79,20 @@ function HeroSection() {
         />
         <div className="flex-1">
           <div className="flex items-center gap-3">
-            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+            <h1
+              className="text-4xl md:text-5xl font-extrabold tracking-tight leading-tight"
+              style={{
+                background: 'linear-gradient(120deg,#fff 25%,#c4b5fd 65%,#a78bfa)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
               {typed}
-              <span className="ml-1 inline-block h-[0.9em] w-[2px] align-[-0.1em] bg-current animate-cursor" />
+              <span
+                className="ml-1 inline-block h-[0.9em] w-[2px] align-[-0.1em] animate-cursor"
+                style={{ background: '#c4b5fd' }}
+              />
             </h1>
             <motion.div
               animate={{ rotate: [0, 15, 0, -15, 0] }}
@@ -93,8 +103,8 @@ function HeroSection() {
           </div>
           <p className="mt-3 text-zinc-100/90">
             student at montgomery blair high school passionate about engineering.
-            my goal is to one day become a "full-stack" maker, experienced in everything from manufacturing to web dev to cad. i love trying new things and building new projects.
-            <span className="text-yellow-200">  i'm currently looking for an internship for summer 2026, reach out!</span>
+            my goal is to one day become a &ldquo;full-stack&rdquo; maker, experienced in everything from manufacturing to web dev to cad. i love trying new things and building new projects.
+            <span className="text-yellow-200"> i&apos;m currently looking for an internship for summer 2026, reach out!</span>
           </p>
         </div>
       </motion.div>
@@ -102,33 +112,6 @@ function HeroSection() {
   );
 }
 
-function AboutSection() {
-  return (
-    <Card className="p-5 md:p-6">
-      <motion.div
-        initial={{ opacity: 0, x: -36 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.55 }}
-        className="flex gap-5 items-center"
-      >
-        <Image
-          src="/cooper1.png"
-          alt="Profile"
-          width={96}
-          height={96}
-          className="h-20 w-20 md:h-24 md:w-24 rounded-full object-cover border border-white/20 shadow-md"
-        />
-        <div>
-          <h2 className="text-2xl font-semibold">About</h2>
-          <p className="text-zinc-100/85 mt-1">
-            building things, breaking things (then fixing them), and sharing what i learn along the way.
-          </p>
-        </div>
-      </motion.div>
-    </Card>
-  );
-}
 
 function ContactSection() {
   const Item = ({ href, children, icon: Icon }: { href: string; children: React.ReactNode; icon: any }) => (
@@ -146,7 +129,7 @@ function ContactSection() {
   return (
     <Card className="p-5 md:p-6">
       <motion.div initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.55 }}>
-        <h2 className="text-2xl font-semibold mb-4">Contact & Resume</h2>
+        <h2 className="text-2xl font-semibold mb-4">Contact &amp; Resume</h2>
         <div className="space-y-3">
           <Item href="mailto:copperli1234@gmail.com" icon={FaEnvelope}>email</Item>
           <Item href="https://github.com/CooperLi1" icon={FaGithub}>github</Item>
@@ -158,6 +141,15 @@ function ContactSection() {
   );
 }
 
+/* ──────────────── Stagger variants ──────────────── */
+const listVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } },
+};
+const itemVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.42, ease: 'easeOut' } },
+};
 
 function ProjectsSection() {
   const projects = [
@@ -188,36 +180,38 @@ function ProjectsSection() {
     { title: "Diffy | 2023", description: "Differential drive pod built as a gift.", image: "/differential.jpg", link: "/projects/diffy" },
     { title: "Nutmeg | 2022-2023", description: "Turret crane robot for FTC Powerplay Season. Alabama state champion.", image: "/nutmeg.png", link: "/projects/nutmeg" },
     { title: "Macadamia | 2021-2022", description: "Suspension robot for FTC Freight Frenzy. Worlds division semifinalist; state champion.", image: "/mac.png", link: "/projects/mac" },
-    {
-      title: "Rube Goldberg | 2021",
-      description: "Rube goldberg machine for science olympiad.",
-      image: "/rubegoldberg.png",
-      link: "/projects/rubegoldberg"
-    },
-    {
-      title: "Collision Preventer | 2019-2020",
-      description: "Detects and warns of collisions in hallway deadzones.",
-      image: "/collision.png",
-      link: "/projects/collision"
-    },
+    { title: "Rube Goldberg | 2021", description: "Rube goldberg machine for science olympiad.", image: "/rubegoldberg.png", link: "/projects/rubegoldberg" },
+    { title: "Collision Preventer | 2019-2020", description: "Detects and warns of collisions in hallway deadzones.", image: "/collision.png", link: "/projects/collision" },
   ];
 
   return (
-    // Make the card the clipper (rounded + overflow-hidden) and remove padding here
     <Card className="rounded-3xl overflow-hidden p-0">
-      {/* Put padding on inner content and make THAT the scroller */}
       <motion.section
-        initial={{ opacity: 0, x: 42 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.6 }}
-        // fixed height on large screens so scrolling happens inside the card
+        variants={listVariants}
+        initial="hidden"
+        animate="visible"
         className="h-auto lg:h-[calc(100vh-6rem)] lg:overflow-y-auto"
       >
         <div className="p-6 md:p-7">
-          <h2 className="text-3xl font-semibold text-center mb-6">Projects</h2>
+          {/* heading with gradient underline accent */}
+          <div className="text-center mb-6">
+            <h2 className="text-3xl font-semibold inline-block relative">
+              Projects
+              <span
+                className="absolute -bottom-1 left-0 right-0 h-[2px] rounded-full"
+                style={{ background: 'linear-gradient(90deg,transparent,#a78bfa,transparent)' }}
+              />
+            </h2>
+          </div>
           <div className="space-y-5 divide-y divide-white/10">
             {projects.map((p, i) => (
-              <a key={i} href={p.link} target="_blank" className="block group pt-5 first:pt-0">
+              <motion.a
+                key={i}
+                href={p.link}
+                target="_blank"
+                variants={itemVariants}
+                className="block group pt-5 first:pt-0"
+              >
                 <div className="flex flex-col md:flex-row gap-5 items-start">
                   <Image
                     src={p.image}
@@ -233,7 +227,7 @@ function ProjectsSection() {
                     <p className="text-zinc-100/80 text-sm mt-1">{p.description}</p>
                   </div>
                 </div>
-              </a>
+              </motion.a>
             ))}
           </div>
         </div>
@@ -253,14 +247,12 @@ export default function Page() {
           <div className="w-full lg:w-1/2 lg:pr-2 lg:overflow-y-auto">
             <div className="space-y-8 pt-12 pb-10">
               <HeroSection />
-              {/* <AboutSection /> */}
               <ContactSection />
+
             </div>
           </div>
           <div className="w-full lg:w-1/2 lg:pl-2 lg:overflow-y-auto mt-2 lg:mt-12 lg:mb-10">
-            {/* <div className="lg:h-[calc(100vh-6rem)]"> */}
             <ProjectsSection />
-            {/* </div> */}
           </div>
         </div>
       </div>
