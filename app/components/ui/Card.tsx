@@ -15,7 +15,8 @@ export function Card({
   const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = ref.current?.getBoundingClientRect();
     if (!rect) return;
-    setPos({ x: e.clientX - rect.left, y: e.clientY - rect.top, visible: true });
+    const scrollTop = ref.current?.scrollTop || 0;
+    setPos({ x: e.clientX - rect.left, y: e.clientY - rect.top + scrollTop, visible: true });
   };
 
   return (
@@ -28,7 +29,7 @@ export function Card({
       {/* spotlight layer */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-300"
+        className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-300 min-h-full"
         style={{
           opacity: pos.visible ? 1 : 0,
           background: `radial-gradient(400px circle at ${pos.x}px ${pos.y}px, rgba(180,140,255,0.13), transparent 70%)`,

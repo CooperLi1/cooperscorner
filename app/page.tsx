@@ -63,7 +63,7 @@ function Card({ children, className = "" }: { children: React.ReactNode; classNa
 function HeroSection() {
   const typed = useTypewriter("hi, i'm cooper!", 68);
   return (
-    <Card className="p-5 md:p-7">
+    <Card className="p-4 md:p-4">
       <motion.div
         initial={{ opacity: 0, y: -18 }}
         animate={{ opacity: 1, y: 0 }}
@@ -127,9 +127,15 @@ function ContactSection() {
   );
 
   return (
-    <Card className="p-5 md:p-6">
+    <Card className="px-6 py-3 md:px-8 md:py-3">
       <motion.div initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.55 }}>
-        <h2 className="text-2xl font-semibold mb-4">Contact &amp; Resume</h2>
+        <h2 className="text-2xl font-semibold inline-block relative mb-4">
+          Contact &amp; Resume
+          <span
+            className="absolute -bottom-1 left-0 right-0 h-[2px] rounded-full"
+            style={{ background: 'linear-gradient(90deg,transparent,#a78bfa,transparent)' }}
+          />
+        </h2>
         <div className="space-y-3">
           <Item href="mailto:copperli1234@gmail.com" icon={FaEnvelope}>email</Item>
           <Item href="https://github.com/CooperLi1" icon={FaGithub}>github</Item>
@@ -386,7 +392,7 @@ function ProjectsSection() {
         variants={listVariants}
         initial="hidden"
         animate="visible"
-        className="h-auto lg:h-[calc(100vh-6rem)] lg:overflow-y-auto"
+        className="h-auto lg:h-[calc(100vh-6rem)] lg:overflow-y-auto custom-scrollbar"
       >
         <div className="p-6 md:p-7">
           {/* heading with gradient underline accent + Filter Dropdown */}
@@ -494,6 +500,67 @@ function ProjectsSection() {
   );
 }
 
+function PublicationsSection() {
+  return (
+    <Card className="p-0 overflow-hidden">
+      <div className="lg:max-h-40 overflow-y-auto custom-scrollbar px-6 py-3 md:px-8 md:py-3 space-y-6">
+        <motion.div initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.55 }}>
+          <h2 className="text-2xl font-semibold inline-block relative mb-2">
+            Publications
+            <span
+              className="absolute -bottom-1 left-0 right-0 h-[2px] rounded-full"
+              style={{ background: 'linear-gradient(90deg,transparent,#a78bfa,transparent)' }}
+            />
+          </h2>
+          <div className="space-y-7 pr-2">
+            <div>
+              <a href="https://www3.cs.stonybrook.edu/~icdm2025/icdmw2025proceedings/813200c994.pdf" target="_blank" className="group block">
+                <h3 className="text-sm font-semibold group-hover:text-yellow-200 transition text-zinc-100 leading-snug">
+                  Multimodal Foundation Models as Router Models for High-Resolution Aerial Image Segmentation.
+                </h3>
+                <p className="text-xs text-zinc-400 mt-1.5 leading-relaxed">
+                  <strong className="text-yellow-200 font-semibold">Cooper Li</strong>, Zhihao Wang, Yiqun Xie.
+                </p>
+                <p className="text-[10px] text-white/40 mt-1 italic">
+                  In Proceedings of the IEEE International Conference on Data Mining (ICDM), 2025.
+                </p>
+              </a>
+            </div>
+
+            <div>
+              <a href="https://neurips.cc/virtual/2025/loc/san-diego/poster/121794" target="_blank" className="group block">
+                <h3 className="text-sm font-semibold group-hover:text-yellow-200 transition text-zinc-100 leading-snug">
+                  TreeFinder: A US-Scale Benchmark Dataset for Individual Tree Mortality Monitoring Using High-Resolution Aerial Imagery.
+                </h3>
+                <p className="text-xs text-zinc-400 mt-1.5 leading-relaxed">
+                  Zhihao Wang, <strong className="text-yellow-200 font-semibold">Cooper Li</strong>, Ruichen Wang, Lei Ma, George Hurtt, Xiaowei Jia, Gengchen Mai, Zhili Li, Yiqun Xie.
+                </p>
+                <p className="text-[10px] text-white/40 mt-1 italic">
+                  In Proceedings of the 39th Conference on Neural Information Processing Systems (NeurIPS), 2025.
+                </p>
+              </a>
+            </div>
+
+            <div>
+              <a href="https://dl.acm.org/doi/10.1145/3764919.3770871" target="_blank" className="group block">
+                <h3 className="text-sm font-semibold group-hover:text-yellow-200 transition text-zinc-100 leading-snug">
+                  Characterizing the Effectiveness of DINOv2 as an Off-the-Shelf Foundation Model for Earth Monitoring Tasks: Preliminary Results.
+                </h3>
+                <p className="text-xs text-zinc-400 mt-1.5 leading-relaxed">
+                  Ruichen Wang, <strong className="text-yellow-200 font-semibold">Cooper Li</strong>, Sophia Hou, Alexander Lu, Zhihao Wang, Xiaowei Jia, and Yiqun Xie.
+                </p>
+                <p className="text-[10px] text-white/40 mt-1 italic">
+                  In Proceedings of the 4th ACM SIGSPATIAL International Workshop on Spatial Big Data and AI for Industrial Applications (GeoIndustry &apos;25), 2025.
+                </p>
+              </a>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </Card>
+  );
+}
+
 /* ───────────────── Page ───────────────── */
 export default function Page() {
   return (
@@ -506,7 +573,7 @@ export default function Page() {
             <div className="space-y-8 pt-12 pb-10">
               <HeroSection />
               <ContactSection />
-
+              <PublicationsSection />
             </div>
           </div>
           <div className="w-full lg:w-1/2 lg:pl-2 lg:overflow-y-auto mt-2 lg:mt-12 lg:mb-10">
