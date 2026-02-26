@@ -189,13 +189,6 @@ const projects: Project[] = [
     tags: ["Mechatronics", "Controls"]
   },
   {
-    title: "Lucky | 2025-Now",
-    description: <><strong>Wheeled bipedal robot</strong> with coaxial powered legs and custom PCB. Controlled via inverse kinematics. In Progress.</>,
-    image: "/luckybuild.png",
-    link: "/projects/lucky",
-    tags: ["Mechatronics", "PCB Design", "Controls"]
-  },
-  {
     title: "Dugtrio | 2025-Now",
     description: <>World&apos;s only &apos;triple shooter on a turret&apos; robot for FIRST Tech Challenge Decode. Placed <strong>first overall in Chesapeake</strong>. In Progress.</>,
     image: "/dugtrio.png",
@@ -203,11 +196,18 @@ const projects: Project[] = [
     tags: ["Mechatronics", "Controls"]
   },
   {
-    title: "Hamlet Game | 2026",
-    description: <>Turn based video game simulating Hamlet final fight made for AP Lit.</>,
-    image: "/hamlet.png",
-    link: "https://hamlet-game.vercel.app/",
-    tags: ["WebDev"]
+    title: "FTC Chat | 2026-Now",
+    description: <>Chatbot using <strong>mixture of experts and retrieval augmented generation</strong> to accurately answer questions about FIRST Tech Challenge. In Progress.</>,
+    image: "/ftcrag.png",
+    link: "/projects/ftcrag",
+    tags: ["WebDev", "AI"]
+  },
+    {
+    title: "Lucky | 2025-2026",
+    description: <><strong>Wheeled bipedal robot</strong> with coaxial powered legs and custom PCB. Controlled via inverse kinematics. In Progress.</>,
+    image: "/luckybuild.png",
+    link: "/projects/lucky",
+    tags: ["Mechatronics", "PCB Design", "Controls"]
   },
   {
     title: "Rope Climbing Robot | 2025",
@@ -277,6 +277,13 @@ const projects: Project[] = [
     description: <>Website made for my friend&apos;s nonprofit</>,
     image: "/mathmadesimple.png",
     link: "https://mathmadesimple.vercel.app/",
+    tags: ["WebDev"]
+  },
+  {
+    title: "Hamlet Game | 2025",
+    description: <>Turn based video game simulating Hamlet final fight made for AP Lit.</>,
+    image: "/hamlet.png",
+    link: "https://hamlet-game.vercel.app/",
     tags: ["WebDev"]
   },
   {
