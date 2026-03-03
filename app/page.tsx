@@ -196,15 +196,15 @@ const projects: Project[] = [
     tags: ["Mechatronics", "Controls"]
   },
   {
-    title: "FTC Chat | 2026-Now",
-    description: <>Chatbot using <strong>mixture of experts and retrieval augmented generation</strong> to accurately answer questions about FIRST Tech Challenge. In Progress.</>,
+    title: "FTC Chat | 2026",
+    description: <>Chatbot using <strong>mixture of experts and retrieval augmented generation</strong> to accurately answer questions about FIRST Tech Challenge.</>,
     image: "/ftcrag.png",
     link: "/projects/ftcrag",
     tags: ["WebDev", "AI"]
   },
     {
     title: "Lucky | 2025-2026",
-    description: <><strong>Wheeled bipedal robot</strong> with coaxial powered legs and custom PCB. Controlled via inverse kinematics. In Progress.</>,
+    description: <><strong>Wheeled bipedal robot</strong> with coaxial powered legs and custom PCB. Controlled via inverse kinematics.</>,
     image: "/luckybuild.png",
     link: "/projects/lucky",
     tags: ["Mechatronics", "PCB Design", "Controls"]

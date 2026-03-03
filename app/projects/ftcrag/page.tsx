@@ -10,7 +10,7 @@ export default function ProjectPage() {
   const playerRef = useRef<any>(null);
 
   const project = {
-    name: "FTC Chat (In Progress)",
+    name: "FTC Chat",
     media: [
       {
         type: "image",
@@ -22,7 +22,7 @@ export default function ProjectPage() {
         type: "image",
         src: "/ftcragvisual.png",
         description:
-          "Pipeline for agent. I'm currently working on adding more documents to the vector DB.",
+          "Pipeline for agent.",
       },
     ],
   };

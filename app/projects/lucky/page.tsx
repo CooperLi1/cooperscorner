@@ -5,7 +5,7 @@ import { Card } from '@/app/components/ui/Card';
 
 export default function ProjectPage() {
   const project = {
-    name: "Lucky (In Progress)",
+    name: "Lucky",
     media: [
       {
         type: "video",
