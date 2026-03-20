@@ -189,6 +189,13 @@ const projects: Project[] = [
     tags: ["Mechatronics", "Controls"]
   },
   {
+    title: "Auto-pipetting Gantry | 2026-Now",
+    description: <>3-axis gantry with a pipette to automatically create different solutions. In Progress.</>,
+    image: "/nostrapharmaschematic.png",
+    link: "/projects/auto-pipette",
+    tags: ["Mechatronics", "Manufacturing", "PCB Design", "Controls"]
+  },
+  {
     title: "Dugtrio | 2025-Now",
     description: <>World&apos;s only &apos;triple shooter on a turret&apos; robot for FIRST Tech Challenge Decode. Placed <strong>first overall in Chesapeake</strong>. In Progress.</>,
     image: "/dugtrio.png",
