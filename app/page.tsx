@@ -202,13 +202,13 @@ const projects: Project[] = [
     link: "/projects/dugtrio",
     tags: ["Mechatronics", "Controls"]
   },
-  //   {
-  //   title: "Birthday Gift | 2026",
-  //   description: <>PCB birthday gift with audio player and astable multivibrator.</>,
-  //   image: "/ftcrag.png",
-  //   link: "/projects/ftcrag",
-  //   tags: ["PCB Design"]
-  // },
+    {
+    title: "Birthday Gift | 2026",
+    description: <>PCB birthday gift with audio player and astable multivibrator.</>,
+    image: "/birthdaypcb.png",
+    link: "/projects/birthday",
+    tags: ["PCB Design"]
+  },
   {
     title: "FTC Chat | 2026",
     description: <>Chatbot using <strong>mixture of experts and retrieval augmented generation</strong> to accurately answer questions about FIRST Tech Challenge.</>,
