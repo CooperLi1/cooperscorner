@@ -4,8 +4,13 @@ import { Card } from '@/app/components/ui/Card';
 
 export default function ProjectPage() {
   const project = {
-    name: "Auto-pipetting Gantry",
+    name: "Auto-pipetting Gantry (In Progress)",
     media: [
+      {
+        type: "image",
+        src: "/pipettecad.png",
+        description: "CAD of pipetting gantry, still in progress. Censored because this project is being built for a local biotech firm.",
+      },
       {
         type: "image",
         src: "/nostrapharmaschematic.png",

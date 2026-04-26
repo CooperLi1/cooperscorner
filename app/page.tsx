@@ -191,7 +191,7 @@ const projects: Project[] = [
   {
     title: "Auto-pipetting Gantry | 2026-Now",
     description: <>3-axis gantry with a pipette to automatically create different solutions. In Progress.</>,
-    image: "/nostrapharmaschematic.png",
+    image: "/pipettecad.png",
     link: "/projects/auto-pipette",
     tags: ["Mechatronics", "Manufacturing", "PCB Design", "Controls"]
   },
@@ -202,6 +202,13 @@ const projects: Project[] = [
     link: "/projects/dugtrio",
     tags: ["Mechatronics", "Controls"]
   },
+  //   {
+  //   title: "Birthday Gift | 2026",
+  //   description: <>PCB birthday gift with audio player and astable multivibrator.</>,
+  //   image: "/ftcrag.png",
+  //   link: "/projects/ftcrag",
+  //   tags: ["PCB Design"]
+  // },
   {
     title: "FTC Chat | 2026",
     description: <>Chatbot using <strong>mixture of experts and retrieval augmented generation</strong> to accurately answer questions about FIRST Tech Challenge.</>,
