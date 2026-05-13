@@ -183,21 +183,21 @@ const projects: Project[] = [
   },
   {
     title: "📌 Nash | 2023-2024",
-    description: <>Dual extension differential arm robot for FIRST Tech Challenge Centerstage Season. <strong>Top 4 at worlds</strong>; Chesapeake regional champion.</>,
+    description: <>Dual extension differential arm robot for FIRST Tech Challenge Centerstage Season. <strong>Top 4 globally out of 8000+ teams</strong>; Chesapeake regional champion.</>,
     image: "/nash.png",
     link: "/projects/nash",
     tags: ["Mechatronics", "Controls"]
   },
   {
-    title: "Auto-pipetting Gantry | 2026-Now",
-    description: <>3-axis gantry with a pipette to automatically create different solutions. In Progress.</>,
+    title: "PipSqueak | 2026-Now",
+    description: <>3-axis <strong>automatic-pipetting gantry</strong> to create different solutions. Built for local biotech firm. In Progress.</>,
     image: "/pipettecad.png",
     link: "/projects/auto-pipette",
     tags: ["Mechatronics", "Manufacturing", "PCB Design", "Controls"]
   },
   {
-    title: "Dugtrio | 2025-Now",
-    description: <>World&apos;s only &apos;triple shooter on a turret&apos; robot for FIRST Tech Challenge Decode. Placed <strong>first overall in Chesapeake</strong>. In Progress.</>,
+    title: "Dugtrio | 2025-2026",
+    description: <>World&apos;s only &apos;triple shooter on a turret&apos; robot for FIRST Tech Challenge Decode. Placed <strong>Top 6 globally out of 8000+ teams</strong> and first overall in Chesapeake.</>,
     image: "/dugtrio.png",
     link: "/projects/dugtrio",
     tags: ["Mechatronics", "Controls"]

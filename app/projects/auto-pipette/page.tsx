@@ -4,16 +4,16 @@ import { Card } from '@/app/components/ui/Card';
 
 export default function ProjectPage() {
   const project = {
-    name: "Auto-pipetting Gantry (In Progress)",
+    name: "PipSqueak (In Progress)",
     media: [
       {
         type: "image",
         src: "/pipettecad.png",
-        description: "CAD of pipetting gantry, still in progress. Censored because this project is being built for a local biotech firm.",
+        description: "CAD of automatic pipetting gantry, still in progress. Censored because this project is being built for a local biotech firm.",
       },
       {
         type: "image",
-        src: "/nostrapharmaschematic.png",
+        src: "/pipsqueaksch.png",
         description: "PCB schematic in KiCAD",
       },
     ],
