@@ -13,8 +13,18 @@ export default function ProjectPage() {
       },
       {
         type: "image",
+        src: "/pipsqueakpcb.png",
+        description: "PCB for pipsqueak.",
+      },
+      {
+        type: "image",
+        src: "/pipsqueakrouting.png",
+        description: "PCB footprint.",
+      },
+      {
+        type: "image",
         src: "/pipsqueaksch.png",
-        description: "PCB schematic in KiCAD",
+        description: "PCB schematic",
       },
     ],
   };
