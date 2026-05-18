@@ -205,7 +205,7 @@ const projects: Project[] = [
     {
     title: "Birthday Gift | 2026",
     description: <>PCB birthday gift with audio player and astable multivibrator.</>,
-    image: "/birthdaypcb.png",
+    image: "/birthday.png",
     link: "/projects/birthday",
     tags: ["PCB Design"]
   },

@@ -11,6 +11,12 @@ export default function ProjectPage() {
     media: [
       {
         type: "image",
+        src: "/birthday.mov",
+        alt: "Demo Image 1",
+        description: "Schematic in KiCAD.",
+      },
+      {
+        type: "image",
         src: "/birthdaysch.png",
         alt: "Demo Image 1",
         description: "Schematic in KiCAD.",
@@ -38,16 +44,6 @@ export default function ProjectPage() {
             <MediaList items={project.media as MediaItem[]} />
           </MediaCard>
         </Card>
-{/* 
-        <a
-          href="/projects/wristphone"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-white/15 ring-1 ring-white/10 bg-white/10 hover:bg-white/15 py-3 font-semibold text-sky-200 transition"
-        >
-          <LinkIcon size={18} />
-          Rev 2 (Wristphone)
-        </a> */}
       </div>
     </div>
   );
