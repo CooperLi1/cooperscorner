@@ -8,10 +8,9 @@ export default function ProjectPage() {
     name: "Birthday Gift",
     media: [
       {
-        type: "image",
+        type: "video",
         src: "/birthday.mov",
-        alt: "Demo Image 1",
-        description: "Schematic in KiCAD.",
+        description: "Demo.",
       },
       {
         type: "image",
