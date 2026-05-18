@@ -51,13 +51,18 @@ export function ProjectHeader({
 }) {
   return (
     <div className={`flex items-center justify-between gap-4 ${className}`}>
-      <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">{title}</h1>
+      <div>
+        <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">{title}</h1>
+        {subtitle && (
+          <p className="mt-2 max-w-[65ch] text-sm leading-6 text-[var(--ink-muted)]">{subtitle}</p>
+        )}
+      </div>
       {moreInfoUrl && (
         <a
           href={moreInfoUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 hover:bg-white/15 px-3 py-2 text-sm font-semibold text-sky-200 transition"
+          className="paper-button rounded-xl px-3 py-2 text-sm"
         >
           <LinkIcon size={18} />
           More Info
@@ -71,7 +76,7 @@ export function MediaList({ items }: { items: MediaItem[] }) {
   return (
     <div className="p-5 md:p-7 space-y-6">
       {items.map((item, i) => (
-        <div key={i} className="bg-white/5 border border-white/10 rounded-xl overflow-hidden shadow-md">
+        <div key={i} className="media-frame">
           {item.type === 'image' && (
             <Image
               src={item.src}
@@ -79,7 +84,7 @@ export function MediaList({ items }: { items: MediaItem[] }) {
               width={0}
               height={0}
               sizes="100vw"
-              className={`w-full h-auto object-contain bg-black/20 ${item.className || ''}`}
+              className={`w-full h-auto object-contain bg-[var(--bg-paper)] ${item.className || ''}`}
             />
           )}
 
@@ -134,7 +139,7 @@ export function MediaList({ items }: { items: MediaItem[] }) {
 
           {'description' in item && item.description && (
             <div className="p-4 md:p-5">
-              <p className="text-zinc-100/85">{item.description}</p>
+              <p className="media-caption">{item.description}</p>
             </div>
           )}
         </div>
@@ -153,7 +158,7 @@ export function MediaCard({
   className?: string;
 }) {
   return (
-    <div className={`rounded-3xl overflow-hidden p-0 ${className}`}>
+    <div className={`overflow-hidden p-0 ${className}`}>
       <section className={scrollable ? 'h-[calc(100vh-12rem)] overflow-y-auto' : 'overflow-visible'}>
         {children}
       </section>

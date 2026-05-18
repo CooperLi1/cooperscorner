@@ -22,7 +22,7 @@ export default function ProjectPage() {
   };
 
     return (
-      <div className="min-h-screen text-white px-4 md:px-8 lg:px-16">
+      <div className="min-h-screen px-4 md:px-8 lg:px-16">
         <div className="max-w-5xl mx-auto space-y-6">
           {/* Header card */}
           <Card className="p-6 md:p-8">

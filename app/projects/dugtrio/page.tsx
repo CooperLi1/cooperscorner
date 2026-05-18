@@ -41,7 +41,7 @@ export default function ProjectPage() {
     };
 
     return (
-        <div className="min-h-screen text-white px-4 md:px-8 lg:px-16">
+        <div className="min-h-screen px-4 md:px-8 lg:px-16">
             <div className="max-w-5xl mx-auto space-y-6">
                 {/* Header card */}
                 <Card className="p-6 md:p-8">
@@ -60,7 +60,7 @@ export default function ProjectPage() {
                     href="https://drive.google.com/file/d/1yZF7Rh9eeIUfDzdKA-Iqfd0n8_niBwGM/view?usp=sharing"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-white/15 ring-1 ring-white/10 bg-white/10 hover:bg-white/15 py-3 font-semibold text-sky-200 transition"
+                    className="project-action-link"
                 >
                     <LinkIcon size={18} />
                     More Info

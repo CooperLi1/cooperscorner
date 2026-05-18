@@ -28,7 +28,7 @@ export default function FlyingBird() {
   };
 
   useEffect(() => {
-    let startTime = Date.now();
+    const startTime = Date.now();
     let prevX = 0;
     let prevY = 300;
 

@@ -2,57 +2,34 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { IoMdHand } from 'react-icons/io';
 import { FaGithub, FaLinkedin, FaEnvelope, FaFileDownload } from 'react-icons/fa';
+import type { IconType } from 'react-icons';
 
 import Image from 'next/image';
-import VertexBackground from '@/app/components/VertexBackground';
 
 /* ───────────────── Typewriter ───────────────── */
 function useTypewriter(fullText: string, speedMs = 34) {
-  const [text, setText] = useState('');
+  const [count, setCount] = useState(0);
+
   useEffect(() => {
-    let i = 0;
-    let t: number | null = null;
-    setText('');
-    const step = () => {
-      i += 1;
-      setText(fullText.slice(0, i));
-      if (i < fullText.length) t = window.setTimeout(step, speedMs);
-    };
-    t = window.setTimeout(step, speedMs);
-    return () => { if (t) clearTimeout(t); };
-  }, [fullText, speedMs]);
-  return text;
+    if (count >= fullText.length) return;
+
+    const timer = window.setTimeout(() => {
+      setCount((current) => Math.min(current + 1, fullText.length));
+    }, speedMs);
+
+    return () => window.clearTimeout(timer);
+  }, [count, fullText.length, speedMs]);
+
+  return fullText.slice(0, count);
 }
 
-/* ──────────────── Reusable glass card ──────────────── */
+/* ──────────────── Reusable paper card ──────────────── */
 function Card({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  const ref = React.useRef<HTMLDivElement>(null);
-  const [pos, setPos] = React.useState({ x: 0, y: 0, visible: false });
-
-  const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = ref.current?.getBoundingClientRect();
-    if (!rect) return;
-    setPos({ x: e.clientX - rect.left, y: e.clientY - rect.top, visible: true });
-  };
-
   return (
-    <div
-      ref={ref}
-      onMouseMove={onMouseMove}
-      onMouseLeave={() => setPos(p => ({ ...p, visible: false }))}
-      className={`relative overflow-hidden bg-white/10 backdrop-blur-xl border border-white/15 ring-1 ring-white/10 rounded-2xl shadow-[0_12px_45px_-12px_rgba(0,0,0,0.6)] ${className}`}
-    >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-300"
-        style={{
-          opacity: pos.visible ? 1 : 0,
-          background: `radial-gradient(400px circle at ${pos.x}px ${pos.y}px, rgba(180,140,255,0.13), transparent 70%)`,
-        }}
-      />
+    <div className={`paper-card ${className}`}>
       <div className="relative z-10">{children}</div>
     </div>
   );
@@ -62,49 +39,44 @@ function Card({ children, className = "" }: { children: React.ReactNode; classNa
 /* ──────────────── Sections ──────────────── */
 function HeroSection() {
   const typed = useTypewriter("hi, i'm cooper!", 68);
+
   return (
-    <Card className="p-4 md:p-4">
+    <Card className="p-4">
       <motion.div
         initial={{ opacity: 0, y: -18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
-        className="flex items-start gap-5"
+        className="grid gap-5 md:grid-cols-[7.5rem_1fr] md:items-stretch"
       >
-        <Image
-          src="/cooper1.png"
-          alt="Cooper"
-          width={96}
-          height={96}
-          className="h-20 w-20 md:h-24 md:w-24 rounded-full object-cover border border-white/25 shadow-lg"
-        />
-        <div className="flex-1">
-          <div className="flex items-center gap-3">
+        <div className="relative min-h-28 overflow-hidden rounded-[0.7rem] border border-[var(--line-soft)] bg-[rgba(239,228,210,0.74)] md:min-h-full">
+          <Image
+            src="/cooper1.png"
+            alt="Cooper"
+            fill
+            priority
+            sizes="(min-width: 768px) 9rem, 7rem"
+            className="object-cover"
+          />
+        </div>
+        <div className="flex flex-col gap-5">
+          <div className="flex items-start justify-between gap-4">
             <h1
-              className="text-4xl md:text-5xl font-extrabold tracking-tight leading-tight"
-              style={{
-                background: 'linear-gradient(120deg,#fff 25%,#c4b5fd 65%,#a78bfa)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
+              className="min-h-[1.05em] whitespace-nowrap text-3xl font-bold leading-[1.03] tracking-[-0.01em] text-[var(--ink)] sm:text-4xl md:text-5xl"
             >
               {typed}
-              <span
-                className="ml-1 inline-block h-[0.9em] w-[2px] align-[-0.1em] animate-cursor"
-                style={{ background: '#c4b5fd' }}
-              />
+              <span className="ml-1 inline-block h-[0.9em] w-[2px] bg-[var(--accent)] align-[-0.1em] animate-cursor" />
             </h1>
             <motion.div
               animate={{ rotate: [0, 15, 0, -15, 0] }}
               transition={{ repeat: Infinity, duration: 1.2 }}
             >
-              <IoMdHand className="text-yellow-300 text-4xl drop-shadow" />
+              <IoMdHand className="mt-0.5 text-3xl text-[var(--accent-light)] sm:text-4xl md:text-5xl" />
             </motion.div>
           </div>
-          <p className="mt-3 text-zinc-100/90">
+          <p className="max-w-[64ch] text-sm leading-6 text-[var(--ink-muted)] md:text-[0.9rem]">
             student at montgomery blair high school passionate about engineering.
             my goal is to one day become a &ldquo;full-stack&rdquo; maker, experienced in everything from manufacturing to web dev to cad. i love trying new things and building new projects.
-            <span className="text-yellow-200"> i&apos;m currently looking for an internship for summer 2026, reach out!</span>
+            <span className="font-semibold text-[var(--accent)]"> i&apos;m currently looking for an internship for august/september 2026, reach out!</span>
           </p>
         </div>
       </motion.div>
@@ -113,37 +85,120 @@ function HeroSection() {
 }
 
 
-function ContactSection() {
-  const Item = ({ href, children, icon: Icon }: { href: string; children: React.ReactNode; icon: any }) => (
+function ContactItem({ href, children, icon: Icon }: { href: string; children: React.ReactNode; icon: IconType }) {
+  return (
     <a
       href={href}
       target={href.startsWith('http') ? '_blank' : undefined}
       rel="noopener noreferrer"
-      className="flex items-center gap-4 text-zinc-100/90 hover:text-yellow-200 transition"
+      className="group flex items-center gap-4 text-sm text-[var(--ink-muted)] hover:text-[var(--accent)]"
     >
-      <Icon className="text-xl" />
+      <Icon className="text-lg transition-transform duration-200 group-hover:-translate-y-0.5" />
       <span>{children}</span>
     </a>
   );
+}
 
+function ContactSection() {
   return (
-    <Card className="px-6 py-3 md:px-8 md:py-3">
+    <Card className="px-5 py-4">
       <motion.div initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.55 }}>
-        <h2 className="text-2xl font-semibold inline-block relative mb-4">
+        <h2 className="section-title mb-4 text-xl">
           Contact &amp; Resume
-          <span
-            className="absolute -bottom-1 left-0 right-0 h-[2px] rounded-full"
-            style={{ background: 'linear-gradient(90deg,transparent,#a78bfa,transparent)' }}
-          />
         </h2>
-        <div className="space-y-3">
-          <Item href="mailto:copperli1234@gmail.com" icon={FaEnvelope}>email</Item>
-          <Item href="https://github.com/CooperLi1" icon={FaGithub}>github</Item>
-          <Item href="https://www.linkedin.com/in/cooper-li-483672341" icon={FaLinkedin}>linkedin</Item>
-          <Item href="https://drive.google.com/file/d/1xJ2eMiS8GXGEpoGaKvoetEYNhwGyPBSp/view?usp=sharing" icon={FaFileDownload}>resume</Item>
+        <div className="grid gap-3 sm:grid-cols-2">
+          <ContactItem href="mailto:copperli1234@gmail.com" icon={FaEnvelope}>email</ContactItem>
+          <ContactItem href="https://github.com/CooperLi1" icon={FaGithub}>github</ContactItem>
+          <ContactItem href="https://www.linkedin.com/in/cooper-li-483672341" icon={FaLinkedin}>linkedin</ContactItem>
+          <ContactItem href="https://drive.google.com/file/d/1xJ2eMiS8GXGEpoGaKvoetEYNhwGyPBSp/view?usp=sharing" icon={FaFileDownload}>resume</ContactItem>
         </div>
       </motion.div>
     </Card>
+  );
+}
+
+const awards = [
+  {
+    label: "2x FTC Worlds Inspire Award",
+    detail: <>Top award in FIRST Tech Challenge given to <span className="award-highlight">4/8000+ teams</span>.</>,
+  },
+  {
+    label: "Public Forum Debate Bid Leader",
+    detail: <><span className="award-highlight">1st/8000+ globally</span> based on number of TOC qualifying performances.</>,
+  },
+  {
+    label: "International Debate Champion",
+    detail: <>New York City Invitational, Harvard RR, Durham, Blue Key RR, Ivy Street RR.</>,
+  },
+  {
+    label: "Cameron Impact Scholarship Finalist",
+    detail: <><span className="award-highlight">Top 100/3000+</span> for leadership and impactful community service.</>,
+  },
+  {
+    label: "Palantir Meritocracy Fellow",
+    detail: <>Accepted for commercial sector technical internship at Palantir, <span className="award-highlight">&asymp;Top 4%</span>.</>,
+  },
+  {
+    label: "2x FTC Worlds Innovate Award",
+    detail: <><span className="award-highlight">Top 0.15%</span> for robot innovation globally.</>,
+  },
+  {
+    label: "FBLA Management Information Systems",
+    detail: <>Placed <span className="award-highlight">Top 10 nationally</span> out of <span className="award-highlight">&asymp;1,000 competing teams</span>.</>,
+  },
+  {
+    label: "Wharton Investment Comp. Semifinalist",
+    detail: <>Led financial modeling software to place <span className="award-highlight">top 50/1800+ teams</span>.</>,
+  },
+  {
+    label: "Certificate of Meritorious Service",
+    detail: <><span className="award-highlight">700+</span> county-recognized service hours.</>,
+  },
+];
+
+function SkillsSection() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.55 }}
+    >
+      <Card className="skills-card px-4 py-3">
+        <h2 className="section-title mb-3 text-base">Skills</h2>
+        <div className="resume-lines">
+          <p>
+            <strong>Engineering:</strong> CAD/CAM (Onshape, Solidworks), PCB Design (Altium, KiCAD), Machine Design, Manufacturing, FEA
+          </p>
+          <p>
+            <strong>Software/AI:</strong> Python, Java, Embedded, Full-Stack, Controls, Git, LLMs, AI-assisted Coding
+          </p>
+        </div>
+      </Card>
+    </motion.div>
+  );
+}
+
+function AwardsSection() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.55 }}
+    >
+      <Card className="px-5 py-4 md:px-5 md:py-4">
+        <h2 className="section-title mb-4 text-xl">Awards</h2>
+        <ul className="award-list">
+          {awards.map((award) => (
+            <li key={award.label} className="award-item">
+              <strong>{award.label}:</strong>{" "}
+              <span>{award.detail}</span>
+            </li>
+          ))}
+        </ul>
+      </Card>
+    </motion.div>
   );
 }
 
@@ -159,30 +214,105 @@ const itemVariants = {
 
 type Project = { title: string; description: React.ReactNode; image: string; link: string; tags?: string[] };
 
+const projectTileClasses = [
+  "sm:col-span-2 xl:col-span-3 xl:row-span-2",
+  "sm:col-span-2 xl:col-span-3 xl:row-span-2",
+  "sm:col-span-2 xl:col-span-3",
+  "sm:col-span-2 xl:col-span-3",
+  "sm:col-span-2 xl:col-span-4",
+  "xl:col-span-2",
+  "xl:col-span-2",
+  "xl:col-span-2",
+  "xl:col-span-2",
+];
+
+function getProjectTileClass(index: number, total: number) {
+  if (index < projectTileClasses.length) return projectTileClasses[index];
+
+  const remainingCount = Math.max(total - projectTileClasses.length, 0);
+  const remainingIndex = index - projectTileClasses.length;
+  const isLastRemaining = remainingIndex === remainingCount - 1;
+  const remainder = remainingCount % 3;
+
+  if (isLastRemaining && remainder === 1) return "sm:col-span-2 xl:col-span-6";
+  if (isLastRemaining && remainder === 2) return "sm:col-span-2 xl:col-span-4";
+
+  return "xl:col-span-2";
+}
+
+function isFeatureTile(index: number) {
+  return index < 2 || index === 4;
+}
+
+function ProjectImage({
+  src,
+  alt,
+  feature,
+}: {
+  src: string;
+  alt: string;
+  feature: boolean;
+}) {
+  return (
+    <div className={`relative overflow-hidden rounded-[0.65rem] ${feature ? 'min-h-56 md:min-h-full' : 'h-80'}`}>
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        loading="eager"
+        sizes="(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw"
+        className="rounded-[0.65rem] object-cover transition duration-300 group-hover:scale-[1.02]"
+      />
+    </div>
+  );
+}
+
+const projectPriority = [
+  "CoopCNC | 2024-2025",
+  "Debatify | 2025",
+  "Dugtrio | 2025-2026",
+  "Recycla V1 | 2025",
+  "Nash | 2023-2024",
+  "PipSqueak | 2026-Now",
+  "Pipe Traversing Robot | 2025",
+  "Lucky | 2025-2026",
+  "Nudge Wristphone | 2025",
+  "Rope Climbing Robot | 2025",
+  "Wartortle | 2024-2025",
+  "FTC Chat | 2026",
+  "Birthday Gift | 2026",
+  "Nudge Smartwatch | 2025",
+  "InvestorBriefs | 2025",
+  "Sensor Interface PCB | 2025",
+  "ESP32 Breakout Board | 2024",
+];
+
+const projectPriorityRank = new Map(projectPriority.map((title, index) => [title, index]));
+
 const projects: Project[] = [
   {
-    title: "📌 CoopCNC | 2024-2025",
+    title: "CoopCNC | 2024-2025",
     description: <><strong>Custom designed CNC machine</strong> with 1x1 meter bed to cut wood/aluminum.</>,
     image: "/cncdone.png",
     link: "/projects/cnc",
     tags: ["Mechatronics", "Manufacturing"]
   },
   {
-    title: "📌 Debatify | 2025",
+    title: "Debatify | 2025",
     description: <>AI-powered personal assistant for competitive debate. Includes debate search engines, evidence archives, reformatters. <strong>15k+ Users, 8k+ ARR</strong>.</>,
     image: "/debatifyhome.png",
     link: "/projects/debatify",
     tags: ["WebDev", "AI", "Product"]
   },
   {
-    title: "📌 Recycla V1 | 2025",
+    title: "Recycla V1 | 2025",
     description: <>Custom designed <strong>water bottle to filament recycler</strong> with a split ring compound planetary gearbox.</>,
     image: "/recyclav1.png",
     link: "/projects/recycla",
     tags: ["Mechatronics", "Manufacturing", "Product"]
   },
   {
-    title: "📌 Nash | 2023-2024",
+    title: "Nash | 2023-2024",
     description: <>Dual extension differential arm robot for FIRST Tech Challenge Centerstage Season. <strong>Top 4 globally out of 8000+ teams</strong>; Chesapeake regional champion.</>,
     image: "/nash.png",
     link: "/projects/nash",
@@ -388,7 +518,6 @@ const projects: Project[] = [
 
 function ProjectsSection() {
   const [filter, setFilter] = useState('All');
-  const [isOpen, setIsOpen] = useState(false);
 
   // Compute unique tags sorted by frequency
   const allTags = React.useMemo(() => {
@@ -402,175 +531,138 @@ function ProjectsSection() {
 
   const categories = ['All', ...allTags];
 
+  const orderedProjects = React.useMemo(() => {
+    return projects
+      .map((project, index) => ({
+        project,
+        index,
+        rank: projectPriorityRank.get(project.title) ?? Number.MAX_SAFE_INTEGER,
+      }))
+      .sort((a, b) => a.rank - b.rank || a.index - b.index)
+      .map(({ project }) => project);
+  }, []);
+
   const filteredProjects = filter === 'All'
-    ? projects
-    : projects.filter(p => p.tags?.includes(filter));
+    ? orderedProjects
+    : orderedProjects.filter(p => p.tags?.includes(filter));
 
 
   return (
-    <Card className="rounded-3xl overflow-hidden p-0">
-      <motion.section
-        variants={listVariants}
-        initial="hidden"
-        animate="visible"
-        className="h-auto lg:h-[calc(100vh-6rem)] lg:overflow-y-auto custom-scrollbar"
-      >
-        <div className="p-6 md:p-7">
-          {/* heading with gradient underline accent + Filter Dropdown */}
-          <div className="flex items-center justify-between lg:justify-center mb-6 relative">
-            <h2 className="text-3xl font-semibold inline-block relative lg:absolute lg:left-1/2 lg:-translate-x-1/2">
-              Projects
-              <span
-                className="absolute -bottom-1 left-0 right-0 h-[2px] rounded-full"
-                style={{ background: 'linear-gradient(90deg,transparent,#a78bfa,transparent)' }}
-              />
-            </h2>
+    <motion.section
+      variants={listVariants}
+      initial="hidden"
+      animate="visible"
+      className="h-auto"
+    >
+      <div className="relative mb-5 flex items-start justify-between gap-4">
+        <h2 className="section-title text-2xl md:text-3xl">
+          Projects
+        </h2>
 
-            {/* Filter Dropdown */}
-            <div
-              className="relative lg:absolute lg:right-0 lg:top-0 cursor-pointer"
-              onMouseEnter={() => setIsOpen(true)}
-              onMouseLeave={() => setIsOpen(false)}
+        <label className="sr-only" htmlFor="project-filter">Filter projects</label>
+        <select
+          id="project-filter"
+          value={filter}
+          onChange={(event) => setFilter(event.target.value)}
+          className="project-filter-select"
+        >
+          {categories.map((cat) => (
+            <option key={cat} value={cat}>{cat}</option>
+          ))}
+        </select>
+      </div>
+
+      <div className="grid grid-flow-dense grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-6">
+        {filteredProjects.map((p, i) => {
+          const feature = isFeatureTile(i);
+
+          return (
+            <motion.a
+              layout
+              key={p.title}
+              href={p.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              variants={itemVariants}
+              className={`paper-card group min-h-[16rem] p-3 ${getProjectTileClass(i, filteredProjects.length)}`}
             >
-              <div className="relative">
-                <button
-                  onClick={() => setIsOpen(!isOpen)}
-                  className="cursor-pointer flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium hover:bg-white/10 transition-colors backdrop-blur-sm"
-                >
-                  <span>{filter}</span>
-                  <motion.svg
-                    animate={{ rotate: isOpen ? 180 : 0 }}
-                    width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-                  >
-                    <path d="M6 9l6 6 6-6" />
-                  </motion.svg>
-                </button>
-
-                <AnimatePresence>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 8, scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 8, scale: 0.95 }}
-                      transition={{ duration: 0.15 }}
-                      className="absolute right-0 mt-2 w-48 max-h-60 overflow-y-auto rounded-xl bg-zinc-900/90 border border-white/10 backdrop-blur-xl shadow-2xl z-50 p-1 custom-scrollbar"
-                    >
-                      {categories.map((cat) => (
-                        <button
-                          key={cat}
-                          onClick={() => { setFilter(cat); setIsOpen(false); }}
-                          className={`cursor-pointer w-full text-left px-3 py-2 rounded-lg text-xs font-medium transition-colors ${filter === cat ? 'bg-white/10 text-white' : 'text-zinc-400 hover:bg-white/5 hover:text-white'
-                            }`}
+              <div className={feature ? "grid h-full gap-3 md:grid-cols-[1.05fr_0.95fr]" : "flex h-full flex-col gap-3"}>
+                <ProjectImage src={p.image} alt={p.title} feature={feature} />
+                <div className="flex flex-1 flex-col px-1 pb-1">
+                  <h3 className="text-lg font-semibold leading-tight text-[var(--ink)] transition group-hover:text-[var(--accent)] md:text-xl">
+                    {p.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-6 text-[var(--ink-muted)] [&_strong]:font-semibold [&_strong]:text-[var(--accent)]">
+                    {p.description}
+                  </p>
+                  {p.tags && p.tags.length > 0 && (
+                    <div className="mt-auto flex flex-wrap gap-2 pt-4">
+                      {p.tags.map(tag => (
+                        <span
+                          key={tag}
+                          className="tag-chip"
                         >
-                          {cat}
-                        </button>
+                          {tag}
+                        </span>
                       ))}
-                    </motion.div>
+                    </div>
                   )}
-                </AnimatePresence>
-              </div>
-            </div>
-            {/* End Dropdown */}
-          </div>
-          <div className="flex flex-col">
-            {filteredProjects.map((p, i) => (
-              <motion.a
-                layout
-                key={p.title} // Use title as key for reordering animation (idx is unstable)
-                href={p.link}
-                target="_blank"
-                variants={itemVariants}
-                className="block group py-4 border-b border-white/10 last:border-0"
-              >
-                <div className="flex flex-col md:flex-row gap-5 items-start">
-                  <Image
-                    src={p.image}
-                    alt={p.title}
-                    width={112}
-                    height={112}
-                    className="w-28 h-28 object-cover rounded-lg border border-white/20 shadow-md group-hover:scale-[1.03] transition"
-                  />
-                  <div>
-                    <h3 className="text-xl font-semibold leading-tight group-hover:text-yellow-200 transition">
-                      {p.title}
-                    </h3>
-                    <p className="text-zinc-100/80 text-sm mt-1 [&_strong]:text-yellow-200 [&_strong]:font-semibold">
-                      {p.description}
-                    </p>
-                    {/* Tags */}
-                    {p.tags && p.tags.length > 0 && (
-                      <div className="flex flex-wrap gap-3 mt-2.5">
-                        {p.tags.map(tag => (
-                          <span
-                            key={tag}
-                            className="text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded bg-white/10 border border-white/10 text-zinc-300 shadow-sm"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
                 </div>
-              </motion.a>
-            ))}
-          </div>
-        </div>
-      </motion.section>
-    </Card>
+              </div>
+            </motion.a>
+          );
+        })}
+      </div>
+    </motion.section>
   );
 }
 
 function PublicationsSection() {
   return (
     <Card className="p-0 overflow-hidden">
-      <div className="lg:max-h-40 overflow-y-auto custom-scrollbar px-6 py-3 md:px-8 md:py-3 space-y-6">
+      <div className="space-y-4 px-5 py-4">
         <motion.div initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.55 }}>
-          <h2 className="text-2xl font-semibold inline-block relative mb-2">
+          <h2 className="section-title mb-3 text-lg">
             Publications
-            <span
-              className="absolute -bottom-1 left-0 right-0 h-[2px] rounded-full"
-              style={{ background: 'linear-gradient(90deg,transparent,#a78bfa,transparent)' }}
-            />
           </h2>
-          <div className="space-y-7 pr-2">
+          <div className="space-y-4 pr-2">
             <div>
-              <a href="https://www3.cs.stonybrook.edu/~icdm2025/icdmw2025proceedings/813200c994.pdf" target="_blank" className="group block">
-                <h3 className="text-sm font-semibold group-hover:text-yellow-200 transition text-zinc-100 leading-snug">
+              <a href="https://www3.cs.stonybrook.edu/~icdm2025/icdmw2025proceedings/813200c994.pdf" target="_blank" rel="noopener noreferrer" className="group block">
+                <h3 className="text-[0.78rem] font-semibold leading-[1.25] text-[var(--ink)] transition group-hover:text-[var(--accent)]">
                   Multimodal Foundation Models as Router Models for High-Resolution Aerial Image Segmentation.
                 </h3>
-                <p className="text-xs text-zinc-400 mt-1.5 leading-relaxed">
-                  <strong className="text-yellow-200 font-semibold">Cooper Li</strong>, Zhihao Wang, Yiqun Xie.
+                <p className="mt-1 text-[0.68rem] leading-[1.35] text-[var(--ink-muted)]">
+                  <strong className="font-semibold text-[var(--accent)]">Cooper Li</strong>, Zhihao Wang, Yiqun Xie.
                 </p>
-                <p className="text-[10px] text-white/40 mt-1 italic">
+                <p className="mt-1 text-[0.56rem] italic leading-[1.25] text-[var(--ink-soft)]">
                   In Proceedings of the IEEE International Conference on Data Mining (ICDM), 2025.
                 </p>
               </a>
             </div>
 
             <div>
-              <a href="https://neurips.cc/virtual/2025/loc/san-diego/poster/121794" target="_blank" className="group block">
-                <h3 className="text-sm font-semibold group-hover:text-yellow-200 transition text-zinc-100 leading-snug">
+              <a href="https://neurips.cc/virtual/2025/loc/san-diego/poster/121794" target="_blank" rel="noopener noreferrer" className="group block">
+                <h3 className="text-[0.78rem] font-semibold leading-[1.25] text-[var(--ink)] transition group-hover:text-[var(--accent)]">
                   TreeFinder: A US-Scale Benchmark Dataset for Individual Tree Mortality Monitoring Using High-Resolution Aerial Imagery.
                 </h3>
-                <p className="text-xs text-zinc-400 mt-1.5 leading-relaxed">
-                  Zhihao Wang, <strong className="text-yellow-200 font-semibold">Cooper Li</strong>, Ruichen Wang, Lei Ma, George Hurtt, Xiaowei Jia, Gengchen Mai, Zhili Li, Yiqun Xie.
+                <p className="mt-1 text-[0.68rem] leading-[1.35] text-[var(--ink-muted)]">
+                  Zhihao Wang, <strong className="font-semibold text-[var(--accent)]">Cooper Li</strong>, Ruichen Wang, Lei Ma, George Hurtt, Xiaowei Jia, Gengchen Mai, Zhili Li, Yiqun Xie.
                 </p>
-                <p className="text-[10px] text-white/40 mt-1 italic">
+                <p className="mt-1 text-[0.56rem] italic leading-[1.25] text-[var(--ink-soft)]">
                   In Proceedings of the 39th Conference on Neural Information Processing Systems (NeurIPS), 2025.
                 </p>
               </a>
             </div>
 
             <div>
-              <a href="https://dl.acm.org/doi/10.1145/3764919.3770871" target="_blank" className="group block">
-                <h3 className="text-sm font-semibold group-hover:text-yellow-200 transition text-zinc-100 leading-snug">
+              <a href="https://dl.acm.org/doi/10.1145/3764919.3770871" target="_blank" rel="noopener noreferrer" className="group block">
+                <h3 className="text-[0.78rem] font-semibold leading-[1.25] text-[var(--ink)] transition group-hover:text-[var(--accent)]">
                   Characterizing the Effectiveness of DINOv2 as an Off-the-Shelf Foundation Model for Earth Monitoring Tasks: Preliminary Results.
                 </h3>
-                <p className="text-xs text-zinc-400 mt-1.5 leading-relaxed">
-                  Ruichen Wang, <strong className="text-yellow-200 font-semibold">Cooper Li</strong>, Sophia Hou, Alexander Lu, Zhihao Wang, Xiaowei Jia, and Yiqun Xie.
+                <p className="mt-1 text-[0.68rem] leading-[1.35] text-[var(--ink-muted)]">
+                  Ruichen Wang, <strong className="font-semibold text-[var(--accent)]">Cooper Li</strong>, Sophia Hou, Alexander Lu, Zhihao Wang, Xiaowei Jia, and Yiqun Xie.
                 </p>
-                <p className="text-[10px] text-white/40 mt-1 italic">
+                <p className="mt-1 text-[0.56rem] italic leading-[1.25] text-[var(--ink-soft)]">
                   In Proceedings of the 4th ACM SIGSPATIAL International Workshop on Spatial Big Data and AI for Industrial Applications (GeoIndustry &apos;25), 2025.
                 </p>
               </a>
@@ -585,29 +677,25 @@ function PublicationsSection() {
 /* ───────────────── Page ───────────────── */
 export default function Page() {
   return (
-    <div className="relative min-h-screen text-white">
-      <VertexBackground />
-      {/* content above background */}
-      <div className="relative z-30 px-4 md:px-8 lg:px-16">
-        <div className="flex flex-col lg:flex-row lg:h-screen gap-8 lg:gap-6">
-          <div className="w-full lg:w-1/2 lg:pr-2 lg:overflow-y-auto custom-scrollbar">
-            <div className="space-y-8 pt-12 pb-0 lg:pb-10">
+    <main id="main-content" className="relative min-h-screen text-[var(--ink)]">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 py-6 md:px-8 md:py-8 lg:px-12">
+        <div className="space-y-6">
+          <section className="grid gap-5 lg:grid-cols-[1.18fr_0.82fr] lg:items-start">
+            <div className="space-y-5">
               <HeroSection />
+              <AwardsSection />
+            </div>
+            <div className="space-y-5">
               <ContactSection />
               <PublicationsSection />
+              <SkillsSection />
             </div>
-          </div>
-          <div className="w-full lg:w-1/2 lg:pl-2 lg:overflow-y-auto mt-0 lg:mt-12 lg:mb-10 custom-scrollbar">
+          </section>
+          <section>
             <ProjectsSection />
-          </div>
+          </section>
         </div>
       </div>
-
-      {/* Local keyframes (client-safe) */}
-      <style jsx global>{`
-        @keyframes cursor { 0%,49% { opacity: 1 } 50%,100% { opacity: 0 } }
-        .animate-cursor { animation: cursor 1.05s step-end infinite; }
-      `}</style>
-    </div>
+    </main>
   );
 }

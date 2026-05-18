@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { mont } from '@/app/ui/fonts';
-import Logo from "@/app/ui/images/Logo";
-import DarkModeToggle from "@/app/components/darkmodetoggle";
+import { hackerMono } from '@/app/ui/fonts';
 import { ServiceWorkerUnregister } from "@/app/components/ServiceWorkerUnregister";
-import "./globals.css";
 import { Analytics } from "@vercel/analytics/next"
 
 
@@ -32,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${mont.className} antialiased`}>
+      <body className={`${hackerMono.className} antialiased`}>
         <ServiceWorkerUnregister />
         {children}
         <Analytics />

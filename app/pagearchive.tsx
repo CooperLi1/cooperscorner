@@ -115,7 +115,7 @@ function AboutSection() {
           />
           <div>
             <p className="text-gray-400 text-lg">
-              Hey, I'm Cooper! I am a student at Montgomery Blair High School always eager to learn more about robotics, debate, AI, and climate change. My goal is to one day become a "full-stack" maker, experienced in everything from manufacturing to web dev to CAD.
+              Hey, I&apos;m Cooper! I am a student at Montgomery Blair High School always eager to learn more about robotics, debate, AI, and climate change. My goal is to one day become a &quot;full-stack&quot; maker, experienced in everything from manufacturing to web dev to CAD.
               <span className="text-yellow-300"> I love trying new things and building new projects. Reach out!</span>
             </p>
           </div>

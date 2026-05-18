@@ -4,6 +4,11 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
+const rainDrops = Array.from({ length: 50 }, (_, i) => ({
+  left: `${(i * 37) % 100}%`,
+  delay: ((i * 17) % 20) / 10,
+}));
+
 export default function AnimatedScene() {
   const [showRain, setShowRain] = useState(false);
 
@@ -71,13 +76,13 @@ export default function AnimatedScene() {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
         >
-          {Array.from({ length: 50 }).map((_, i) => (
+          {rainDrops.map((drop, i) => (
             <motion.div
               key={i}
               className="absolute bg-blue-500 w-1 h-8 opacity-50"
-              style={{ left: `${Math.random() * 100}%`, top: "0%" }}
+              style={{ left: drop.left, top: "0%" }}
               animate={{ y: "100vh", opacity: 0 }}
-              transition={{ duration: 1, delay: Math.random() * 2, repeat: Infinity }}
+              transition={{ duration: 1, delay: drop.delay, repeat: Infinity }}
             />
           ))}
         </motion.div>

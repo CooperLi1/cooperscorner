@@ -8,15 +8,15 @@ interface DarkModeToggleProps {
 }
 
 const DarkModeToggle = ({ setDarkMode }: DarkModeToggleProps) => {
-  const [darkMode, setDarkModeLocal] = useState<boolean>(false);
+  const [darkMode, setDarkModeLocal] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    return localStorage.getItem("theme") === "dark";
+  });
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-      setDarkModeLocal(true);
-      setDarkMode(true);
-    }
-  }, []);
+    document.documentElement.classList.toggle("dark", darkMode);
+    setDarkMode(darkMode);
+  }, [darkMode, setDarkMode]);
 
   const toggleDarkMode = () => {
     const newMode = !darkMode;
