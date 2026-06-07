@@ -299,7 +299,7 @@ const projects: Project[] = [
   },
   {
     title: "Debatify | 2025",
-    description: <>AI-powered personal assistant for competitive debate. Includes debate search engines, evidence archives, reformatters. <strong>15k+ Users, 8k+ ARR</strong>.</>,
+    description: <>AI-powered personal assistant for competitive debate. Includes debate search engines, evidence archives, reformatters. <strong>30k+ Visitors, 10k+ ARR</strong>.</>,
     image: "/debatifyhome.png",
     link: "/projects/debatify",
     tags: ["WebDev", "AI", "Product"]
