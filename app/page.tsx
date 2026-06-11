@@ -2,7 +2,8 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
 import { IoMdHand } from 'react-icons/io';
 import { FaGithub, FaLinkedin, FaEnvelope, FaFileDownload } from 'react-icons/fa';
 import type { IconType } from 'react-icons';
@@ -32,6 +33,62 @@ function Card({ children, className = "" }: { children: React.ReactNode; classNa
     <div className={`paper-card ${className}`}>
       <div className="relative z-10">{children}</div>
     </div>
+  );
+}
+
+function CollapsibleCard({
+  id,
+  title,
+  children,
+  cardClassName = "",
+  contentClassName = "",
+  defaultOpen = false,
+}: {
+  id: string;
+  title: string;
+  children: React.ReactNode;
+  cardClassName?: string;
+  contentClassName?: string;
+  defaultOpen?: boolean;
+}) {
+  const [isOpen, setIsOpen] = useState(defaultOpen);
+  const contentId = `${id}-content`;
+
+  return (
+    <Card className={cardClassName}>
+      <button
+        type="button"
+        className="collapsible-trigger"
+        aria-expanded={isOpen}
+        aria-controls={contentId}
+        onClick={() => setIsOpen((current) => !current)}
+      >
+        <span className="section-title text-xl">{title}</span>
+        <span className="collapsible-action" aria-hidden="true">
+          <ChevronDown
+            className={`collapsible-chevron ${isOpen ? 'is-open' : ''}`}
+            strokeWidth={1.8}
+          />
+        </span>
+      </button>
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            id={contentId}
+            key={contentId}
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.24, ease: 'easeInOut' }}
+            className="collapsible-content"
+          >
+            <div className={`collapsible-body ${contentClassName}`}>
+              {children}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </Card>
   );
 }
 
@@ -74,9 +131,9 @@ function HeroSection() {
             </motion.div>
           </div>
           <p className="max-w-[64ch] text-sm leading-6 text-[var(--ink-muted)] md:text-[0.9rem]">
-            student at montgomery blair high school passionate about engineering.
-            my goal is to one day become a &ldquo;full-stack&rdquo; maker, experienced in everything from manufacturing to web dev to cad. i love trying new things and building new projects.
-            <span className="font-semibold text-[var(--accent)]"> i&apos;m currently looking for an internship for august/september 2026, reach out!</span>
+            i&apos;m a rising freshman at stanford and my goal is to become a &ldquo;full-stack&rdquo; maker, experience in everything from manufacturing, to web dev, to cad.
+            i&apos;ve previously ranked 1st in the world in debate and 2nd in the world in robotics.
+            i love trying new things and building new projects and <span className="font-semibold text-[var(--accent)]">i&apos;m currently open to work, reach out!</span>
           </p>
         </div>
       </motion.div>
@@ -101,19 +158,19 @@ function ContactItem({ href, children, icon: Icon }: { href: string; children: R
 
 function ContactSection() {
   return (
-    <Card className="px-5 py-4">
-      <motion.div initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.55 }}>
-        <h2 className="section-title mb-4 text-xl">
-          Contact &amp; Resume
-        </h2>
-        <div className="grid gap-3 sm:grid-cols-2">
-          <ContactItem href="mailto:copperli1234@gmail.com" icon={FaEnvelope}>email</ContactItem>
-          <ContactItem href="https://github.com/CooperLi1" icon={FaGithub}>github</ContactItem>
-          <ContactItem href="https://www.linkedin.com/in/cooper-li-483672341" icon={FaLinkedin}>linkedin</ContactItem>
-          <ContactItem href="https://drive.google.com/file/d/1xJ2eMiS8GXGEpoGaKvoetEYNhwGyPBSp/view?usp=sharing" icon={FaFileDownload}>resume</ContactItem>
-        </div>
-      </motion.div>
-    </Card>
+    <motion.div initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.55 }}>
+      <CollapsibleCard
+        id="contacts"
+        title="Contact & Resume"
+        cardClassName="px-5 py-4"
+        contentClassName="grid gap-3 sm:grid-cols-2"
+      >
+        <ContactItem href="mailto:copperli1234@gmail.com" icon={FaEnvelope}>email</ContactItem>
+        <ContactItem href="https://github.com/CooperLi1" icon={FaGithub}>github</ContactItem>
+        <ContactItem href="https://www.linkedin.com/in/cooper-li-483672341" icon={FaLinkedin}>linkedin</ContactItem>
+        <ContactItem href="https://drive.google.com/file/d/1xJ2eMiS8GXGEpoGaKvoetEYNhwGyPBSp/view?usp=sharing" icon={FaFileDownload}>resume</ContactItem>
+      </CollapsibleCard>
+    </motion.div>
   );
 }
 
@@ -164,17 +221,19 @@ function SkillsSection() {
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.55 }}
     >
-      <Card className="skills-card px-4 py-3">
-        <h2 className="section-title mb-3 text-base">Skills</h2>
-        <div className="resume-lines">
-          <p>
-            <strong>Engineering:</strong> CAD/CAM (Onshape, Solidworks), PCB Design (Altium, KiCAD), Machine Design, Manufacturing, FEA
-          </p>
-          <p>
-            <strong>Software/AI:</strong> Python, Java, Embedded, Full-Stack, Controls, Git, LLMs, AI-assisted Coding
-          </p>
-        </div>
-      </Card>
+      <CollapsibleCard
+        id="skills"
+        title="Skills"
+        cardClassName="skills-card px-4 py-3"
+        contentClassName="resume-lines"
+      >
+        <p>
+          <strong>Engineering:</strong> CAD/CAM (Onshape, Solidworks), PCB Design (Altium, KiCAD), Machine Design, Manufacturing, FEA
+        </p>
+        <p>
+          <strong>Software/AI:</strong> Python, Java, Embedded, Full-Stack, Controls, Git, LLMs, AI-assisted Coding
+        </p>
+      </CollapsibleCard>
     </motion.div>
   );
 }
@@ -187,8 +246,11 @@ function AwardsSection() {
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.55 }}
     >
-      <Card className="px-5 py-4 md:px-5 md:py-4">
-        <h2 className="section-title mb-4 text-xl">Awards</h2>
+      <CollapsibleCard
+        id="awards"
+        title="Awards"
+        cardClassName="px-5 py-4 md:px-5 md:py-4"
+      >
         <ul className="award-list">
           {awards.map((award) => (
             <li key={award.label} className="award-item">
@@ -197,7 +259,7 @@ function AwardsSection() {
             </li>
           ))}
         </ul>
-      </Card>
+      </CollapsibleCard>
     </motion.div>
   );
 }
@@ -269,14 +331,16 @@ function ProjectImage({
 
 const projectPriority = [
   "CoopCNC | 2024-2025",
-  "Debatify | 2025",
   "Dugtrio | 2025-2026",
+  "Debatify | 2025",
   "Recycla V1 | 2025",
   "Nash | 2023-2024",
   "PipSqueak | 2026-Now",
+  "CounselorCart | 2026-Now",
   "Pipe Traversing Robot | 2025",
   "Lucky | 2025-2026",
   "Nudge Wristphone | 2025",
+  "Pick and Place Sim | 2026",
   "Rope Climbing Robot | 2025",
   "Wartortle | 2024-2025",
   "FTC Chat | 2026",
@@ -296,6 +360,13 @@ const projects: Project[] = [
     image: "/cncdone.png",
     link: "/projects/cnc",
     tags: ["Mechatronics", "Manufacturing"]
+  },
+  {
+    title: "Dugtrio | 2025-2026",
+    description: <>World&apos;s only &apos;triple shooter on a turret&apos; robot for FIRST Tech Challenge Decode. Placed <strong>2nd globally out of 7000+ teams</strong> and first overall in Chesapeake.</>,
+    image: "/dugtrio.png",
+    link: "/projects/dugtrio",
+    tags: ["Mechatronics", "Controls"]
   },
   {
     title: "Debatify | 2025",
@@ -325,13 +396,20 @@ const projects: Project[] = [
     link: "/projects/auto-pipette",
     tags: ["Mechatronics", "Manufacturing", "PCB Design", "Controls"]
   },
-  {
-    title: "Dugtrio | 2025-2026",
-    description: <>World&apos;s only &apos;triple shooter on a turret&apos; robot for FIRST Tech Challenge Decode. Placed <strong>Top 6 globally out of 8000+ teams</strong> and first overall in Chesapeake.</>,
-    image: "/dugtrio.png",
-    link: "/projects/dugtrio",
-    tags: ["Mechatronics", "Controls"]
-  },
+  //   {
+  //   title: "CounselorCart | 2026-Now",
+  //   description: <>3-axis <strong>automatic-pipetting gantry</strong> to create different solutions. Built for local biotech firm. In Progress.</>,
+  //   image: "/pipettecad.png",
+  //   link: "/projects/auto-pipette",
+  //   tags: ["WebDev", "Product"]
+  // },
+  //     {
+  //   title: "Pick and Place Sim | 2026",
+  //   description: <>3-axis <strong>automatic-pipetting gantry</strong> to create different solutions. Built for local biotech firm. In Progress.</>,
+  //   image: "/pickandplace.png",
+  //   link: "/projects/pickandplace",
+  //   tags: ["AI", "Mechatronics", "Controls"]
+  // },
     {
     title: "Birthday Gift | 2026",
     description: <>PCB birthday gift with audio player and astable multivibrator.</>,
@@ -619,58 +697,56 @@ function ProjectsSection() {
 
 function PublicationsSection() {
   return (
-    <Card className="p-0 overflow-hidden">
-      <div className="space-y-4 px-5 py-4">
-        <motion.div initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.55 }}>
-          <h2 className="section-title mb-3 text-lg">
-            Publications
-          </h2>
-          <div className="space-y-4 pr-2">
-            <div>
-              <a href="https://www3.cs.stonybrook.edu/~icdm2025/icdmw2025proceedings/813200c994.pdf" target="_blank" rel="noopener noreferrer" className="group block">
-                <h3 className="text-[0.78rem] font-semibold leading-[1.25] text-[var(--ink)] transition group-hover:text-[var(--accent)]">
-                  Multimodal Foundation Models as Router Models for High-Resolution Aerial Image Segmentation.
-                </h3>
-                <p className="mt-1 text-[0.68rem] leading-[1.35] text-[var(--ink-muted)]">
-                  <strong className="font-semibold text-[var(--accent)]">Cooper Li</strong>, Zhihao Wang, Yiqun Xie.
-                </p>
-                <p className="mt-1 text-[0.56rem] italic leading-[1.25] text-[var(--ink-soft)]">
-                  In Proceedings of the IEEE International Conference on Data Mining (ICDM), 2025.
-                </p>
-              </a>
-            </div>
+    <motion.div initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.55 }}>
+      <CollapsibleCard
+        id="publications"
+        title="Publications"
+        cardClassName="px-5 py-4"
+        contentClassName="space-y-4 pr-2"
+      >
+        <div>
+          <a href="https://www3.cs.stonybrook.edu/~icdm2025/icdmw2025proceedings/813200c994.pdf" target="_blank" rel="noopener noreferrer" className="group block">
+            <h3 className="text-[0.78rem] font-semibold leading-[1.25] text-[var(--ink)] transition group-hover:text-[var(--accent)]">
+              Multimodal Foundation Models as Router Models for High-Resolution Aerial Image Segmentation.
+            </h3>
+            <p className="mt-1 text-[0.68rem] leading-[1.35] text-[var(--ink-muted)]">
+              <strong className="font-semibold text-[var(--accent)]">Cooper Li</strong>, Zhihao Wang, Yiqun Xie.
+            </p>
+            <p className="mt-1 text-[0.56rem] italic leading-[1.25] text-[var(--ink-soft)]">
+              In Proceedings of the IEEE International Conference on Data Mining (ICDM), 2025.
+            </p>
+          </a>
+        </div>
 
-            <div>
-              <a href="https://neurips.cc/virtual/2025/loc/san-diego/poster/121794" target="_blank" rel="noopener noreferrer" className="group block">
-                <h3 className="text-[0.78rem] font-semibold leading-[1.25] text-[var(--ink)] transition group-hover:text-[var(--accent)]">
-                  TreeFinder: A US-Scale Benchmark Dataset for Individual Tree Mortality Monitoring Using High-Resolution Aerial Imagery.
-                </h3>
-                <p className="mt-1 text-[0.68rem] leading-[1.35] text-[var(--ink-muted)]">
-                  Zhihao Wang, <strong className="font-semibold text-[var(--accent)]">Cooper Li</strong>, Ruichen Wang, Lei Ma, George Hurtt, Xiaowei Jia, Gengchen Mai, Zhili Li, Yiqun Xie.
-                </p>
-                <p className="mt-1 text-[0.56rem] italic leading-[1.25] text-[var(--ink-soft)]">
-                  In Proceedings of the 39th Conference on Neural Information Processing Systems (NeurIPS), 2025.
-                </p>
-              </a>
-            </div>
+        <div>
+          <a href="https://neurips.cc/virtual/2025/loc/san-diego/poster/121794" target="_blank" rel="noopener noreferrer" className="group block">
+            <h3 className="text-[0.78rem] font-semibold leading-[1.25] text-[var(--ink)] transition group-hover:text-[var(--accent)]">
+              TreeFinder: A US-Scale Benchmark Dataset for Individual Tree Mortality Monitoring Using High-Resolution Aerial Imagery.
+            </h3>
+            <p className="mt-1 text-[0.68rem] leading-[1.35] text-[var(--ink-muted)]">
+              Zhihao Wang, <strong className="font-semibold text-[var(--accent)]">Cooper Li</strong>, Ruichen Wang, Lei Ma, George Hurtt, Xiaowei Jia, Gengchen Mai, Zhili Li, Yiqun Xie.
+            </p>
+            <p className="mt-1 text-[0.56rem] italic leading-[1.25] text-[var(--ink-soft)]">
+              In Proceedings of the 39th Conference on Neural Information Processing Systems (NeurIPS), 2025.
+            </p>
+          </a>
+        </div>
 
-            <div>
-              <a href="https://dl.acm.org/doi/10.1145/3764919.3770871" target="_blank" rel="noopener noreferrer" className="group block">
-                <h3 className="text-[0.78rem] font-semibold leading-[1.25] text-[var(--ink)] transition group-hover:text-[var(--accent)]">
-                  Characterizing the Effectiveness of DINOv2 as an Off-the-Shelf Foundation Model for Earth Monitoring Tasks: Preliminary Results.
-                </h3>
-                <p className="mt-1 text-[0.68rem] leading-[1.35] text-[var(--ink-muted)]">
-                  Ruichen Wang, <strong className="font-semibold text-[var(--accent)]">Cooper Li</strong>, Sophia Hou, Alexander Lu, Zhihao Wang, Xiaowei Jia, and Yiqun Xie.
-                </p>
-                <p className="mt-1 text-[0.56rem] italic leading-[1.25] text-[var(--ink-soft)]">
-                  In Proceedings of the 4th ACM SIGSPATIAL International Workshop on Spatial Big Data and AI for Industrial Applications (GeoIndustry &apos;25), 2025.
-                </p>
-              </a>
-            </div>
-          </div>
-        </motion.div>
-      </div>
-    </Card>
+        <div>
+          <a href="https://dl.acm.org/doi/10.1145/3764919.3770871" target="_blank" rel="noopener noreferrer" className="group block">
+            <h3 className="text-[0.78rem] font-semibold leading-[1.25] text-[var(--ink)] transition group-hover:text-[var(--accent)]">
+              Characterizing the Effectiveness of DINOv2 as an Off-the-Shelf Foundation Model for Earth Monitoring Tasks: Preliminary Results.
+            </h3>
+            <p className="mt-1 text-[0.68rem] leading-[1.35] text-[var(--ink-muted)]">
+              Ruichen Wang, <strong className="font-semibold text-[var(--accent)]">Cooper Li</strong>, Sophia Hou, Alexander Lu, Zhihao Wang, Xiaowei Jia, and Yiqun Xie.
+            </p>
+            <p className="mt-1 text-[0.56rem] italic leading-[1.25] text-[var(--ink-soft)]">
+              In Proceedings of the 4th ACM SIGSPATIAL International Workshop on Spatial Big Data and AI for Industrial Applications (GeoIndustry &apos;25), 2025.
+            </p>
+          </a>
+        </div>
+      </CollapsibleCard>
+    </motion.div>
   );
 }
 

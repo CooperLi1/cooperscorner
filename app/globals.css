@@ -249,6 +249,62 @@ button:focus-visible {
   background: linear-gradient(90deg, var(--accent), transparent);
 }
 
+.collapsible-trigger {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+}
+
+.collapsible-trigger:hover .section-title,
+.collapsible-trigger:focus-visible .section-title {
+  color: var(--accent);
+}
+
+.collapsible-trigger:active {
+  transform: translateY(1px);
+}
+
+.collapsible-action {
+  display: inline-flex;
+  width: 1.85rem;
+  height: 1.85rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line-soft);
+  border-radius: 999px;
+  background: rgba(239, 228, 210, 0.74);
+  box-shadow: 0 0.75rem 1.9rem -1.6rem var(--shadow-warm);
+  color: var(--accent);
+}
+
+.collapsible-chevron {
+  width: 1rem;
+  height: 1rem;
+  transform: rotate(-90deg);
+  transition: transform 220ms ease;
+}
+
+.collapsible-chevron.is-open {
+  transform: rotate(0deg);
+}
+
+.collapsible-content {
+  overflow: hidden;
+}
+
+.collapsible-body {
+  padding-top: 1rem;
+}
+
 .tag-chip {
   display: inline-flex;
   align-items: center;

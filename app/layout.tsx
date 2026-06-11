@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     template: "%s | Cooper's Corner",
     default: "Cooper's Corner",
   },
-  description: 'Maker Portfolio | High School Student at Montgomery Blair.',
+  description: 'Maker Portfolio | Rising Stanford freshman and full-stack maker.',
 
   // Icons for the Browser Tab (Favicon)
   icons: {
