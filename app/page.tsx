@@ -131,9 +131,9 @@ function HeroSection() {
             </motion.div>
           </div>
           <p className="max-w-[64ch] text-sm leading-6 text-[var(--ink-muted)] md:text-[0.9rem]">
-            i&apos;m a rising freshman at stanford and my goal is to become a &ldquo;full-stack&rdquo; maker, experience in everything from manufacturing, to web dev, to cad.
+            i&apos;m a rising freshman at stanford and my goal is to become a &ldquo;full-stack&rdquo; maker, experience in everything from manufacturing to web dev to cad.
             i&apos;ve previously ranked 1st in the world in debate and 2nd in the world in robotics.
-            i love trying new things and building new projects and <span className="font-semibold text-[var(--accent)]">i&apos;m currently open to work, reach out!</span>
+            i love trying new things and building new projects and <span className="font-semibold text-[var(--accent)]">i&apos;m currently looking for a summer 2027 internship, reach out!</span>
           </p>
         </div>
       </motion.div>
@@ -213,6 +213,25 @@ const awards = [
   },
 ];
 
+const skillGroups = [
+  {
+    label: "Mechanical & Fabrication",
+    skills: "CAD/CAM (Onshape, SolidWorks), Mechanism Design, DFM/DFA, Topology Optimization, CNC Machining, Additive Manufacturing, Rapid Prototyping, Hand Tools",
+  },
+  {
+    label: "Electronics & Controls",
+    skills: "PCB Design (KiCad, Altium), Soldering, Embedded Systems, Sensors, Communication Protocols, PID Control, Finite State Machines, Inverse Kinematics, Motion Profiling",
+  },
+  {
+    label: "Software & Dev Tools",
+    skills: "Python, Java, React/Next.js, REST APIs, Relational Databases, Supabase, Auth/OAuth, Vercel, Stripe, Docker, Git, Codex, Claude Code",
+  },
+  {
+    label: "Machine Learning & Robotics",
+    skills: "Data Pipelines, PyTorch/TensorFlow, Computer Vision, Segmentation/Classification, Model Benchmarking, CNNs, LLMs, RAG, Reinforcement Learning, Hugging Face, Isaac Lab",
+  },
+];
+
 function SkillsSection() {
   return (
     <motion.div
@@ -227,12 +246,11 @@ function SkillsSection() {
         cardClassName="skills-card px-4 py-3"
         contentClassName="resume-lines"
       >
-        <p>
-          <strong>Engineering:</strong> CAD/CAM (Onshape, Solidworks), PCB Design (Altium, KiCAD), Machine Design, Manufacturing, FEA
-        </p>
-        <p>
-          <strong>Software/AI:</strong> Python, Java, Embedded, Full-Stack, Controls, Git, LLMs, AI-assisted Coding
-        </p>
+        {skillGroups.map((group) => (
+          <p key={group.label}>
+            <strong>{group.label}:</strong> {group.skills}
+          </p>
+        ))}
       </CollapsibleCard>
     </motion.div>
   );
@@ -333,21 +351,24 @@ const projectPriority = [
   "CoopCNC | 2024-2025",
   "Dugtrio | 2025-2026",
   "Debatify | 2025",
-  "Recycla V1 | 2025",
   "Nash | 2023-2024",
+  "Recycla | 2025",
+  "Aksis | 2026-Now",
   "PipSqueak | 2026-Now",
-  // "CounselorCart | 2026-Now",
   "Pipe Traversing Robot | 2025",
   "Lucky | 2025-2026",
+  "Pick and Place Sim | 2026",
   "Nudge Wristphone | 2025",
-  // "Pick and Place Sim | 2026",
-  "Rope Climbing Robot | 2025",
   "Wartortle | 2024-2025",
+  "CounselorCart | 2026-Now",
+  "PlanROS | 2026-Now",
+  "Rope Climbing Robot | 2025",
+  "Venture Scout Infra | 2026",
+  "Sensor Interface PCB | 2025",
   "FTC Chat | 2026",
   "Birthday Gift | 2026",
   "Nudge Smartwatch | 2025",
   "InvestorBriefs | 2025",
-  "Sensor Interface PCB | 2025",
   "ESP32 Breakout Board | 2024",
 ];
 
@@ -376,7 +397,7 @@ const projects: Project[] = [
     tags: ["WebDev", "AI", "Product"]
   },
   {
-    title: "Recycla V1 | 2025",
+    title: "Recycla | 2025",
     description: <>Custom designed <strong>water bottle to filament recycler</strong> with a split ring compound planetary gearbox.</>,
     image: "/recyclav1.png",
     link: "/projects/recycla",
@@ -390,26 +411,47 @@ const projects: Project[] = [
     tags: ["Mechatronics", "Controls"]
   },
   {
+  title: "Aksis | 2026-Now",
+  description: <>Easy-to-use AI-powered browser studio to <strong>train robots with RL</strong> from CAD in minutes. In Progress.</>,
+  image: "/aksispreview.png",
+  link: "https://aksisrobotics.vercel.app/",
+  tags: ["AI", "Mechatronics", "WebDev", "Product"]
+},
+  {
     title: "PipSqueak | 2026-Now",
     description: <>3-axis <strong>automatic-pipetting gantry</strong> to create different solutions. Built for local biotech firm. In Progress.</>,
-    image: "/pipettecad.png",
+    image: "/pipsqueakcad.png",
     link: "/projects/auto-pipette",
     tags: ["Mechatronics", "Manufacturing", "PCB Design", "Controls"]
   },
-  //   {
-  //   title: "CounselorCart | 2026-Now",
-  //   description: <>3-axis <strong>automatic-pipetting gantry</strong> to create different solutions. Built for local biotech firm. In Progress.</>,
-  //   image: "/pipettecad.png",
-  //   link: "/projects/auto-pipette",
-  //   tags: ["WebDev", "Product"]
-  // },
-  //     {
-  //   title: "Pick and Place Sim | 2026",
-  //   description: <>3-axis <strong>automatic-pipetting gantry</strong> to create different solutions. Built for local biotech firm. In Progress.</>,
-  //   image: "/pickandplace.png",
-  //   link: "/projects/pickandplace",
-  //   tags: ["AI", "Mechatronics", "Controls"]
-  // },
+      {
+    title: "PlanROS | 2026-Now",
+    description: <>Visual planner for <strong>ROS 2</strong>. Lay out nodes and export a base project. In Progress.</>,
+    image: "/planros.png",
+    link: "https://planros.vercel.app/",
+    tags: ["AI", "Mechatronics", "Controls"]
+  },
+    {
+    title: "Pick and Place Sim | 2026",
+    description: <>Simulation of pick and place robot trained via <strong>reinforcement learning</strong> using Isaac Lab.</>,
+    image: "/pickandplace.png",
+    link: "/projects/pickandplace",
+    tags: ["AI", "Mechatronics", "Controls"]
+  },
+  {
+    title: "Venture Scout Infra | 2026",
+    description: <>Talent sign-up, <strong>embedding-based retrieval, and AI analyzers</strong> built for Quanta Ventures.</>,
+    image: "/venturescout.png",
+    link: "/projects/venturescout",
+    tags: ["AI", "WebDev"]
+  },
+    {
+    title: "CounselorCart | 2026-Now",
+    description: <>Marketplace and organizer for college counselors. In Progress.</>,
+    image: "/counselorcart.png",
+    link: "https://www.counselorcart.com/",
+    tags: ["WebDev", "Product"]
+  },
     {
     title: "Birthday Gift | 2026",
     description: <>PCB birthday gift with audio player and astable multivibrator.</>,
