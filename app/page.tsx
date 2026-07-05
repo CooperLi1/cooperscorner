@@ -358,11 +358,16 @@ const projectPriority = [
   "Pipe Traversing Robot | 2025",
   "Lucky | 2025-2026",
   "Pick and Place Sim | 2026",
-  "Nudge Wristphone | 2025",
   "Wartortle | 2024-2025",
+  "Nudge Wristphone | 2025",
+  "Nutmeg | 2022-2023",
   "CounselorCart | 2026-Now",
   "PlanROS | 2026-Now",
+  "Ros 2 + SLAM Explorer | 2026",
+  "Cabo! | 2026",
   "Rope Climbing Robot | 2025",
+  "Macadamia | 2021-2022",
+  "Polyformer | 2024-2025",
   "Venture Scout Infra | 2026",
   "Sensor Interface PCB | 2025",
   "FTC Chat | 2026",
@@ -370,6 +375,7 @@ const projectPriority = [
   "Nudge Smartwatch | 2025",
   "InvestorBriefs | 2025",
   "ESP32 Breakout Board | 2024",
+  "Rechargeable Flashlight | 2024",
 ];
 
 const projectPriorityRank = new Map(projectPriority.map((title, index) => [title, index]));
@@ -417,6 +423,13 @@ const projects: Project[] = [
   link: "https://aksisrobotics.vercel.app/",
   tags: ["AI", "Mechatronics", "WebDev", "Product"]
 },
+{
+  title: "Cabo! | 2026",
+  description: <>My favorite card game made for multiplayer online play.</>,
+  image: "/cabo.png",
+  link: "https://www.cabocards.online/",
+  tags: ["WebDev", "Product"]
+},
   {
     title: "PipSqueak | 2026-Now",
     description: <>3-axis <strong>automatic-pipetting gantry</strong> to create different solutions. Built for local biotech firm. In Progress.</>,
@@ -437,6 +450,13 @@ const projects: Project[] = [
     image: "/pickandplace.png",
     link: "/projects/pickandplace",
     tags: ["AI", "Mechatronics", "Controls"]
+  },
+    {
+    title: "Ros 2 + SLAM Explorer | 2026",
+    description: <>Simulation of robot using SLAM to explore an environment. Programmed using ROS 2.</>,
+    image: "/ros2nav.png",
+    link: "/projects/ros2nav",
+    tags: ["Mechatronics", "Controls"]
   },
   {
     title: "Venture Scout Infra | 2026",
