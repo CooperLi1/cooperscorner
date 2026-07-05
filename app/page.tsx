@@ -442,7 +442,7 @@ const projects: Project[] = [
     description: <>Visual planner for <strong>ROS 2</strong>. Lay out nodes and export a base project. In Progress.</>,
     image: "/planros.png",
     link: "https://planros.vercel.app/",
-    tags: ["AI", "Mechatronics", "Controls"]
+    tags: ["WebDev", "Controls"]
   },
     {
     title: "Pick and Place Sim | 2026",
