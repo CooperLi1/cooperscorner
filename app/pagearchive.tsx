@@ -142,7 +142,7 @@ function ContactSection() {
         >
           <div className="flex gap-10 justify-center items-center p-6 border-4 border-gray-700 rounded-full hover:bg-gray-800 transition duration-300">
             <a 
-              href="mailto:copperli1234@gmail.com" 
+              href="mailto:cooper.liu.li1@gmail.com"
               className="text-3xl text-gray-400 hover:text-yellow-400 transition duration-300"
             >
               <FaEnvelope />
@@ -156,7 +156,7 @@ function ContactSection() {
               <FaGithub />
             </a>
             <a 
-              href="https://www.linkedin.com/in/cooper-li-483672341" 
+              href="https://www.linkedin.com/in/cooper-li/"
               target="_blank" 
               rel="noopener noreferrer"
               className="text-3xl text-gray-400 hover:text-yellow-400 transition duration-300"

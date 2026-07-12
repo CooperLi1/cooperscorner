@@ -1,5 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Overridable so a second dev instance (e.g. an automated preview) can run
+  // without fighting the primary `next dev` over the .next lock.
+  distDir: process.env.NEXT_DIST_DIR || '.next',
+  // One-time development prefix invalidates chunks previously served with an
+  // incorrect year-long immutable cache policy. Production URLs are unchanged.
+  assetPrefix: process.env.NODE_ENV === 'development' ? '/dev-assets' : undefined,
   images: {
     // Modern formats + correct responsive buckets
     formats: ['image/avif', 'image/webp'],
@@ -11,6 +17,12 @@ const nextConfig = {
   },
   // Long-lived caching for build assets and public images
   async headers() {
+    // Development chunks use stable Turbopack URLs and must remain revalidatable
+    // or HMR can load an obsolete module graph from the browser cache.
+    if (process.env.NODE_ENV !== 'production') {
+      return [];
+    }
+
     return [
       {
         source: '/_next/static/:path*',

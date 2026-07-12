@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { hackerMono } from '@/app/ui/fonts';
+import { hackerMono, manrope } from '@/app/ui/fonts';
 import { ServiceWorkerUnregister } from "@/app/components/ServiceWorkerUnregister";
 import { Analytics } from "@vercel/analytics/next"
 
@@ -27,8 +27,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${hackerMono.className} antialiased`}>
+    <html lang="en" data-scroll-behavior="smooth">
+      <body className={`${manrope.variable} ${hackerMono.variable} antialiased`}>
+        <noscript>
+          <style>{`[data-reveal]{opacity:1 !important;animation:none !important}[data-reveal-line]::before{transform:none !important}`}</style>
+        </noscript>
         <ServiceWorkerUnregister />
         {children}
         <Analytics />

@@ -8,8 +8,8 @@ export default function ProjectPage() {
     media: [
       {
         type: "image",
-        src: "/pipettecad.png",
-        description: "CAD of automatic pipetting gantry, still in progress. Censored because this project is being built for a local biotech firm.",
+        src: "/pipsqueakcad.png",
+        description: "CAD of the automatic pipetting gantry, currently in progress.",
       },
       {
         type: "image",

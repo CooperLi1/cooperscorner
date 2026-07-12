@@ -1,0 +1,6 @@
+# Lessons
+
+- Never force `Cache-Control: immutable` on `/_next/static/*` during development. Turbopack uses stable development chunk URLs, so long-lived caching can preserve an obsolete module graph and cause recurring HMR factory or hydration errors. Restrict immutable asset headers to production.
+- Do not fully clip a Framer Motion `whileInView` trigger in its initial variant. Motion uses IntersectionObserver, and clipping the observed element can keep its intersection below the activation threshold. Animate an unclipped section with transforms/filter/opacity, or observe a separate unclipped anchor.
+- When the local dev server must remain available after a Codex turn ends, do not rely on a temporary exec PTY. Run it in a named detached `screen` session, then verify the session, listening socket, and an HTTP 200 response. If Next reports a dev lock while no socket exists, identify and terminate the process holding `.next/dev/lock` before restarting.
+- Do not inject decorative reveal elements as direct children of a CSS grid. During HMR or a missing-style state, an overlay can briefly participate in layout and consume a real grid cell, producing a blank bento tile. Keep decorations in a non-grid wrapper, use a pseudo-element, or leave the grid markup static.

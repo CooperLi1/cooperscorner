@@ -1,5 +1,3 @@
-'use client';
-
 import * as React from 'react';
 import Image from 'next/image';
 import { Link as LinkIcon } from 'lucide-react';
@@ -50,11 +48,11 @@ export function ProjectHeader({
   className?: string;
 }) {
   return (
-    <div className={`flex items-center justify-between gap-4 ${className}`}>
-      <div>
-        <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">{title}</h1>
+    <header className={`project-header ${className}`}>
+      <div className="project-header-copy">
+        <h1 className="project-title">{title}</h1>
         {subtitle && (
-          <p className="mt-2 max-w-[65ch] text-sm leading-6 text-[var(--ink-muted)]">{subtitle}</p>
+          <p className="project-subtitle">{subtitle}</p>
         )}
       </div>
       {moreInfoUrl && (
@@ -62,89 +60,92 @@ export function ProjectHeader({
           href={moreInfoUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="paper-button rounded-xl px-3 py-2 text-sm"
+          className="paper-button project-header-link"
         >
           <LinkIcon size={18} />
           More Info
         </a>
       )}
-    </div>
+      <span className="project-header-mark" aria-hidden="true" />
+    </header>
   );
 }
 
 export function MediaList({ items }: { items: MediaItem[] }) {
   return (
-    <div className="p-5 md:p-7 space-y-6">
+    <ol className="project-media-list">
       {items.map((item, i) => (
-        <div key={i} className="media-frame">
-          {item.type === 'image' && (
-            <Image
-              src={item.src}
-              alt={item.alt || 'project image'}
-              width={0}
-              height={0}
-              sizes="100vw"
-              className={`w-full h-auto object-contain bg-[var(--bg-paper)] ${item.className || ''}`}
-            />
-          )}
-
-          {item.type === 'video' && (
-            <>
-              {isYouTube(item.src) ? (
-                // YouTube → iframe
-                <div className="relative w-full max-w-full" style={{ paddingBottom: '56.25%' }}>
-                  <iframe
-                    src={toEmbed(item.src)}
-                    title="Video"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="absolute inset-0 w-full h-full"
-                  />
-                </div>
-              ) : (
-                // Local/hosted file → HTML5 <video>
-                <video
-                  controls
-                  playsInline
-                  preload="metadata"
-                  poster={('poster' in item && item.poster) || undefined}
-                  className={`w-full max-w-full bg-black/20 ${item.className || ''}`}
-                >
-                  {/*
-                    IMPORTANT: put an *untyped* source FIRST to let browsers sniff.
-                    This mirrors your working example and helps with .mov in Chrome when decodable.
-                  */}
-                  <source src={item.src} />
-
-                  {/* Then include known-good typed sources for broader compatibility */}
-                  {('sources' in item && item.sources && item.sources.length > 0)
-                    ? item.sources.map((s, idx) => (
-                      s.type
-                        ? <source key={idx} src={s.src} type={s.type} />
-                        : <source key={idx} src={s.src} />
-                    ))
-                    : (() => {
-                      const mime = guessMime(item.src);
-                      // if it’s a widely supported mime, add a typed duplicate as a fallback
-                      if (mime === 'video/mp4' || mime === 'video/webm') {
-                        return <source src={item.src} type={mime} />;
-                      }
-                      return null;
-                    })()}
-                  Your browser does not support the video tag.
-                </video>
+        <li
+          key={`${item.type}-${item.src}-${i}`}
+          className="project-media-item"
+        >
+          <figure className="media-frame">
+            <div className="project-media-visual">
+              {item.type === 'image' && (
+                <Image
+                  src={item.src}
+                  alt={item.alt || (typeof item.description === 'string' ? item.description : `Project media ${i + 1}`)}
+                  width={0}
+                  height={0}
+                  loading={i === 0 ? 'eager' : undefined}
+                  fetchPriority={i === 0 ? 'high' : undefined}
+                  sizes="(min-width: 84rem) 78rem, 100vw"
+                  className={`w-full h-auto object-contain bg-[var(--bg-paper)] ${item.className || ''}`}
+                />
               )}
-            </>
-          )}
 
-          {'description' in item && item.description && (
-            <div className="p-4 md:p-5">
-              <p className="media-caption">{item.description}</p>
+              {item.type === 'video' && (
+                isYouTube(item.src) ? (
+                  <div className="project-video-embed">
+                    <iframe
+                      src={toEmbed(item.src)}
+                      title={`Project video ${i + 1}`}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="project-video-iframe"
+                    />
+                  </div>
+                ) : (
+                  <video
+                    controls
+                    playsInline
+                    preload="metadata"
+                    poster={('poster' in item && item.poster) || undefined}
+                    className={`project-local-video ${item.className || ''}`}
+                  >
+                    <source src={item.src} />
+
+                    {('sources' in item && item.sources && item.sources.length > 0)
+                      ? item.sources.map((source, sourceIndex) => (
+                        source.type
+                          ? <source key={sourceIndex} src={source.src} type={source.type} />
+                          : <source key={sourceIndex} src={source.src} />
+                      ))
+                      : (() => {
+                        const mime = guessMime(item.src);
+                        if (mime === 'video/mp4' || mime === 'video/webm') {
+                          return <source src={item.src} type={mime} />;
+                        }
+                        return null;
+                      })()}
+                    Your browser does not support the video tag.
+                  </video>
+                )
+              )}
             </div>
-          )}
-        </div>
+
+            {'description' in item && item.description && (
+              <figcaption className="project-media-caption">
+                <span className="project-media-index" aria-hidden="true">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <div className="media-caption">{item.description}</div>
+              </figcaption>
+            )}
+          </figure>
+        </li>
       ))}
-    </div>
+    </ol>
   );
 }
 
@@ -158,10 +159,10 @@ export function MediaCard({
   className?: string;
 }) {
   return (
-    <div className={`overflow-hidden p-0 ${className}`}>
-      <section className={scrollable ? 'h-[calc(100vh-12rem)] overflow-y-auto' : 'overflow-visible'}>
+    <section className={`project-media-card ${className}`}>
+      <div className={scrollable ? 'h-[calc(100vh-12rem)] overflow-y-auto' : 'project-media-flow'}>
         {children}
-      </section>
-    </div>
+      </div>
+    </section>
   );
 }

@@ -1,187 +1,148 @@
 // app/page.tsx
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
-import { IoMdHand } from 'react-icons/io';
-import { FaGithub, FaLinkedin, FaEnvelope, FaFileDownload } from 'react-icons/fa';
+import React, { useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { FaEnvelope, FaGithub, FaLinkedin } from 'react-icons/fa';
 import type { IconType } from 'react-icons';
 
-import Image from 'next/image';
+// Adds `.is-visible` to [data-reveal] / [data-reveal-line] elements as they
+// enter the viewport (once each). All visual states live in globals.css and
+// are gated behind prefers-reduced-motion, so this is purely progressive.
+function useScrollReveal(deps: React.DependencyList = []) {
+  React.useEffect(() => {
+    const pending = Array.from(
+      document.querySelectorAll<HTMLElement>('[data-reveal], [data-reveal-line]'),
+    ).filter((el) => !el.classList.contains('is-visible'));
 
-/* ───────────────── Typewriter ───────────────── */
-function useTypewriter(fullText: string, speedMs = 34) {
-  const [count, setCount] = useState(0);
+    if (pending.length === 0) return;
 
-  useEffect(() => {
-    if (count >= fullText.length) return;
+    if (typeof IntersectionObserver === 'undefined') {
+      pending.forEach((el) => el.classList.add('is-visible'));
+      return;
+    }
 
-    const timer = window.setTimeout(() => {
-      setCount((current) => Math.min(current + 1, fullText.length));
-    }, speedMs);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -8% 0px' },
+    );
 
-    return () => window.clearTimeout(timer);
-  }, [count, fullText.length, speedMs]);
-
-  return fullText.slice(0, count);
+    pending.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, deps);
 }
 
-/* ──────────────── Reusable paper card ──────────────── */
-function Card({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+function revealDelay(index: number, step = 50, cap = 350): React.CSSProperties {
+  return { '--reveal-delay': `${Math.min(index * step, cap)}ms` } as React.CSSProperties;
+}
+
+function SectionHeading({ id, index, children }: { id: string; index: string; children: React.ReactNode }) {
   return (
-    <div className={`paper-card ${className}`}>
-      <div className="relative z-10">{children}</div>
+    <div className="section-heading-row" data-reveal>
+      <span className="section-index" aria-hidden="true">{index}</span>
+      <h2 id={id} className="portfolio-section-title">{children}</h2>
     </div>
   );
 }
-
-function CollapsibleCard({
-  id,
-  title,
-  children,
-  cardClassName = "",
-  contentClassName = "",
-  defaultOpen = false,
-}: {
-  id: string;
-  title: string;
-  children: React.ReactNode;
-  cardClassName?: string;
-  contentClassName?: string;
-  defaultOpen?: boolean;
-}) {
-  const [isOpen, setIsOpen] = useState(defaultOpen);
-  const contentId = `${id}-content`;
-
-  return (
-    <Card className={cardClassName}>
-      <button
-        type="button"
-        className="collapsible-trigger"
-        aria-expanded={isOpen}
-        aria-controls={contentId}
-        onClick={() => setIsOpen((current) => !current)}
-      >
-        <span className="section-title text-xl">{title}</span>
-        <span className="collapsible-action" aria-hidden="true">
-          <ChevronDown
-            className={`collapsible-chevron ${isOpen ? 'is-open' : ''}`}
-            strokeWidth={1.8}
-          />
-        </span>
-      </button>
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            id={contentId}
-            key={contentId}
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.24, ease: 'easeInOut' }}
-            className="collapsible-content"
-          >
-            <div className={`collapsible-body ${contentClassName}`}>
-              {children}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </Card>
-  );
-}
-
-
-/* ──────────────── Sections ──────────────── */
-function HeroSection() {
-  const typed = useTypewriter("hi, i'm cooper!", 68);
-
-  return (
-    <Card className="p-4">
-      <motion.div
-        initial={{ opacity: 0, y: -18 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-        className="grid gap-5 md:grid-cols-[7.5rem_1fr] md:items-stretch"
-      >
-        <div className="relative min-h-28 overflow-hidden rounded-[0.7rem] border border-[var(--line-soft)] bg-[rgba(239,228,210,0.74)] md:min-h-full">
-          <Image
-            src="/cooper1.png"
-            alt="Cooper"
-            fill
-            priority
-            sizes="(min-width: 768px) 9rem, 7rem"
-            className="object-cover"
-          />
-        </div>
-        <div className="flex flex-col gap-5">
-          <div className="flex items-start justify-between gap-4">
-            <h1
-              className="min-h-[1.05em] whitespace-nowrap text-3xl font-bold leading-[1.03] tracking-[-0.01em] text-[var(--ink)] sm:text-4xl md:text-5xl"
-            >
-              {typed}
-              <span className="ml-1 inline-block h-[0.9em] w-[2px] bg-[var(--accent)] align-[-0.1em] animate-cursor" />
-            </h1>
-            <motion.div
-              animate={{ rotate: [0, 15, 0, -15, 0] }}
-              transition={{ repeat: Infinity, duration: 1.2 }}
-            >
-              <IoMdHand className="mt-0.5 text-3xl text-[var(--accent-light)] sm:text-4xl md:text-5xl" />
-            </motion.div>
-          </div>
-          <p className="max-w-[64ch] text-sm leading-6 text-[var(--ink-muted)] md:text-[0.9rem]">
-            i&apos;m a rising freshman at stanford and my goal is to become a &ldquo;full-stack&rdquo; maker, experience in everything from manufacturing to web dev to cad.
-            i&apos;ve previously ranked 1st in the world in debate and 2nd in the world in robotics.
-            i love trying new things and building new projects and <span className="font-semibold text-[var(--accent)]">i&apos;m currently looking for a summer 2027 internship, reach out!</span>
-          </p>
-        </div>
-      </motion.div>
-    </Card>
-  );
-}
-
 
 function ContactItem({ href, children, icon: Icon }: { href: string; children: React.ReactNode; icon: IconType }) {
   return (
     <a
       href={href}
       target={href.startsWith('http') ? '_blank' : undefined}
-      rel="noopener noreferrer"
-      className="group flex items-center gap-4 text-sm text-[var(--ink-muted)] hover:text-[var(--accent)]"
+      rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+      className="contact-link"
     >
-      <Icon className="text-lg transition-transform duration-200 group-hover:-translate-y-0.5" />
+      <Icon aria-hidden="true" />
       <span>{children}</span>
     </a>
   );
 }
 
-function ContactSection() {
+function HeroSection() {
   return (
-    <motion.div initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.55 }}>
-      <CollapsibleCard
-        id="contacts"
-        title="Contact & Resume"
-        cardClassName="px-5 py-4"
-        contentClassName="grid gap-3 sm:grid-cols-2"
-      >
-        <ContactItem href="mailto:copperli1234@gmail.com" icon={FaEnvelope}>email</ContactItem>
-        <ContactItem href="https://github.com/CooperLi1" icon={FaGithub}>github</ContactItem>
-        <ContactItem href="https://www.linkedin.com/in/cooper-li-483672341" icon={FaLinkedin}>linkedin</ContactItem>
-        <ContactItem href="https://drive.google.com/file/d/1xJ2eMiS8GXGEpoGaKvoetEYNhwGyPBSp/view?usp=sharing" icon={FaFileDownload}>resume</ContactItem>
-      </CollapsibleCard>
-    </motion.div>
+    <header className="portfolio-hero">
+      <div className="portfolio-portrait">
+        <Image
+          src="/cooper1.png"
+          alt="Cooper hiking in the mountains"
+          fill
+          priority
+          sizes="(min-width: 900px) 18rem, 40vw"
+          className="object-cover"
+        />
+      </div>
+
+      <div className="portfolio-hero-copy">
+        <p className="hero-status">
+          <span className="hero-status-dot" aria-hidden="true" />
+          open to summer 2027 internships
+        </p>
+        <h1>hi, i&apos;m cooper!</h1>
+        <p className="portfolio-intro">
+          i&apos;m a rising freshman at stanford and my goal is to become a &ldquo;full-stack&rdquo; maker, experienced in everything from manufacturing to web dev to cad.
+          i&apos;ve previously ranked <span className="portfolio-intro-ranking">1st in the world in debate and 2nd in the world in robotics</span>.
+          i love trying new things and building new projects, <strong>reach out!</strong>
+        </p>
+        <nav className="contact-nav" aria-label="Contact links">
+          <ContactItem href="mailto:cooper.liu.li1@gmail.com" icon={FaEnvelope}>email</ContactItem>
+          <ContactItem href="https://github.com/CooperLi1" icon={FaGithub}>github</ContactItem>
+          <ContactItem href="https://www.linkedin.com/in/cooper-li/" icon={FaLinkedin}>linkedin</ContactItem>
+        </nav>
+      </div>
+    </header>
+  );
+}
+
+const experience = [
+  { organization: 'Bambu Lab', role: 'Mechanical Design Intern', dates: 'June 2026 - July 2026' },
+  { organization: 'Arculus Solutions', role: 'Mechatronics Intern', dates: 'July 2025 - August 2025' },
+  { organization: 'Nostopharma', role: 'Robotics Lead, Contractor', dates: 'Feb 2026 - Present' },
+  { organization: 'University of Maryland', role: 'Machine Learning Researcher', dates: 'June 2024 - Feb 2026' },
+  { organization: 'Debatify.app', role: 'Founder, Full-Stack Developer', dates: 'Feb 2025 - Present' },
+  { organization: 'Johns Hopkins Applied Physics Lab', role: 'Electrical Engineering Intern', dates: 'June 2024 - August 2024' },
+];
+
+function ExperienceSection() {
+  return (
+    <section
+      className="portfolio-section portfolio-section--experience"
+      aria-labelledby="experience-heading"
+      data-reveal-line
+    >
+      <SectionHeading id="experience-heading" index="01">Experience</SectionHeading>
+      <ul className="experience-list">
+        {experience.map((item, index) => (
+          <li key={`${item.organization}-${item.role}`} data-reveal style={revealDelay(index)}>
+            <div>
+              <h3>{item.organization}</h3>
+              <p>{item.role}</p>
+            </div>
+            <time>{item.dates}</time>
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }
 
 const awards = [
   {
     label: "2x FTC Worlds Inspire Award",
-    detail: <>Top award in FIRST Tech Challenge given to <span className="award-highlight">4/8000+ teams</span>.</>,
+    detail: <>FTC&apos;s top award, given to <span className="award-highlight">4/7,000+ teams</span> for innovative engineering and community impact.</>,
   },
   {
     label: "Public Forum Debate Bid Leader",
-    detail: <><span className="award-highlight">1st/8000+ globally</span> based on number of TOC qualifying performances.</>,
+    detail: <>Ranked <span className="award-highlight">1st globally out of 8,000+ debate teams</span>.</>,
   },
   {
     label: "International Debate Champion",
@@ -189,23 +150,27 @@ const awards = [
   },
   {
     label: "Cameron Impact Scholarship Finalist",
-    detail: <><span className="award-highlight">Top 100/3000+</span> for leadership and impactful community service.</>,
+    detail: <><span className="award-highlight">Top 100 of 3,000+</span> for leadership and community impact.</>,
   },
   {
-    label: "Palantir Meritocracy Fellow",
-    detail: <>Accepted for commercial sector technical internship at Palantir, <span className="award-highlight">&asymp;Top 4%</span>.</>,
+    label: "Palantir Meritocracy Fellowship Offer",
+    detail: <>Selected for a direct-entry forward-deployed role at Palantir as an alternative to college.</>,
+  },
+  {
+    label: "U.S. Presidential Scholars Semifinalist",
+    detail: <>One of <span className="award-highlight">627 U.S. seniors</span> selected for one of the nation&apos;s highest academic honors.</>,
   },
   {
     label: "2x FTC Worlds Innovate Award",
-    detail: <><span className="award-highlight">Top 0.15%</span> for robot innovation globally.</>,
+    detail: <><span className="award-highlight">Top 0.15% globally</span> for robot innovation.</>,
   },
   {
     label: "FBLA Management Information Systems",
-    detail: <>Placed <span className="award-highlight">Top 10 nationally</span> out of <span className="award-highlight">&asymp;1,000 competing teams</span>.</>,
+    detail: <><span className="award-highlight">Top 10 nationally</span> out of roughly 1,000 competing teams.</>,
   },
   {
     label: "Wharton Investment Comp. Semifinalist",
-    detail: <>Led financial modeling software to place <span className="award-highlight">top 50/1800+ teams</span>.</>,
+    detail: <>Built financial modeling software placing <span className="award-highlight">top 50 of 1,800+ teams</span>.</>,
   },
   {
     label: "Certificate of Meritorious Service",
@@ -215,137 +180,91 @@ const awards = [
 
 const skillGroups = [
   {
-    label: "Mechanical & Fabrication",
-    skills: "CAD/CAM (Onshape, SolidWorks), Mechanism Design, DFM/DFA, Topology Optimization, CNC Machining, Additive Manufacturing, Rapid Prototyping, Hand Tools",
+    label: "Mechanical Engineering",
+    sections: [
+      { label: "CAD & design", skills: "Onshape, Creo/Windchill, SolidWorks, Mechanism Design, DFM/DFA" },
+      { label: "Analysis & documentation", skills: "FEA, Topology Optimization, GD&T, Engineering Drawings, Materials and Process Selection" },
+      { label: "Manufacturing", skills: "CAM, CNC Machining, Injection Molding, Additive Manufacturing, Rapid Prototyping" },
+    ],
   },
   {
-    label: "Electronics & Controls",
-    skills: "PCB Design (KiCad, Altium), Soldering, Embedded Systems, Sensors, Communication Protocols, PID Control, Finite State Machines, Inverse Kinematics, Motion Profiling",
+    label: "Electrical & Embedded Systems",
+    sections: [
+      { label: "PCB design", skills: "KiCad, Altium, Schematic Capture, PCB Layout, Board Bring-up" },
+      { label: "Embedded systems", skills: "Microcontrollers, Firmware, I2C, SPI, UART, CAN" },
+      { label: "Hardware integration", skills: "Soldering, Circuit Debugging, Sensors, Actuators" },
+    ],
   },
   {
-    label: "Software & Dev Tools",
-    skills: "Python, Java, React/Next.js, REST APIs, Relational Databases, Supabase, Auth/OAuth, Vercel, Stripe, Docker, Git, Codex, Claude Code",
+    label: "Software Engineering",
+    sections: [
+      { label: "Languages & frontend", skills: "Python, Java, TypeScript, React, Next.js" },
+      { label: "Backend & data", skills: "REST APIs, Relational Databases, Supabase, Authentication/OAuth, Stripe" },
+      { label: "Infrastructure & tools", skills: "Linux, Docker, Git, Vercel, Codex, Claude Code" },
+    ],
   },
   {
-    label: "Machine Learning & Robotics",
-    skills: "Data Pipelines, PyTorch/TensorFlow, Computer Vision, Segmentation/Classification, Model Benchmarking, CNNs, LLMs, RAG, Reinforcement Learning, Hugging Face, Isaac Lab",
+    label: "Robotics & Machine Learning",
+    sections: [
+      { label: "Robotics & controls", skills: "ROS 2, Finite State Machines, PID Control, Motion Profiling, Inverse Kinematics, SLAM, Isaac Lab" },
+      { label: "Computer vision", skills: "Image Classification, Segmentation, CNNs, Model Benchmarking" },
+      { label: "ML systems", skills: "PyTorch, TensorFlow, Hugging Face, Data Pipelines, LLMs, RAG, Reinforcement Learning" },
+    ],
   },
 ];
 
 function SkillsSection() {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 18 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.55 }}
+    <section
+      className="portfolio-section portfolio-section--skills"
+      aria-labelledby="skills-heading"
+      data-reveal-line
     >
-      <CollapsibleCard
-        id="skills"
-        title="Skills"
-        cardClassName="skills-card px-4 py-3"
-        contentClassName="resume-lines"
-      >
-        {skillGroups.map((group) => (
-          <p key={group.label}>
-            <strong>{group.label}:</strong> {group.skills}
-          </p>
+      <SectionHeading id="skills-heading" index="04">Skills</SectionHeading>
+      <dl className="skills-grid">
+        {skillGroups.map((group, index) => (
+          <div key={group.label} data-reveal style={revealDelay(index, 60)}>
+            <dt>{group.label}</dt>
+            <dd>
+              <ul className="skill-subsections">
+                {group.sections.map((section) => (
+                  <li key={section.label}>
+                    <span>{section.label}</span>
+                    <p>{section.skills}</p>
+                  </li>
+                ))}
+              </ul>
+            </dd>
+          </div>
         ))}
-      </CollapsibleCard>
-    </motion.div>
+      </dl>
+    </section>
   );
 }
 
 function AwardsSection() {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 18 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.55 }}
+    <section
+      className="portfolio-section portfolio-section--awards"
+      aria-labelledby="awards-heading"
+      data-reveal-line
     >
-      <CollapsibleCard
-        id="awards"
-        title="Awards"
-        cardClassName="px-5 py-4 md:px-5 md:py-4"
-      >
-        <ul className="award-list">
-          {awards.map((award) => (
-            <li key={award.label} className="award-item">
-              <strong>{award.label}:</strong>{" "}
-              <span>{award.detail}</span>
-            </li>
-          ))}
-        </ul>
-      </CollapsibleCard>
-    </motion.div>
+      <SectionHeading id="awards-heading" index="02">Awards</SectionHeading>
+      <ol className="award-list">
+        {awards.map((award, index) => (
+          <li key={award.label} className="award-item" data-reveal style={revealDelay(index, 35)}>
+            <div>
+              <h3>{award.label}</h3>
+              <p>{award.detail}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
   );
 }
-
-/* ──────────────── Stagger variants ──────────────── */
-const listVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } },
-};
-const itemVariants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.42, ease: 'easeOut' } },
-};
 
 type Project = { title: string; description: React.ReactNode; image: string; link: string; tags?: string[] };
-
-const projectTileClasses = [
-  "sm:col-span-2 xl:col-span-3 xl:row-span-2",
-  "sm:col-span-2 xl:col-span-3 xl:row-span-2",
-  "sm:col-span-2 xl:col-span-3",
-  "sm:col-span-2 xl:col-span-3",
-  "sm:col-span-2 xl:col-span-4",
-  "xl:col-span-2",
-  "xl:col-span-2",
-  "xl:col-span-2",
-  "xl:col-span-2",
-];
-
-function getProjectTileClass(index: number, total: number) {
-  if (index < projectTileClasses.length) return projectTileClasses[index];
-
-  const remainingCount = Math.max(total - projectTileClasses.length, 0);
-  const remainingIndex = index - projectTileClasses.length;
-  const isLastRemaining = remainingIndex === remainingCount - 1;
-  const remainder = remainingCount % 3;
-
-  if (isLastRemaining && remainder === 1) return "sm:col-span-2 xl:col-span-6";
-  if (isLastRemaining && remainder === 2) return "sm:col-span-2 xl:col-span-4";
-
-  return "xl:col-span-2";
-}
-
-function isFeatureTile(index: number) {
-  return index < 2 || index === 4;
-}
-
-function ProjectImage({
-  src,
-  alt,
-  feature,
-}: {
-  src: string;
-  alt: string;
-  feature: boolean;
-}) {
-  return (
-    <div className={`relative overflow-hidden rounded-[0.65rem] ${feature ? 'min-h-56 md:min-h-full' : 'h-80'}`}>
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        loading="eager"
-        sizes="(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw"
-        className="rounded-[0.65rem] object-cover transition duration-300 group-hover:scale-[1.02]"
-      />
-    </div>
-  );
-}
 
 const projectPriority = [
   "CoopCNC | 2024-2025",
@@ -361,7 +280,7 @@ const projectPriority = [
   "Wartortle | 2024-2025",
   "Nudge Wristphone | 2025",
   "Nutmeg | 2022-2023",
-  "CounselorCart | 2026-Now",
+  "CounselorCart | 2026",
   "PlanROS | 2026-Now",
   "Ros 2 + SLAM Explorer | 2026",
   "Cabo! | 2026",
@@ -466,8 +385,8 @@ const projects: Project[] = [
     tags: ["AI", "WebDev"]
   },
     {
-    title: "CounselorCart | 2026-Now",
-    description: <>Marketplace and organizer for college counselors. In Progress.</>,
+    title: "CounselorCart | 2026",
+    description: <>Marketplace and organizer for college counselors.</>,
     image: "/counselorcart.png",
     link: "https://www.counselorcart.com/",
     tags: ["WebDev", "Product"]
@@ -656,10 +575,80 @@ const projects: Project[] = [
   },
 ];
 
+function getProjectParts(title: string) {
+  const separatorIndex = title.lastIndexOf(' | ');
+
+  if (separatorIndex === -1) {
+    return { name: title, year: '' };
+  }
+
+  return {
+    name: title.slice(0, separatorIndex),
+    year: title.slice(separatorIndex + 3),
+  };
+}
+
+function ProjectCard({
+  project,
+  variant,
+  priority = false,
+  revealDelayStyle,
+}: {
+  project: Project;
+  variant: 'featured' | 'compact';
+  priority?: boolean;
+  revealDelayStyle?: React.CSSProperties;
+}) {
+  const { name, year } = getProjectParts(project.title);
+  const isExternal = project.link.startsWith('http');
+
+  return (
+    <Link
+      href={project.link}
+      target={isExternal ? '_blank' : undefined}
+      rel={isExternal ? 'noopener noreferrer' : undefined}
+      prefetch={isExternal ? undefined : false}
+      className={`project-card project-card--${variant}`}
+      data-reveal={revealDelayStyle ? '' : undefined}
+      style={revealDelayStyle}
+    >
+      <div className="project-card-media">
+        <Image
+          src={project.image}
+          alt={name}
+          fill
+          priority={priority}
+          sizes={variant === 'featured'
+            ? '(min-width: 1100px) 40vw, (min-width: 700px) 50vw, 100vw'
+            : '(min-width: 1100px) 9rem, (min-width: 700px) 8rem, 7rem'}
+          className="object-cover"
+        />
+      </div>
+      <div className="project-card-copy">
+        <div className="project-card-meta">
+          {year && <time>{year}</time>}
+          <span className="project-card-arrow" aria-hidden="true">↗</span>
+        </div>
+        <h3>{name}</h3>
+        <p className="project-card-description">{project.description}</p>
+        {project.tags && project.tags.length > 0 && (
+          <div className="project-tags" aria-label="Project categories">
+            {project.tags.map((tag) => (
+              <span key={tag} className="tag-chip">{tag}</span>
+            ))}
+          </div>
+        )}
+      </div>
+    </Link>
+  );
+}
+
 function ProjectsSection() {
   const [filter, setFilter] = useState('All');
 
-  // Compute unique tags sorted by frequency
+  // Re-observe after a filter change so the remounted grid animates back in.
+  useScrollReveal([filter]);
+
   const allTags = React.useMemo(() => {
     const tagCounts = new Map<string, number>();
     projects.forEach(p => p.tags?.forEach(t => tagCounts.set(t, (tagCounts.get(t) || 0) + 1)));
@@ -686,154 +675,135 @@ function ProjectsSection() {
     ? orderedProjects
     : orderedProjects.filter(p => p.tags?.includes(filter));
 
+  const featuredProjects = filter === 'All' ? filteredProjects.slice(0, 5) : [];
+  const indexedProjects = filter === 'All' ? filteredProjects.slice(5) : filteredProjects;
 
   return (
-    <motion.section
-      variants={listVariants}
-      initial="hidden"
-      animate="visible"
-      className="h-auto"
-    >
-      <div className="relative mb-5 flex items-start justify-between gap-4">
-        <h2 className="section-title text-2xl md:text-3xl">
-          Projects
-        </h2>
-
-        <label className="sr-only" htmlFor="project-filter">Filter projects</label>
-        <select
-          id="project-filter"
-          value={filter}
-          onChange={(event) => setFilter(event.target.value)}
-          className="project-filter-select"
-        >
+    <section className="projects-section" aria-labelledby="projects-heading" data-reveal-line>
+      <div className="projects-heading-row">
+        <SectionHeading id="projects-heading" index="05">Projects</SectionHeading>
+        <div className="project-filters" aria-label="Filter projects">
           {categories.map((cat) => (
-            <option key={cat} value={cat}>{cat}</option>
-          ))}
-        </select>
-      </div>
-
-      <div className="grid grid-flow-dense grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-6">
-        {filteredProjects.map((p, i) => {
-          const feature = isFeatureTile(i);
-
-          return (
-            <motion.a
-              layout
-              key={p.title}
-              href={p.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              variants={itemVariants}
-              className={`paper-card group min-h-[16rem] p-3 ${getProjectTileClass(i, filteredProjects.length)}`}
+            <button
+              key={cat}
+              type="button"
+              aria-pressed={filter === cat}
+              aria-controls="project-list"
+              className={filter === cat ? 'project-filter is-active' : 'project-filter'}
+              onClick={() => setFilter(cat)}
             >
-              <div className={feature ? "grid h-full gap-3 md:grid-cols-[1.05fr_0.95fr]" : "flex h-full flex-col gap-3"}>
-                <ProjectImage src={p.image} alt={p.title} feature={feature} />
-                <div className="flex flex-1 flex-col px-1 pb-1">
-                  <h3 className="text-lg font-semibold leading-tight text-[var(--ink)] transition group-hover:text-[var(--accent)] md:text-xl">
-                    {p.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-6 text-[var(--ink-muted)] [&_strong]:font-semibold [&_strong]:text-[var(--accent)]">
-                    {p.description}
-                  </p>
-                  {p.tags && p.tags.length > 0 && (
-                    <div className="mt-auto flex flex-wrap gap-2 pt-4">
-                      {p.tags.map(tag => (
-                        <span
-                          key={tag}
-                          className="tag-chip"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
-            </motion.a>
-          );
-        })}
+              {cat}
+            </button>
+          ))}
+        </div>
       </div>
-    </motion.section>
+
+      <div id="project-list" key={filter}>
+        {featuredProjects.length > 0 && (
+          <div className="featured-project-grid">
+            {featuredProjects.map((project, index) => (
+              <ProjectCard
+                key={project.title}
+                project={project}
+                variant="featured"
+                priority={index < 2}
+                revealDelayStyle={revealDelay(index, 70)}
+              />
+            ))}
+          </div>
+        )}
+
+        <div
+          className={featuredProjects.length > 0 ? 'project-index-grid has-featured' : 'project-index-grid'}
+          data-reveal
+          style={featuredProjects.length > 0 ? revealDelay(1, 80) : undefined}
+        >
+          {indexedProjects.map((project) => (
+            <ProjectCard
+              key={project.title}
+              project={project}
+              variant="compact"
+            />
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
 function PublicationsSection() {
   return (
-    <motion.div initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.55 }}>
-      <CollapsibleCard
-        id="publications"
-        title="Publications"
-        cardClassName="px-5 py-4"
-        contentClassName="space-y-4 pr-2"
-      >
-        <div>
-          <a href="https://www3.cs.stonybrook.edu/~icdm2025/icdmw2025proceedings/813200c994.pdf" target="_blank" rel="noopener noreferrer" className="group block">
-            <h3 className="text-[0.78rem] font-semibold leading-[1.25] text-[var(--ink)] transition group-hover:text-[var(--accent)]">
+    <section
+      className="portfolio-section portfolio-section--publications"
+      aria-labelledby="publications-heading"
+      data-reveal-line
+    >
+      <SectionHeading id="publications-heading" index="03">Publications</SectionHeading>
+      <div className="publication-list">
+        <article data-reveal>
+          <a href="https://www3.cs.stonybrook.edu/~icdm2025/icdmw2025proceedings/813200c994.pdf" target="_blank" rel="noopener noreferrer">
+            <h3>
               Multimodal Foundation Models as Router Models for High-Resolution Aerial Image Segmentation.
             </h3>
-            <p className="mt-1 text-[0.68rem] leading-[1.35] text-[var(--ink-muted)]">
-              <strong className="font-semibold text-[var(--accent)]">Cooper Li</strong>, Zhihao Wang, Yiqun Xie.
+            <p>
+              <strong>Cooper Li</strong>, Zhihao Wang, Yiqun Xie.
             </p>
-            <p className="mt-1 text-[0.56rem] italic leading-[1.25] text-[var(--ink-soft)]">
+            <p className="publication-venue">
               In Proceedings of the IEEE International Conference on Data Mining (ICDM), 2025.
             </p>
           </a>
-        </div>
+        </article>
 
-        <div>
-          <a href="https://neurips.cc/virtual/2025/loc/san-diego/poster/121794" target="_blank" rel="noopener noreferrer" className="group block">
-            <h3 className="text-[0.78rem] font-semibold leading-[1.25] text-[var(--ink)] transition group-hover:text-[var(--accent)]">
+        <article data-reveal style={revealDelay(1, 70)}>
+          <a href="https://neurips.cc/virtual/2025/loc/san-diego/poster/121794" target="_blank" rel="noopener noreferrer">
+            <h3>
               TreeFinder: A US-Scale Benchmark Dataset for Individual Tree Mortality Monitoring Using High-Resolution Aerial Imagery.
             </h3>
-            <p className="mt-1 text-[0.68rem] leading-[1.35] text-[var(--ink-muted)]">
-              Zhihao Wang, <strong className="font-semibold text-[var(--accent)]">Cooper Li</strong>, Ruichen Wang, Lei Ma, George Hurtt, Xiaowei Jia, Gengchen Mai, Zhili Li, Yiqun Xie.
+            <p>
+              Zhihao Wang, <strong>Cooper Li</strong>, Ruichen Wang, Lei Ma, George Hurtt, Xiaowei Jia, Gengchen Mai, Zhili Li, Yiqun Xie.
             </p>
-            <p className="mt-1 text-[0.56rem] italic leading-[1.25] text-[var(--ink-soft)]">
+            <p className="publication-venue">
               In Proceedings of the 39th Conference on Neural Information Processing Systems (NeurIPS), 2025.
             </p>
           </a>
-        </div>
+        </article>
 
-        <div>
-          <a href="https://dl.acm.org/doi/10.1145/3764919.3770871" target="_blank" rel="noopener noreferrer" className="group block">
-            <h3 className="text-[0.78rem] font-semibold leading-[1.25] text-[var(--ink)] transition group-hover:text-[var(--accent)]">
+        <article data-reveal style={revealDelay(2, 70)}>
+          <a href="https://dl.acm.org/doi/10.1145/3764919.3770871" target="_blank" rel="noopener noreferrer">
+            <h3>
               Characterizing the Effectiveness of DINOv2 as an Off-the-Shelf Foundation Model for Earth Monitoring Tasks: Preliminary Results.
             </h3>
-            <p className="mt-1 text-[0.68rem] leading-[1.35] text-[var(--ink-muted)]">
-              Ruichen Wang, <strong className="font-semibold text-[var(--accent)]">Cooper Li</strong>, Sophia Hou, Alexander Lu, Zhihao Wang, Xiaowei Jia, and Yiqun Xie.
+            <p>
+              Ruichen Wang, <strong>Cooper Li</strong>, Sophia Hou, Alexander Lu, Zhihao Wang, Xiaowei Jia, and Yiqun Xie.
             </p>
-            <p className="mt-1 text-[0.56rem] italic leading-[1.25] text-[var(--ink-soft)]">
+            <p className="publication-venue">
               In Proceedings of the 4th ACM SIGSPATIAL International Workshop on Spatial Big Data and AI for Industrial Applications (GeoIndustry &apos;25), 2025.
             </p>
           </a>
-        </div>
-      </CollapsibleCard>
-    </motion.div>
+        </article>
+      </div>
+    </section>
   );
 }
 
-/* ───────────────── Page ───────────────── */
 export default function Page() {
+  useScrollReveal();
+
   return (
-    <main id="main-content" className="relative min-h-screen text-[var(--ink)]">
-      <div className="relative z-10 mx-auto max-w-7xl px-4 py-6 md:px-8 md:py-8 lg:px-12">
-        <div className="space-y-6">
-          <section className="grid gap-5 lg:grid-cols-[1.18fr_0.82fr] lg:items-start">
-            <div className="space-y-5">
-              <HeroSection />
-              <AwardsSection />
-            </div>
-            <div className="space-y-5">
-              <ContactSection />
-              <PublicationsSection />
-              <SkillsSection />
-            </div>
-          </section>
-          <section>
-            <ProjectsSection />
-          </section>
+    <>
+      <a className="skip-link" href="#main-content">Skip to content</a>
+      <main id="main-content" className="portfolio-page">
+        <div className="portfolio-shell">
+          <HeroSection />
+          <div className="portfolio-ledger">
+            <ExperienceSection />
+            <AwardsSection />
+            <PublicationsSection />
+            <SkillsSection />
+          </div>
+          <ProjectsSection />
         </div>
-      </div>
-    </main>
+      </main>
+    </>
   );
 }
