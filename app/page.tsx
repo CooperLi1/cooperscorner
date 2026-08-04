@@ -4,7 +4,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaEnvelope, FaGithub, FaLinkedin } from 'react-icons/fa';
+import { PiArrowUpRight, PiEnvelopeSimple, PiGithubLogo, PiLinkedinLogo } from 'react-icons/pi';
 import type { IconType } from 'react-icons';
 
 // Adds `.is-visible` to [data-reveal] / [data-reveal-line] elements as they
@@ -45,10 +45,9 @@ function revealDelay(index: number, step = 50, cap = 350): React.CSSProperties {
   return { '--reveal-delay': `${Math.min(index * step, cap)}ms` } as React.CSSProperties;
 }
 
-function SectionHeading({ id, index, children }: { id: string; index: string; children: React.ReactNode }) {
+function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
   return (
     <div className="section-heading-row" data-reveal>
-      <span className="section-index" aria-hidden="true">{index}</span>
       <h2 id={id} className="portfolio-section-title">{children}</h2>
     </div>
   );
@@ -73,11 +72,13 @@ function HeroSection() {
     <header className="portfolio-hero">
       <div className="portfolio-portrait">
         <Image
-          src="/cooper1.png"
-          alt="Cooper hiking in the mountains"
+          src="/cooper-pit.jpg"
+          alt="Cooper working on his FTC robot in the competition pit"
           fill
           priority
-          sizes="(min-width: 900px) 18rem, 40vw"
+          // Matches the hero grid: 17rem / 14rem portrait column on desktop,
+          // full-bleed once the hero stacks below 50rem.
+          sizes="(min-width: 1100px) 17rem, (min-width: 800px) 14rem, 100vw"
           className="object-cover"
         />
       </div>
@@ -89,14 +90,14 @@ function HeroSection() {
         </p>
         <h1>hi, i&apos;m cooper!</h1>
         <p className="portfolio-intro">
-          i&apos;m a rising freshman at stanford and my goal is to become a &ldquo;full-stack&rdquo; maker, experienced in everything from manufacturing to web dev to cad.
-          i&apos;ve previously ranked <span className="portfolio-intro-ranking">1st in the world in debate and 2nd in the world in robotics</span>.
-          i love trying new things and building new projects, <strong>reach out!</strong>
+          i&apos;m a rising freshman at stanford and a <span className="nowrap">&ldquo;full-stack&rdquo;</span> maker: cad, manufacturing, electronics, web dev.
+          previously <span className="portfolio-intro-ranking">1st</span> in the world in debate and{' '}
+          <span className="portfolio-intro-ranking">2nd</span> in robotics. <strong>reach out!</strong>
         </p>
         <nav className="contact-nav" aria-label="Contact links">
-          <ContactItem href="mailto:cooper.liu.li1@gmail.com" icon={FaEnvelope}>email</ContactItem>
-          <ContactItem href="https://github.com/CooperLi1" icon={FaGithub}>github</ContactItem>
-          <ContactItem href="https://www.linkedin.com/in/cooper-li/" icon={FaLinkedin}>linkedin</ContactItem>
+          <ContactItem href="mailto:cooper.liu.li1@gmail.com" icon={PiEnvelopeSimple}>email</ContactItem>
+          <ContactItem href="https://github.com/CooperLi1" icon={PiGithubLogo}>github</ContactItem>
+          <ContactItem href="https://www.linkedin.com/in/cooper-li/" icon={PiLinkedinLogo}>linkedin</ContactItem>
         </nav>
       </div>
     </header>
@@ -104,6 +105,7 @@ function HeroSection() {
 }
 
 const experience = [
+  { organization: 'Conduit', role: 'Robotics Intern', dates: 'July 2026 - Present' },
   { organization: 'Bambu Lab', role: 'Mechanical Design Intern', dates: 'June 2026 - July 2026' },
   { organization: 'Arculus Solutions', role: 'Mechatronics Intern', dates: 'July 2025 - August 2025' },
   { organization: 'Nostopharma', role: 'Robotics Lead, Contractor', dates: 'Feb 2026 - Present' },
@@ -119,7 +121,7 @@ function ExperienceSection() {
       aria-labelledby="experience-heading"
       data-reveal-line
     >
-      <SectionHeading id="experience-heading" index="01">Experience</SectionHeading>
+      <SectionHeading id="experience-heading">Experience</SectionHeading>
       <ul className="experience-list">
         {experience.map((item, index) => (
           <li key={`${item.organization}-${item.role}`} data-reveal style={revealDelay(index)}>
@@ -220,7 +222,7 @@ function SkillsSection() {
       aria-labelledby="skills-heading"
       data-reveal-line
     >
-      <SectionHeading id="skills-heading" index="04">Skills</SectionHeading>
+      <SectionHeading id="skills-heading">Skills</SectionHeading>
       <dl className="skills-grid">
         {skillGroups.map((group, index) => (
           <div key={group.label} data-reveal style={revealDelay(index, 60)}>
@@ -249,17 +251,15 @@ function AwardsSection() {
       aria-labelledby="awards-heading"
       data-reveal-line
     >
-      <SectionHeading id="awards-heading" index="02">Awards</SectionHeading>
-      <ol className="award-list">
+      <SectionHeading id="awards-heading">Awards</SectionHeading>
+      <ul className="award-list">
         {awards.map((award, index) => (
           <li key={award.label} className="award-item" data-reveal style={revealDelay(index, 35)}>
-            <div>
-              <h3>{award.label}</h3>
-              <p>{award.detail}</p>
-            </div>
+            <h3>{award.label}</h3>
+            <p>{award.detail}</p>
           </li>
         ))}
-      </ol>
+      </ul>
     </section>
   );
 }
@@ -619,15 +619,15 @@ function ProjectCard({
           fill
           priority={priority}
           sizes={variant === 'featured'
-            ? '(min-width: 1100px) 40vw, (min-width: 700px) 50vw, 100vw'
-            : '(min-width: 1100px) 9rem, (min-width: 700px) 8rem, 7rem'}
+            ? '(min-width: 1100px) 55vw, (min-width: 800px) 50vw, 100vw'
+            : '(min-width: 1100px) 9rem, (min-width: 800px) 8rem, (min-width: 512px) 34vw, 7rem'}
           className="object-cover"
         />
       </div>
       <div className="project-card-copy">
         <div className="project-card-meta">
           {year && <time>{year}</time>}
-          <span className="project-card-arrow" aria-hidden="true">↗</span>
+          <PiArrowUpRight className="project-card-arrow" size={14} aria-hidden="true" />
         </div>
         <h3>{name}</h3>
         <p className="project-card-description">{project.description}</p>
@@ -681,7 +681,7 @@ function ProjectsSection() {
   return (
     <section className="projects-section" aria-labelledby="projects-heading" data-reveal-line>
       <div className="projects-heading-row">
-        <SectionHeading id="projects-heading" index="05">Projects</SectionHeading>
+        <SectionHeading id="projects-heading">Projects</SectionHeading>
         <div className="project-filters" aria-label="Filter projects">
           {categories.map((cat) => (
             <button
@@ -738,7 +738,7 @@ function PublicationsSection() {
       aria-labelledby="publications-heading"
       data-reveal-line
     >
-      <SectionHeading id="publications-heading" index="03">Publications</SectionHeading>
+      <SectionHeading id="publications-heading">Publications</SectionHeading>
       <div className="publication-list">
         <article data-reveal>
           <a href="https://www3.cs.stonybrook.edu/~icdm2025/icdmw2025proceedings/813200c994.pdf" target="_blank" rel="noopener noreferrer">

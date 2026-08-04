@@ -43,11 +43,6 @@ export default function ProjectPage() {
         alt: "Demo Image 1",
         description: "Success!",
       },
-      {
-        type: "video",
-        src: "https://youtube.com/shorts/xiHRgKjZxGk",
-        description: "Short video I made about my CNC.",
-      },
     ],
   };
 

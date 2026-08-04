@@ -1,19 +1,139 @@
 @import 'tailwindcss';
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* ---------------------------------------------------------------------------
+   Tokens
+
+   Radius system (one scale, applied by role. No asymmetric/alternating radii):
+     --r-lg   surfaces: hero, cards, panels
+     --r-md   media: image frames, thumbnails, inner wells
+     --r-sm   controls: chips, tags, small buttons
+     --r-pill pills: filters, status badges
+--------------------------------------------------------------------------- */
 :root {
-  --bg-base: #efede6;
-  --bg-paper: #f7f4ed;
-  --bg-paper-strong: #fcfaf5;
-  --ink: #202522;
-  --ink-muted: #5f635e;
-  --ink-soft: #858981;
-  --line: #c9c7bd;
-  --line-soft: rgba(32, 37, 34, 0.14);
-  --accent: #ad5434;
-  --accent-soft: #c97858;
-  --accent-light: #dfa082;
-  --shadow-warm: rgba(49, 54, 50, 0.14);
+  color-scheme: light;
+
+  /* Page sits ~6 L* below the card surface. At the previous 4.6 L* the cards
+     read as flat patches rather than as sheets lying on paper. */
+  --bg-base: #ece9e0;
+  --bg-paper: #f7f5ef;
+  --bg-paper-strong: #fdfbf6;
+
+  --ink: #1e2320;
+  --ink-muted: #5c605b;
+  --ink-soft: #6b6760;
+
+  --line: #cbc8bd;
+  --line-soft: rgba(30, 35, 32, 0.13);
+
+  /* One accent hue, two roles. --accent is text-safe (~5:1 on paper);
+     --accent-bright is decoration only (rules, marks, gradients). */
+  --accent: #a4492a;
+  --accent-bright: #c2663f;
+
+  --surface: rgba(253, 251, 246, 0.86);
+  --surface-2: rgba(247, 245, 239, 0.92);
+  --surface-solid: #f7f5ef;
+  --img-placeholder: #dbd7cc;
+
+  --highlight: rgba(255, 255, 255, 0.7);
+  --media-dim: 1;
+  --media-rim: inset 0 0 0 1px var(--line-soft);
+  --shadow-color: rgba(46, 40, 32, 0.16);
+  /* Two-part warm shadow: a tight contact edge plus a wide ambient falloff.
+     The previous single shadow used a -4.5rem spread on a 6rem blur, which
+     shrank it below the element and rendered as nothing. */
+  --shadow-card: 0 1px 2px rgba(74, 55, 40, 0.06), 0 10px 30px -12px rgba(74, 55, 40, 0.2);
+  --shadow-lift: 0 2px 4px rgba(74, 55, 40, 0.07), 0 18px 40px -16px rgba(74, 55, 40, 0.28);
+
+  --ambient:
+    radial-gradient(circle at 92% 0%, color-mix(in oklab, var(--accent-bright) 12%, transparent), transparent 31rem),
+    radial-gradient(circle at 7% 42%, rgba(87, 103, 92, 0.07), transparent 28rem);
+
+  /* One value for every section boundary. The gaps used to run 57 / 101 / 165px
+     down the page, which read as the layout accelerating rather than breathing. */
+  --section-gap: clamp(3.5rem, 7vw, 7rem);
+
+  --r-lg: 0.875rem;
+  --r-md: 0.5rem;
+  --r-sm: 0.3125rem;
+  --r-pill: 999px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Dark theme. Warm charcoals, never pure black, so the paper identity survives
+   the inversion. Applied by system preference and by the `.dark` class. */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    color-scheme: dark;
+
+    --bg-base: #141210;
+    --bg-paper: #1e1b18;
+    --bg-paper-strong: #2e2a25;
+
+    --ink: #eae5dc;
+    --ink-muted: #a9a299;
+    --ink-soft: #9d958b;
+
+    --line: #3a352f;
+    --line-soft: rgba(234, 229, 220, 0.13);
+
+    --accent: #e2794a;
+    --accent-bright: #eb9068;
+
+    --surface: rgba(44, 40, 35, 0.9);
+    --surface-2: rgba(38, 34, 32, 0.95);
+    --surface-solid: #25211f;
+    --img-placeholder: #2c2825;
+
+    /* Dark drop shadows are invisible on a near-black page; a top light edge
+       is what separates surfaces here. */
+    --highlight: rgba(255, 255, 255, 0.07);
+    --media-dim: 0.82;
+    --media-rim: inset 0 0 0 1px rgba(0, 0, 0, 0.45);
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.35), 0 12px 32px -12px rgba(0, 0, 0, 0.6);
+    --shadow-lift: 0 2px 6px rgba(0, 0, 0, 0.4), 0 20px 44px -16px rgba(0, 0, 0, 0.7);
+
+    --ambient:
+      radial-gradient(circle at 92% 0%, color-mix(in oklab, var(--accent-bright) 10%, transparent), transparent 31rem),
+      radial-gradient(circle at 7% 42%, rgba(120, 150, 130, 0.05), transparent 28rem);
+  }
+}
+
+:root.dark {
+  color-scheme: dark;
+
+  --bg-base: #141210;
+  --bg-paper: #1e1b18;
+  --bg-paper-strong: #2e2a25;
+
+  --ink: #eae5dc;
+  --ink-muted: #a9a299;
+  --ink-soft: #9d958b;
+
+  --line: #3a352f;
+  --line-soft: rgba(234, 229, 220, 0.13);
+
+  --accent: #e2794a;
+  --accent-bright: #eb9068;
+
+  --surface: rgba(44, 40, 35, 0.9);
+  --surface-2: rgba(38, 34, 32, 0.95);
+  --surface-solid: #25211f;
+  --img-placeholder: #2c2825;
+
+  --highlight: rgba(255, 255, 255, 0.07);
+  --media-dim: 0.82;
+  --media-rim: inset 0 0 0 1px rgba(0, 0, 0, 0.45);
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.35), 0 12px 32px -12px rgba(0, 0, 0, 0.6);
+  --shadow-lift: 0 2px 6px rgba(0, 0, 0, 0.4), 0 20px 44px -16px rgba(0, 0, 0, 0.7);
+
+  --ambient:
+    radial-gradient(circle at 92% 0%, color-mix(in oklab, var(--accent-bright) 10%, transparent), transparent 31rem),
+    radial-gradient(circle at 7% 42%, rgba(120, 150, 130, 0.05), transparent 28rem);
 }
 
 * {
@@ -29,31 +149,16 @@ body {
   min-height: 100%;
   margin: 0;
   color: var(--ink);
-  background:
-    radial-gradient(circle at 92% 0%, rgba(173, 84, 52, 0.11), transparent 31rem),
-    radial-gradient(circle at 7% 40%, rgba(87, 103, 92, 0.07), transparent 28rem),
-    var(--bg-base);
+  background: var(--ambient), var(--bg-base);
+  background-attachment: fixed;
   font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   font-variant-numeric: tabular-nums;
   text-rendering: optimizeLegibility;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.42;
-  background-image:
-    linear-gradient(rgba(32, 37, 34, 0.055) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(32, 37, 34, 0.055) 1px, transparent 1px);
-  background-size: 4rem 4rem;
-}
-
 ::selection {
   color: var(--ink);
-  background: rgba(173, 84, 52, 0.22);
+  background: color-mix(in oklab, var(--accent-bright) 26%, transparent);
 }
 
 a {
@@ -75,6 +180,7 @@ button:focus-visible,
 select:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
+  border-radius: var(--r-sm);
 }
 
 h1,
@@ -90,7 +196,7 @@ p {
   left: 0.75rem;
   z-index: 50;
   padding: 0.65rem 0.85rem;
-  border-radius: 0.4rem;
+  border-radius: var(--r-sm);
   color: var(--bg-paper-strong);
   background: var(--ink);
   font-size: 0.85rem;
@@ -107,10 +213,10 @@ p {
   position: relative;
   overflow: hidden;
   color: var(--ink);
-  background: rgba(252, 250, 245, 0.9);
+  background: var(--surface);
   border: 1px solid var(--line-soft);
-  border-radius: 0.8rem;
-  box-shadow: 0 1.25rem 3rem -2.5rem var(--shadow-warm);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-card);
 }
 
 .paper-card::before {
@@ -119,7 +225,7 @@ p {
   inset: 0;
   pointer-events: none;
   border-radius: inherit;
-  box-shadow: inset 0 1px rgba(255, 255, 255, 0.65);
+  box-shadow: inset 0 1px var(--highlight);
 }
 
 .paper-link {
@@ -139,7 +245,7 @@ p {
   justify-content: center;
   gap: 0.5rem;
   border: 1px solid var(--line-soft);
-  background: rgba(247, 244, 237, 0.9);
+  background: var(--surface-2);
   color: var(--ink);
   font-weight: 650;
 }
@@ -147,7 +253,7 @@ p {
 .paper-button:hover,
 .project-action-link:hover,
 .project-back-link:hover {
-  border-color: rgba(173, 84, 52, 0.38);
+  border-color: color-mix(in oklab, var(--accent) 40%, transparent);
   background: var(--bg-paper-strong);
   color: var(--accent);
   transform: translateY(-1px);
@@ -161,12 +267,12 @@ p {
 
 .project-action-link {
   width: 100%;
-  border-radius: 0.55rem;
+  border-radius: var(--r-sm);
   padding: 0.8rem 1rem;
 }
 
 .project-back-link {
-  border-radius: 0.45rem;
+  border-radius: var(--r-sm);
   padding: 0.6rem 0.9rem;
   font-size: 0.875rem;
 }
@@ -176,7 +282,7 @@ p {
   min-height: 2.75rem;
   padding: 0 2rem 0 0.75rem;
   border: 1px solid var(--line-soft);
-  border-radius: 0.45rem;
+  border-radius: var(--r-sm);
   background: var(--bg-paper-strong);
   color: var(--ink);
   font-size: 0.75rem;
@@ -187,7 +293,7 @@ p {
 .media-frame {
   overflow: hidden;
   border: 1px solid var(--line-soft);
-  border-radius: 0.65rem;
+  border-radius: var(--r-md);
   background: var(--bg-paper);
 }
 
@@ -197,22 +303,22 @@ p {
 }
 
 .glass {
-  background: rgba(252, 250, 245, 0.9);
+  background: var(--surface);
   border: 1px solid var(--line-soft);
-  border-radius: 0.8rem;
-  box-shadow: 0 1.25rem 3rem -2.5rem var(--shadow-warm);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-card);
 }
 
 .glass-inner {
   overflow: hidden;
   border: 1px solid var(--line-soft);
-  border-radius: 0.65rem;
+  border-radius: var(--r-md);
   background: var(--bg-paper);
 }
 
 .glass-btn {
   border: 1px solid var(--line-soft);
-  border-radius: 0.55rem;
+  border-radius: var(--r-sm);
   background: var(--bg-paper);
   color: var(--ink);
   font-weight: 650;
@@ -236,11 +342,54 @@ p {
   position: sticky;
   top: 0;
   z-index: 20;
+  border-bottom: 1px solid var(--line-soft);
+  background: color-mix(in oklab, var(--bg-base) 92%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+.project-route-nav-inner {
   display: flex;
+  width: min(100%, 78rem);
   min-height: 3.75rem;
   align-items: center;
-  border-bottom: 1px solid var(--line-soft);
-  background: rgba(239, 237, 230, 0.97);
+  margin: 0 auto;
+  padding-inline: clamp(1rem, 2.5vw, 2rem);
+}
+
+/* Reading-progress hairline. Scroll-driven animation, so it is inert (and
+   invisible) in browsers without support instead of falling back to a bar
+   frozen at 0%. */
+.scroll-trace {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 30;
+  height: 2px;
+  pointer-events: none;
+}
+
+.scroll-trace-progress {
+  display: block;
+  height: 100%;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: linear-gradient(90deg, var(--accent), var(--accent-bright));
+}
+
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes scroll-trace-grow {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+
+    .scroll-trace-progress {
+      animation: scroll-trace-grow linear both;
+      animation-timeline: scroll(root block);
+    }
+  }
 }
 
 .project-route .project-back-link {
@@ -289,34 +438,33 @@ p {
 .project-header {
   position: relative;
   display: flex;
-  min-height: clamp(11.5rem, 17vw, 14.5rem);
+  min-height: clamp(8rem, 12vw, 11rem);
   overflow: hidden;
   align-items: flex-end;
   justify-content: space-between;
   gap: 1.5rem;
   padding: clamp(1.4rem, 2.8vw, 2.5rem);
   border: 1px solid var(--line-soft);
-  border-top: 0.3rem solid var(--accent);
-  border-radius: 0.5rem 1.75rem 0.5rem 1.75rem;
+  border-radius: var(--r-lg);
   background:
-    radial-gradient(circle at 88% 18%, rgba(173, 84, 52, 0.16), transparent 21rem),
-    repeating-linear-gradient(90deg, transparent 0 3.95rem, rgba(32, 37, 34, 0.045) 3.95rem 4rem),
-    rgba(252, 250, 245, 0.86);
-  box-shadow: 0 3rem 8rem -6rem var(--shadow-warm);
+    radial-gradient(circle at 88% 18%, color-mix(in oklab, var(--accent-bright) 15%, transparent), transparent 21rem),
+    var(--surface);
+  box-shadow: var(--shadow-card);
 }
 
-.project-header::before {
+.project-header::after {
   content: "";
   position: absolute;
-  top: clamp(1.4rem, 3vw, 2.4rem);
-  right: clamp(1.4rem, 3vw, 2.4rem);
-  width: clamp(3.25rem, 6vw, 5rem);
-  aspect-ratio: 1;
-  border: 1px solid rgba(173, 84, 52, 0.34);
-  border-radius: 50%;
-  box-shadow:
-    inset 0 0 0 0.7rem rgba(173, 84, 52, 0.04),
-    inset 0 0 0 1.4rem rgba(173, 84, 52, 0.03);
+  top: 0;
+  left: 0;
+  width: 7rem;
+  height: 2px;
+  background: var(--accent);
+}
+
+.project-header:not(:has(.project-subtitle)) {
+  min-height: 0;
+  padding-block: clamp(1.5rem, 3vw, 2.25rem);
 }
 
 .project-header-copy {
@@ -330,8 +478,8 @@ p {
   margin: 0;
   font-size: clamp(2.4rem, 4.25vw, 4.6rem);
   font-weight: 760;
-  letter-spacing: -0.07em;
-  line-height: 0.92;
+  letter-spacing: -0.055em;
+  line-height: 0.94;
   text-wrap: balance;
 }
 
@@ -349,19 +497,8 @@ p {
   flex: 0 0 auto;
   min-height: 2.75rem;
   padding: 0.7rem 0.9rem;
-  border-radius: 0.45rem;
+  border-radius: var(--r-sm);
   font-size: 0.78rem;
-}
-
-.project-header-mark {
-  position: absolute;
-  right: 0;
-  bottom: clamp(1.25rem, 3vw, 2.25rem);
-  width: clamp(5rem, 13vw, 10rem);
-  height: 1px;
-  background: var(--accent);
-  transform: rotate(-28deg) translateX(18%);
-  transform-origin: right;
 }
 
 .project-media-card,
@@ -384,9 +521,9 @@ p {
 .project-media-item .media-frame {
   width: min(96%, 72rem);
   margin: 0;
-  border-radius: 0.55rem 2rem 0.55rem 2rem;
-  background: rgba(252, 250, 245, 0.88);
-  box-shadow: 0 2.5rem 6rem -5rem var(--shadow-warm);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
 }
 
 .project-media-item:first-child .media-frame {
@@ -395,14 +532,11 @@ p {
 
 .project-media-item:nth-child(even) .media-frame {
   margin-left: auto;
-  border-radius: 2rem 0.55rem 2rem 0.55rem;
 }
 
 .project-media-visual {
   overflow: hidden;
-  background:
-    linear-gradient(rgba(32, 37, 34, 0.035), rgba(32, 37, 34, 0.035)),
-    var(--bg-paper);
+  background: var(--bg-paper);
 }
 
 .project-media-visual img,
@@ -412,9 +546,13 @@ p {
   height: auto;
 }
 
+.project-media-visual img {
+  filter: brightness(var(--media-dim));
+}
+
 .project-local-video {
   max-width: 100%;
-  background: rgba(32, 37, 34, 0.92);
+  background: #16130f;
 }
 
 .project-video-embed {
@@ -493,59 +631,77 @@ p {
 .portfolio-hero {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(13rem, 17rem) minmax(0, 1fr);
+  grid-template-columns: minmax(14rem, 21rem) minmax(0, 1fr);
   min-height: 25rem;
   overflow: hidden;
   border: 1px solid var(--line-soft);
-  border-top: 0.35rem solid var(--accent);
-  border-radius: 0.55rem 2.2rem 0.55rem 2.2rem;
+  border-radius: var(--r-lg);
   background:
-    radial-gradient(circle at 88% 8%, rgba(173, 84, 52, 0.10), transparent 20rem),
-    rgba(252, 250, 245, 0.82);
-  box-shadow: 0 2.5rem 6rem -4.5rem var(--shadow-warm);
+    radial-gradient(circle at 88% 6%, color-mix(in oklab, var(--accent-bright) 11%, transparent), transparent 22rem),
+    var(--surface);
+  box-shadow:
+    inset 0 1px var(--highlight),
+    var(--shadow-card);
+}
+
+.portfolio-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 7rem;
+  height: 2px;
+  background: var(--accent);
 }
 
 .portfolio-portrait {
   position: relative;
-  min-height: 22rem;
-  margin: 1rem;
+  min-height: 20rem;
+  margin: 0.85rem;
   overflow: hidden;
-  border-radius: 0.45rem 0.45rem 4.5rem 0.45rem;
-  background: #d9d5ca;
+  border-radius: var(--r-sm);
+  background: var(--img-placeholder);
+  box-shadow: var(--media-rim);
 }
 
 .portfolio-portrait img {
   object-position: center 48%;
-  transition: transform 600ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: transform 600ms var(--ease-out);
 }
 
 .portfolio-hero:hover .portfolio-portrait img {
   transform: scale(1.015);
 }
 
+/* Bounded measure. Without the cap the copy column runs the full width of a
+   1344px card, leaving ~440px of hollow paper to the right of every line;
+   capping it turns that gap into a deliberate margin instead. */
 .portfolio-hero-copy {
   display: flex;
   min-width: 0;
   flex-direction: column;
-  padding: clamp(2rem, 5vw, 4.5rem) clamp(1.5rem, 5vw, 5rem) clamp(1.5rem, 3vw, 2.5rem);
+  padding: clamp(1.75rem, 3.5vw, 3rem) clamp(1.5rem, 4vw, 3.5rem) clamp(1.5rem, 2.5vw, 2.25rem);
 }
 
 .portfolio-hero-copy h1 {
   max-width: 11ch;
-  margin: 0;
-  font-size: clamp(3.4rem, 7.2vw, 6.8rem);
+  /* Optical left-align: Manrope's 'h' sidebearing sets the stem ~5px right of
+     the paragraph and rule below it at display size. */
+  margin: 0 0 0 -0.045em;
+  font-size: clamp(3rem, 5.4vw, 4.9rem);
   font-weight: 750;
-  letter-spacing: -0.065em;
-  line-height: 0.9;
+  letter-spacing: -0.055em;
+  line-height: 0.92;
   text-wrap: balance;
 }
 
 .portfolio-intro {
-  max-width: 66ch;
-  margin: clamp(1.5rem, 3vw, 2.5rem) 0 0;
+  max-width: 46ch;
+  margin: clamp(1.35rem, 2.5vw, 2rem) 0 0;
   color: var(--ink-muted);
-  font-size: clamp(0.95rem, 1.25vw, 1.08rem);
-  line-height: 1.75;
+  font-size: clamp(0.95rem, 1.2vw, 1.06rem);
+  line-height: 1.72;
 }
 
 .portfolio-intro strong {
@@ -559,17 +715,18 @@ p {
   align-items: center;
   gap: 0.5rem;
   margin: 0 0 clamp(1rem, 2vw, 1.4rem);
-  padding: 0.4rem 0.65rem;
-  border: 1px solid rgba(173, 84, 52, 0.3);
-  border-radius: 0.3rem;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent);
+  border-radius: var(--r-pill);
   color: var(--accent);
-  background: rgba(173, 84, 52, 0.07);
+  background: color-mix(in oklab, var(--accent-bright) 9%, transparent);
   font-family: var(--font-hacker-mono), ui-monospace, monospace;
   font-size: 0.66rem;
   font-weight: 600;
   letter-spacing: 0.06em;
 }
 
+/* Semantic: signals live availability, not decoration. */
 .hero-status-dot {
   width: 0.42rem;
   height: 0.42rem;
@@ -581,6 +738,11 @@ p {
 .portfolio-intro-ranking {
   color: var(--accent);
   font-weight: 700;
+}
+
+/* Keeps hyphenated compounds from splitting across lines at narrow widths. */
+.nowrap {
+  white-space: nowrap;
 }
 
 .contact-nav {
@@ -604,8 +766,8 @@ p {
 }
 
 .contact-link svg {
-  width: 1rem;
-  height: 1rem;
+  width: 1.05rem;
+  height: 1.05rem;
   color: var(--accent);
   transition: transform 220ms ease;
 }
@@ -631,17 +793,21 @@ p {
 .portfolio-ledger {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: clamp(3.5rem, 6vw, 6rem);
-  margin-top: clamp(3.5rem, 6vw, 5.5rem);
+  column-gap: clamp(2.5rem, 4vw, 4rem);
+  row-gap: var(--section-gap);
+  margin-top: var(--section-gap);
 }
 
 .portfolio-section {
   position: relative;
   isolation: isolate;
   min-width: 0;
-  padding-top: 1rem;
+  padding-top: 1.1rem;
 }
 
+/* A crisp accent tab against a neutral hairline. The previous version faded
+   accent-to-neutral across the first 26%, so ~80% of a 1400px "accent rule"
+   was pale grey and the whole thing read as a smudge. */
 .portfolio-section::before,
 .projects-section::before {
   content: "";
@@ -650,7 +816,8 @@ p {
   right: 0;
   left: 0;
   height: 1px;
-  background: linear-gradient(90deg, var(--accent), var(--line) 26%, var(--line));
+  background-color: var(--line);
+  background-image: linear-gradient(90deg, var(--accent) 0 4.5rem, transparent 4.5rem);
   transform-origin: left;
 }
 
@@ -670,32 +837,27 @@ p {
   gap: 0.8rem;
 }
 
-.section-index,
+/* Mono is reserved for one job: short label-role metadata. The publication
+   venue is running prose, not a label, so it sets in Manrope. */
 .experience-list time,
-.publication-venue,
 .project-card-meta,
-.tag-chip {
+.tag-chip,
+.skill-subsections span,
+.project-filter {
   font-family: var(--font-hacker-mono), ui-monospace, monospace;
-}
-
-.section-index {
-  color: var(--accent);
-  font-size: 0.7rem;
-  font-weight: 650;
-  letter-spacing: 0.08em;
 }
 
 .portfolio-section-title {
   margin: 0;
-  font-size: clamp(1.6rem, 2.7vw, 2.15rem);
+  font-size: clamp(1.45rem, 2.15vw, 1.9rem);
   font-weight: 700;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.035em;
   line-height: 1;
 }
 
 .experience-list,
 .award-list {
-  margin: 1.6rem 0 0;
+  margin: 1.7rem 0 0;
   padding: 0;
   list-style: none;
 }
@@ -705,9 +867,19 @@ p {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 1rem;
-  align-items: start;
-  padding: 0.82rem 0;
+  align-items: baseline;
+  padding: 0.85rem 0;
   border-bottom: 1px solid var(--line-soft);
+}
+
+/* Share a cap-line with the grid-based lists in the opposite column. */
+.experience-list li:first-child,
+.publication-list article:first-child {
+  padding-top: 0;
+}
+
+.experience-list li:last-child {
+  border-bottom: 0;
 }
 
 .experience-list h3,
@@ -717,48 +889,49 @@ p {
 }
 
 .experience-list h3 {
-  font-size: 0.94rem;
-  font-weight: 720;
+  font-size: 1.05rem;
+  font-weight: 740;
   letter-spacing: -0.015em;
 }
 
 .experience-list p {
-  margin-top: 0.18rem;
+  margin-top: 0.2rem;
   color: var(--ink-muted);
   font-size: 0.8rem;
-  line-height: 1.35;
+  line-height: 1.4;
 }
 
 .experience-list time {
   color: var(--ink-soft);
-  font-size: 0.64rem;
+  font-size: 0.68rem;
   line-height: 1.5;
   text-align: right;
+  white-space: nowrap;
 }
 
+/* Ten awards. One column divider instead of ten row rules: the typographic
+   contrast between label and detail already separates the entries. */
 .award-list {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: 2rem;
-  counter-reset: awards;
+  column-gap: clamp(1.75rem, 3.5vw, 3rem);
+  row-gap: 1.4rem;
+}
+
+.award-list::before {
+  content: "";
+  position: absolute;
+  top: 0.15rem;
+  bottom: 0.15rem;
+  left: 50%;
+  width: 1px;
+  background: var(--line-soft);
 }
 
 .award-item {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1.45rem minmax(0, 1fr);
-  gap: 0.65rem;
-  padding: 0.85rem 0;
-  border-bottom: 1px solid var(--line-soft);
-  counter-increment: awards;
-}
-
-.award-item::before {
-  content: counter(awards, decimal-leading-zero);
-  color: var(--accent);
-  font-family: var(--font-hacker-mono), ui-monospace, monospace;
-  font-size: 0.62rem;
-  line-height: 1.5;
+  display: block;
+  min-width: 0;
 }
 
 .award-item h3,
@@ -767,16 +940,16 @@ p {
 }
 
 .award-item h3 {
-  font-size: 0.84rem;
-  font-weight: 720;
+  font-size: 1.05rem;
+  font-weight: 740;
   line-height: 1.3;
 }
 
 .award-item p {
-  margin-top: 0.22rem;
+  margin-top: 0.3rem;
   color: var(--ink-muted);
-  font-size: 0.74rem;
-  line-height: 1.45;
+  font-size: 0.8rem;
+  line-height: 1.5;
 }
 
 .award-highlight {
@@ -785,13 +958,17 @@ p {
 }
 
 .publication-list {
-  margin-top: 1.6rem;
+  margin-top: 1.7rem;
 }
 
 .publication-list article {
   position: relative;
-  padding: 0.95rem 0 1.05rem;
+  padding: 1rem 0 1.1rem;
   border-bottom: 1px solid var(--line-soft);
+}
+
+.publication-list article:last-child {
+  border-bottom: 0;
 }
 
 .publication-list a {
@@ -805,8 +982,8 @@ p {
 }
 
 .publication-list h3 {
-  font-size: 0.88rem;
-  font-weight: 720;
+  font-size: 1.05rem;
+  font-weight: 740;
   line-height: 1.42;
   transition: color 220ms ease;
 }
@@ -816,9 +993,9 @@ p {
 }
 
 .publication-list p {
-  margin-top: 0.38rem;
+  margin-top: 0.4rem;
   color: var(--ink-muted);
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   line-height: 1.5;
 }
 
@@ -829,34 +1006,45 @@ p {
 
 .publication-list .publication-venue {
   color: var(--ink-soft);
-  font-size: 0.62rem;
+  font-size: 0.78rem;
   font-style: normal;
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
 .skills-grid {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 2rem;
-  margin: 1.6rem 0 0;
+  column-gap: clamp(1.75rem, 3.5vw, 3rem);
+  row-gap: 1.75rem;
+  margin: 1.7rem 0 0;
+}
+
+.skills-grid::before {
+  content: "";
+  position: absolute;
+  top: 0.15rem;
+  bottom: 0.15rem;
+  left: 50%;
+  width: 1px;
+  background: var(--line-soft);
 }
 
 .skills-grid > div {
   position: relative;
-  padding: 0.9rem 0 1rem;
-  border-bottom: 1px solid var(--line-soft);
+  min-width: 0;
 }
 
 .skills-grid dt {
-  font-size: 0.85rem;
-  font-weight: 720;
+  font-size: 1.05rem;
+  font-weight: 740;
   line-height: 1.35;
 }
 
 .skills-grid dd {
-  margin: 0.65rem 0 0;
+  margin: 0.7rem 0 0;
   color: var(--ink-muted);
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   line-height: 1.55;
 }
 
@@ -870,15 +1058,14 @@ p {
 
 .skill-subsections li {
   display: grid;
-  grid-template-columns: minmax(5.75rem, 0.34fr) minmax(0, 1fr);
+  grid-template-columns: minmax(8rem, 0.36fr) minmax(0, 1fr);
   gap: 0.8rem;
   align-items: baseline;
 }
 
 .skill-subsections span {
   color: var(--ink-soft);
-  font-family: var(--font-mono), monospace;
-  font-size: 0.59rem;
+  font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   line-height: 1.45;
@@ -892,8 +1079,8 @@ p {
 
 .projects-section {
   position: relative;
-  margin-top: clamp(5rem, 10vw, 9rem);
-  padding-top: 1rem;
+  margin-top: var(--section-gap);
+  padding-top: 1.1rem;
 }
 
 .projects-heading-row {
@@ -903,32 +1090,38 @@ p {
   gap: 2rem;
 }
 
+.projects-heading-row .project-filters {
+  align-self: center;
+}
+
 .project-filters {
   display: flex;
   max-width: 66%;
   flex-wrap: wrap;
   justify-content: flex-end;
-  gap: 0.3rem;
+  gap: 0.35rem;
 }
 
+/* Same case and tracking as the tag chips below: the filter nav and the chips
+   show the same taxonomy in the same eyeline, so they must not be styled as
+   two different label systems. */
 .project-filter {
-  min-height: 2.6rem;
-  padding: 0.55rem 0.72rem;
-  border: 0;
-  border-bottom: 1px solid transparent;
-  border-radius: 0.35rem;
+  min-height: 2.4rem;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid transparent;
+  border-radius: var(--r-pill);
   color: var(--ink-muted);
   background: transparent;
-  font-family: var(--font-hacker-mono), ui-monospace, monospace;
-  font-size: 0.64rem;
+  font-size: 0.65rem;
   font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   cursor: pointer;
 }
 
 .project-filter:hover {
   border-color: var(--line);
   color: var(--accent);
-  background: rgba(252, 250, 245, 0.56);
 }
 
 .project-filter:active {
@@ -937,8 +1130,9 @@ p {
 
 .project-filter.is-active {
   border-color: var(--ink);
-  color: var(--bg-paper-strong);
-  background: var(--ink);
+  color: var(--ink);
+  background: transparent;
+  font-weight: 700;
 }
 
 .featured-project-grid {
@@ -961,8 +1155,9 @@ p {
   overflow: hidden;
   grid-column: span 4;
   border: 1px solid var(--line-soft);
-  border-radius: 0.55rem 1.5rem 0.55rem 1.5rem;
-  background: rgba(252, 250, 245, 0.82);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  box-shadow: inset 0 1px 0 var(--highlight);
   transition: border-color 260ms ease, transform 260ms ease, background-color 260ms ease, box-shadow 260ms ease;
 }
 
@@ -972,24 +1167,28 @@ p {
 
 .project-card--featured:nth-child(2) {
   grid-column: span 5;
-  border-radius: 1.5rem 0.55rem 1.5rem 0.55rem;
 }
 
 .project-card--featured:hover {
-  border-color: rgba(173, 84, 52, 0.42);
+  border-color: color-mix(in oklab, var(--accent) 42%, transparent);
   background: var(--bg-paper-strong);
   transform: translateY(-3px);
-  box-shadow: 0 1.8rem 3.5rem -2.4rem var(--shadow-warm);
+  box-shadow: inset 0 1px 0 var(--highlight), var(--shadow-lift);
 }
 
 .project-card-media {
   position: relative;
   overflow: hidden;
-  background: #d9d5ca;
+  background: var(--img-placeholder);
 }
 
 .project-card-media img {
-  transition: transform 500ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  filter: brightness(var(--media-dim));
+  transition: transform 500ms var(--ease-out), filter 260ms ease;
+}
+
+.project-card:hover .project-card-media img {
+  filter: none;
 }
 
 .project-card:hover .project-card-media img {
@@ -997,12 +1196,21 @@ p {
 }
 
 .project-card--featured .project-card-media {
+  flex: 0 0 auto;
   aspect-ratio: 16 / 8.5;
+}
+
+/* Row one pairs a 7-column and a 5-column card, so their natural image heights
+   differ by ~120px; letting the media absorb the row height stops the narrow
+   card showing a void under its copy. Rows of equal-width cards keep the fixed
+   ratio so their titles stay on a shared baseline. */
+.project-card--featured:nth-child(-n + 2) .project-card-media {
+  flex: 1 0 auto;
 }
 
 .project-card--featured .project-card-copy {
   display: flex;
-  flex: 1;
+  flex: 0 0 auto;
   flex-direction: column;
   padding: 1.1rem 1.2rem 1.25rem;
 }
@@ -1013,18 +1221,20 @@ p {
   justify-content: space-between;
   gap: 1rem;
   color: var(--ink-soft);
-  font-size: 0.64rem;
+  font-size: 0.68rem;
   line-height: 1;
 }
 
+/* Neutral at rest, accent on hover: the arrow becomes a signal on interaction
+   instead of another 40 spots of red competing with the real emphasis. */
 .project-card-arrow {
-  color: var(--accent);
-  font-family: var(--font-manrope), ui-sans-serif, sans-serif;
-  font-size: 1rem;
-  transition: transform 220ms ease;
+  display: inline-flex;
+  color: var(--ink-soft);
+  transition: transform 220ms ease, color 220ms ease;
 }
 
 .project-card:hover .project-card-arrow {
+  color: var(--accent);
   transform: translate(2px, -2px);
 }
 
@@ -1035,10 +1245,10 @@ p {
 
 .project-card--featured h3 {
   margin-top: 0.65rem;
-  font-size: clamp(1.18rem, 2vw, 1.55rem);
+  font-size: clamp(1.1rem, 1.7vw, 1.38rem);
   font-weight: 740;
-  letter-spacing: -0.035em;
-  line-height: 1.05;
+  letter-spacing: -0.03em;
+  line-height: 1.06;
 }
 
 .project-card-description {
@@ -1047,13 +1257,15 @@ p {
 
 .project-card--featured .project-card-description {
   max-width: 62ch;
-  margin-top: 0.58rem;
+  margin-top: 0.6rem;
   font-size: 0.86rem;
   line-height: 1.58;
 }
 
+/* Emphasis inside card copy carries by weight and ink, not colour. 18 cards
+   used the accent here, which turned the highlight into background texture. */
 .project-card-description strong {
-  color: var(--accent);
+  color: var(--ink);
   font-weight: 700;
 }
 
@@ -1069,47 +1281,80 @@ p {
   display: inline-flex;
   align-items: center;
   min-height: 1.45rem;
-  padding: 0.3rem 0.4rem;
-  border-left: 2px solid rgba(173, 84, 52, 0.58);
-  border-radius: 0.12rem;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--r-sm);
   color: var(--ink-soft);
-  background: rgba(173, 84, 52, 0.06);
-  font-size: 0.55rem;
+  background: transparent;
+  font-size: 0.62rem;
   font-weight: 600;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   line-height: 1;
   text-transform: uppercase;
 }
 
+/* Dividers are drawn as per-cell borders rather than by bleeding a background
+   through 1px gaps. With 34 cards in 3 columns the last row has 2 empty cells,
+   and the bleed technique rendered those as a solid grey slab. */
 .project-index-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1px;
+  gap: 0;
   overflow: hidden;
   border: 1px solid var(--line-soft);
-  border-radius: 0.5rem;
-  background: var(--line-soft);
+  border-radius: var(--r-lg);
+  background: var(--surface-2);
+  box-shadow: inset 0 1px 0 var(--highlight);
+}
+
+/* The 34th card would otherwise leave two dead cells inside a closed border as
+   the last thing on the page. Let the orphan finish the row instead. */
+.project-index-grid > *:last-child:nth-child(3n + 1) {
+  grid-column: 1 / -1;
+}
+
+.project-index-grid > *:last-child:nth-child(3n + 2) {
+  grid-column: span 2;
+}
+
+.project-index-grid > *:last-child:nth-child(3n + 1) {
+  grid-template-columns: minmax(6rem, 11%) minmax(0, 1fr);
+}
+
+.project-index-grid > *:nth-child(n + 4) {
+  border-top: 1px solid var(--line-soft);
+}
+
+.project-index-grid > *:not(:nth-child(3n + 1)) {
+  border-left: 1px solid var(--line-soft);
 }
 
 .project-index-grid.has-featured {
   margin-top: 1rem;
 }
 
+/* Transparent so the container's fill shows through: a semi-transparent card
+   stacked on the same semi-transparent container renders ~2 RGB lighter than
+   an empty cell, which drew a visible seam beside the last row. */
 .project-card--compact {
   display: grid;
   grid-template-columns: minmax(6rem, 34%) minmax(0, 1fr);
   min-height: 10rem;
   padding: 0.72rem;
-  background: rgba(247, 244, 237, 0.97);
+  background: transparent;
+  transition: background-color 260ms ease;
 }
 
 .project-card--compact:hover {
   background: var(--bg-paper-strong);
 }
 
+/* Inset hairline so pale thumbnails (white CAD renders, light screenshots) still
+   read as a defined tile against the paper background. */
 .project-card--compact .project-card-media {
   min-height: 100%;
-  border-radius: 0.3rem;
+  border-radius: var(--r-md);
+  box-shadow: inset 0 0 0 1px var(--line-soft);
 }
 
 .project-card--compact .project-card-copy {
@@ -1121,15 +1366,15 @@ p {
 
 .project-card--compact h3 {
   margin-top: 0.45rem;
-  font-size: 0.97rem;
+  font-size: 1rem;
   font-weight: 730;
-  letter-spacing: -0.025em;
-  line-height: 1.12;
+  letter-spacing: -0.02em;
+  line-height: 1.14;
 }
 
 .project-card--compact .project-card-description {
-  margin-top: 0.38rem;
-  font-size: 0.72rem;
+  margin-top: 0.4rem;
+  font-size: 0.78rem;
   line-height: 1.46;
 }
 
@@ -1140,8 +1385,8 @@ p {
 
 .project-card--compact .tag-chip {
   min-height: 1.15rem;
-  padding: 0.22rem 0.3rem;
-  font-size: 0.47rem;
+  padding: 0.22rem 0.38rem;
+  font-size: 0.58rem;
 }
 
 /* Motion layer: hero entrance + scroll reveals. Everything in here degrades to
@@ -1174,16 +1419,16 @@ p {
   @keyframes status-pulse {
     0%,
     100% {
-      box-shadow: 0 0 0 0 rgba(173, 84, 52, 0.32);
+      box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 32%, transparent);
     }
 
     50% {
-      box-shadow: 0 0 0 0.28rem rgba(173, 84, 52, 0);
+      box-shadow: 0 0 0 0.28rem transparent;
     }
   }
 
   .hero-status {
-    animation: rise-in 650ms cubic-bezier(0.16, 1, 0.3, 1) 80ms both;
+    animation: rise-in 650ms var(--ease-out) 80ms both;
   }
 
   .hero-status-dot {
@@ -1191,19 +1436,19 @@ p {
   }
 
   .portfolio-hero-copy h1 {
-    animation: rise-in 700ms cubic-bezier(0.16, 1, 0.3, 1) 160ms both;
+    animation: rise-in 700ms var(--ease-out) 160ms both;
   }
 
   .portfolio-intro {
-    animation: rise-in 700ms cubic-bezier(0.16, 1, 0.3, 1) 280ms both;
+    animation: rise-in 700ms var(--ease-out) 280ms both;
   }
 
   .contact-nav {
-    animation: rise-in 700ms cubic-bezier(0.16, 1, 0.3, 1) 400ms both;
+    animation: rise-in 700ms var(--ease-out) 400ms both;
   }
 
   .portfolio-portrait {
-    animation: portrait-in 900ms cubic-bezier(0.16, 1, 0.3, 1) 120ms both;
+    animation: portrait-in 900ms var(--ease-out) 120ms both;
   }
 
   [data-reveal]:not(.is-visible) {
@@ -1213,13 +1458,13 @@ p {
   /* `backwards` fill so the animation releases the element when done and
      hover transforms (e.g. featured-card lift) are not overridden. */
   [data-reveal].is-visible {
-    animation: rise-in 650ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    animation: rise-in 650ms var(--ease-out) backwards;
     animation-delay: var(--reveal-delay, 0ms);
   }
 
   [data-reveal-line]::before {
     transform: scaleX(0);
-    transition: transform 1100ms cubic-bezier(0.16, 1, 0.3, 1) 120ms;
+    transition: transform 1100ms var(--ease-out) 120ms;
   }
 
   [data-reveal-line].is-visible::before {
@@ -1235,37 +1480,51 @@ p {
 
 ::-webkit-scrollbar-track,
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: rgba(32, 37, 34, 0.06);
+  background: color-mix(in oklab, var(--ink) 6%, transparent);
 }
 
 ::-webkit-scrollbar-thumb,
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  border-radius: 999px;
-  background: rgba(32, 37, 34, 0.32);
+  border-radius: var(--r-pill);
+  background: color-mix(in oklab, var(--ink) 32%, transparent);
 }
 
 ::-webkit-scrollbar-thumb:hover,
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(32, 37, 34, 0.5);
+  background: color-mix(in oklab, var(--ink) 50%, transparent);
 }
 
 @media (min-width: 50.0625rem) {
   .portfolio-hero {
-    min-height: clamp(29rem, 68svh, 34rem);
+    min-height: clamp(25rem, 54svh, 29rem);
   }
 
   .portfolio-hero-copy {
     padding-bottom: clamp(1.75rem, 3vw, 2.75rem);
   }
 
-  .portfolio-ledger {
-    margin-top: clamp(2.5rem, 4vw, 4rem);
-  }
 }
 
 @media (max-width: 68.75rem) {
   .portfolio-hero {
-    grid-template-columns: minmax(12rem, 14rem) minmax(0, 1fr);
+    grid-template-columns: minmax(12rem, 15rem) minmax(0, 1fr);
+    min-height: 0;
+  }
+
+  .portfolio-portrait {
+    min-height: 0;
+    aspect-ratio: 3 / 4;
+  }
+
+  /* Stack the row before the date column gets squeezed against a wrapping
+     employer name. */
+  .experience-list li {
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
+  }
+
+  .experience-list time {
+    text-align: left;
   }
 
   .portfolio-hero-copy h1 {
@@ -1284,6 +1543,11 @@ p {
     grid-template-columns: 1fr;
   }
 
+  .award-list::before,
+  .skills-grid::before {
+    display: none;
+  }
+
   .skill-subsections li {
     grid-template-columns: 1fr;
     gap: 0.15rem;
@@ -1291,6 +1555,21 @@ p {
 
   .project-index-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Re-derive the cell borders for a 2-column grid. */
+  .project-index-grid > *:nth-child(n + 4),
+  .project-index-grid > *:not(:nth-child(3n + 1)) {
+    border-top: 0;
+    border-left: 0;
+  }
+
+  .project-index-grid > *:nth-child(n + 3) {
+    border-top: 1px solid var(--line-soft);
+  }
+
+  .project-index-grid > *:not(:nth-child(2n + 1)) {
+    border-left: 1px solid var(--line-soft);
   }
 }
 
@@ -1307,7 +1586,6 @@ p {
     min-height: clamp(10rem, 30vw, 12rem);
     align-items: flex-end;
     padding: 1.25rem;
-    border-radius: 0.5rem 1.75rem 0.5rem 1.75rem;
   }
 
   .project-title {
@@ -1330,18 +1608,19 @@ p {
 
   .portfolio-hero {
     grid-template-columns: 1fr;
-    border-radius: 0.55rem 1.4rem 0.55rem 1.4rem;
   }
 
   .portfolio-portrait {
     min-height: 0;
     aspect-ratio: 16 / 9;
     margin-bottom: 0;
-    border-radius: 0.4rem 0.4rem 3rem 0.4rem;
   }
 
+  /* The hero slot turns landscape here while the source is portrait. Sit low
+     enough to bring the robot into frame, high enough to keep the head clear
+     of the top edge (past ~46% it starts to crowd). */
   .portfolio-portrait img {
-    object-position: center 40%;
+    object-position: center 38%;
   }
 
   .portfolio-hero-copy {
@@ -1369,12 +1648,21 @@ p {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .award-list::before {
+    display: block;
+  }
+
   .projects-heading-row {
     flex-direction: column;
     align-items: stretch;
+    gap: 1.1rem;
   }
 
-  .project-filters {
+  /* The heading row stacks here, so the desktop `align-self: center` would let
+     the horizontally-scrolling filter strip size to its content and push the
+     page wider than the viewport. */
+  .projects-heading-row .project-filters {
+    align-self: stretch;
     max-width: none;
     justify-content: flex-start;
   }
@@ -1387,6 +1675,17 @@ p {
 
   .project-index-grid {
     grid-template-columns: 1fr;
+  }
+
+  /* Single column: rows divide, nothing divides horizontally. */
+  .project-index-grid > *:nth-child(n + 3),
+  .project-index-grid > *:not(:nth-child(2n + 1)) {
+    border-top: 0;
+    border-left: 0;
+  }
+
+  .project-index-grid > *:nth-child(n + 2) {
+    border-top: 1px solid var(--line-soft);
   }
 }
 
@@ -1404,11 +1703,7 @@ p {
     font-size: clamp(2rem, 10vw, 2.85rem);
   }
 
-  .project-header::before {
-    width: 3.5rem;
-  }
-
-  .project-media-caption {
+    .project-media-caption {
     grid-template-columns: 1fr;
     gap: 0.55rem;
   }
@@ -1441,6 +1736,11 @@ p {
     grid-template-columns: 1fr;
   }
 
+  .award-list::before,
+  .skills-grid::before {
+    display: none;
+  }
+
   .project-filters {
     margin-inline: -1rem;
     padding-inline: 1rem;
@@ -1457,14 +1757,46 @@ p {
     flex: 0 0 auto;
   }
 
+  /* Square thumbs read as images; the 9.5rem floor was padding every short
+     entry and adding ~1000px of scroll across 29 rows. */
   .project-card--compact {
-    grid-template-columns: 5.5rem minmax(0, 1fr);
-    min-height: 9.5rem;
+    grid-template-columns: 6.25rem minmax(0, 1fr);
+    min-height: 0;
     padding: 0.65rem;
+  }
+
+  .project-card--compact .project-card-media {
+    min-height: 0;
+    aspect-ratio: 1 / 1;
+    align-self: start;
   }
 
   .project-card--compact .project-card-copy {
     padding-left: 0.65rem;
+  }
+
+  .project-card--compact .tag-chip {
+    min-height: 1.35rem;
+    padding: 0.25rem 0.45rem;
+    font-size: 0.66rem;
+  }
+
+  .tag-chip {
+    font-size: 0.66rem;
+  }
+
+  /* Unselected filters had a transparent border revealed only on :hover, which
+     never fires on touch, so they read as static labels. */
+  .project-filter {
+    min-height: 2.75rem;
+    padding: 0.6rem 0.85rem;
+    border-color: var(--line);
+    font-size: 0.7rem;
+  }
+
+  .project-filters {
+    gap: 0.5rem;
+    mask-image: linear-gradient(90deg, #000 0 92%, transparent);
   }
 }
 
@@ -1478,15 +1810,11 @@ p {
   .portfolio-section::before,
   .projects-section::before,
   .section-heading-row,
-  .section-index,
-  .experience-list li::after,
-  .award-item::after,
-  .publication-list article::after,
-  .skills-grid > div::after,
   .project-card-media,
   .project-header,
   .project-media-item .media-frame,
-  .project-media-item .project-media-visual {
+  .project-media-item .project-media-visual,
+  .scroll-trace-progress {
     animation: none !important;
     clip-path: none !important;
     filter: none !important;
