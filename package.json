@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "prebuild": "node scripts/generate-media-sizes.mjs",
+    "media-sizes": "node scripts/generate-media-sizes.mjs"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",

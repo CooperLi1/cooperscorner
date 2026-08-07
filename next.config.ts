@@ -6,6 +6,12 @@ const nextConfig = {
   // One-time development prefix invalidates chunks previously served with an
   // incorrect year-long immutable cache policy. Production URLs are unchanged.
   assetPrefix: process.env.NODE_ENV === 'development' ? '/dev-assets' : undefined,
+  // public/ is served as static assets and must never be traced into a
+  // serverless function. It holds ~500MB of video, which on its own exceeds
+  // Vercel's 250MB per-function limit.
+  outputFileTracingExcludes: {
+    '**/*': ['./public/**'],
+  },
   images: {
     // Modern formats + correct responsive buckets
     formats: ['image/avif', 'image/webp'],
