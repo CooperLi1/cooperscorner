@@ -154,10 +154,12 @@ const awards = [
     label: "Cameron Impact Scholarship Finalist",
     detail: <><span className="award-highlight">Top 100 of 3,000+</span> for leadership and community impact.</>,
   },
+  /*
   {
     label: "Palantir Meritocracy Fellowship Offer",
     detail: <>Selected for a direct-entry forward-deployed role at Palantir as an alternative to college.</>,
   },
+  */
   {
     label: "U.S. Presidential Scholars Semifinalist",
     detail: <>One of <span className="award-highlight">627 U.S. seniors</span> selected for one of the nation&apos;s highest academic honors.</>,
