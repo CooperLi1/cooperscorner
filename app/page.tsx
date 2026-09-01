@@ -84,10 +84,6 @@ function HeroSection() {
       </div>
 
       <div className="portfolio-hero-copy">
-        <p className="hero-status">
-          <span className="hero-status-dot" aria-hidden="true" />
-          open to summer 2027 internships
-        </p>
         <h1>hi, i&apos;m cooper!</h1>
         <p className="portfolio-intro">
           i&apos;m a rising freshman at stanford and a <span className="nowrap">&ldquo;full-stack&rdquo;</span> maker: cad, manufacturing, electronics, web dev.
