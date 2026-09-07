@@ -4,13 +4,21 @@ import { hackerMono, manrope } from '@/app/ui/fonts';
 import { ServiceWorkerUnregister } from "@/app/components/ServiceWorkerUnregister";
 import { Analytics } from "@vercel/analytics/next"
 
+const siteName = "Cooper's Corner";
+const siteUrl = 'https://cooperscorner.vercel.app/';
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  applicationName: siteName,
   title: {
     template: "%s | Cooper's Corner",
-    default: "Cooper's Corner",
+    default: siteName,
   },
   description: 'Maker Portfolio | Rising Stanford freshman and full-stack maker.',
+  openGraph: {
+    siteName,
+    type: 'website',
+  },
 
   // Icons for the Browser Tab (Favicon). SVG first for modern browsers, PNG
   // and ICO as fallbacks.
@@ -43,6 +51,19 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body className={`${manrope.variable} ${hackerMono.variable} antialiased`}>
+        <script
+          id="website-structured-data"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              name: siteName,
+              alternateName: 'cooperscorner.vercel.app',
+              url: siteUrl,
+            }).replace(/</g, '\\u003c'),
+          }}
+        />
         <noscript>
           <style>{`[data-reveal]{opacity:1 !important;animation:none !important}[data-reveal-line]::before{transform:none !important}`}</style>
         </noscript>
