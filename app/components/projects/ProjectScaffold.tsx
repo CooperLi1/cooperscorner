@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Image from 'next/image';
-import { Link as LinkIcon } from 'lucide-react';
 import mediaSizes from '@/app/data/media-sizes.json';
 
 /* ---------------------------------------------------------------------------
@@ -86,8 +85,7 @@ export function ProjectHeader({
           rel="noopener noreferrer"
           className="paper-button project-header-link"
         >
-          <LinkIcon size={18} />
-          More Info
+          more info ↗
         </a>
       )}
     </header>
@@ -110,16 +108,18 @@ export function MediaList({ items }: { items: MediaItem[] }) {
                 // guess only if the file cannot be read.
                 const size = readImageSize(item.src) ?? { width: 1600, height: 1000 };
                 return (
-                  <Image
+                  <a href={item.src} target="_blank" rel="noopener noreferrer" className="project-photo-link" aria-label={`Open full-size image: ${typeof item.description === 'string' ? item.description : item.alt || `project photo ${i + 1}`}`}>
+                    <Image
                     src={item.src}
                     alt={item.alt || (typeof item.description === 'string' ? item.description : `Project media ${i + 1}`)}
                     width={size.width}
                     height={size.height}
                     loading={i === 0 ? 'eager' : undefined}
                     fetchPriority={i === 0 ? 'high' : undefined}
-                    sizes="(min-width: 84rem) 78rem, 100vw"
+                    sizes={items.length === 1 ? "(max-width: 800px) 90vw, 760px" : "(max-width: 700px) 90vw, 480px"}
                     className={`w-full h-auto object-contain bg-[var(--bg-paper)] ${item.className || ''}`}
-                  />
+                    />
+                  </a>
                 );
               })()}
 

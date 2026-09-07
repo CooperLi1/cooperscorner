@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     template: "%s | Cooper's Corner",
     default: siteName,
   },
-  description: 'Maker Portfolio | Rising Stanford freshman and full-stack maker.',
+  description: 'Cooper’s Corner — robots, web apps, PCBs, and more. Incoming Stanford freshman; previously ranked 1st in the world in debate and 2nd in robotics.',
   openGraph: {
     siteName,
     type: 'website',
