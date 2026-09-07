@@ -43,7 +43,6 @@ export default function Page() {
           <header className={styles.intro}>
             <div className={styles.greeting}>
               <h1>hi, i&apos;m cooper! <span className={styles.welcome}>welcome to my (semi-retired) personal website!</span></h1>
-              <Image src="/cooper-pixel.png" alt="Pixel-art Cooper waving, with a big head and tiny body" width={56} height={56} sizes="56px" className={styles.avatar} />
             </div>
             <p>i spend a lot of time making stuff — <strong>robots, web apps, pcbs,</strong> and more!</p>
             <p>i&apos;m an incoming freshman at <strong>stanford</strong>, and i previously ranked <strong>1st in the world in debate</strong>, and <strong>2nd in the world in robotics.</strong></p>

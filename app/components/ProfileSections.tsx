@@ -11,7 +11,7 @@ const experience = [
   { organization: 'Arculus Solutions', role: 'Mechatronics Intern', dates: 'July 2025 - August 2025' },
   { organization: 'Nostopharma', role: 'Robotics Lead, Contractor', dates: 'Feb 2026 - Present' },
   { organization: 'University of Maryland', role: 'Machine Learning Researcher', dates: 'June 2024 - Feb 2026' },
-  { organization: 'Debatify.app', role: 'Founder, Full-Stack Developer', dates: 'Feb 2025 - Present' },
+  { organization: 'Debatify.app', role: 'Founder, Full-Stack Developer', dates: 'Feb 2025 - June 2026' },
   { organization: 'Johns Hopkins Applied Physics Lab', role: 'Electrical Engineering Intern', dates: 'June 2024 - August 2024' },
 ];
 
