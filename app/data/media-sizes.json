@@ -227,12 +227,6 @@
     "size": 1151406,
     "mtimeMs": 1763323918750.0361
   },
-  "/cooper-pixel.png": {
-    "width": 1254,
-    "height": 1254,
-    "size": 640711,
-    "mtimeMs": 1788746691542.3206
-  },
   "/cooper1.png": {
     "width": 930,
     "height": 1386,
@@ -558,10 +552,16 @@
     "mtimeMs": 1782613757772.472
   },
   "/pipsqueakcad.png": {
-    "width": 1058,
-    "height": 1010,
-    "size": 656039,
-    "mtimeMs": 1782617262654.638
+    "width": 1456,
+    "height": 1332,
+    "size": 846342,
+    "mtimeMs": 1789461590630.6057
+  },
+  "/pipsqueakenclosure.jpg": {
+    "height": 1600,
+    "width": 1200,
+    "size": 693122,
+    "mtimeMs": 1791241684380.741
   },
   "/pipsqueakpcb.png": {
     "width": 1190,
@@ -604,6 +604,12 @@
     "height": 1134,
     "size": 2471178,
     "mtimeMs": 1744137878874.7
+  },
+  "/printertending.jpg": {
+    "height": 456,
+    "width": 608,
+    "size": 41556,
+    "mtimeMs": 1791238920497.6538
   },
   "/ratchetpto.mov": {
     "width": 1920,

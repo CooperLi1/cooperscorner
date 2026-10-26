@@ -8,8 +8,9 @@ const projectPriority = [
   "Debatify | 2025",
   "Nash | 2023-2024",
   "Recycla | 2025",
-  "Aksis | 2026-Now",
+  "Aksis | 2026",
   "PipSqueak | 2026-Now",
+  "Printer Tending | 2026",
   "Pipe Traversing Robot | 2025",
   "Lucky | 2025-2026",
   "Pick and Place Sim | 2026",
@@ -17,7 +18,7 @@ const projectPriority = [
   "Nudge Wristphone | 2025",
   "Nutmeg | 2022-2023",
   "CounselorCart | 2026",
-  "PlanROS | 2026-Now",
+  "PlanROS | 2026",
   "Ros 2 + SLAM Explorer | 2026",
   "Cabo! | 2026",
   "Rope Climbing Robot | 2025",
@@ -72,8 +73,8 @@ const projects: Project[] = [
     tags: ["Mechatronics", "Controls"]
   },
   {
-  title: "Aksis | 2026-Now",
-  description: <>Easy-to-use AI-powered browser studio to <strong>train robots with RL</strong> from CAD in minutes. In Progress.</>,
+  title: "Aksis | 2026",
+  description: <>Easy-to-use AI-powered browser studio to <strong>train robots with RL</strong> from CAD in minutes.</>,
   image: "/aksispreview.png",
   link: "https://aksisrobotics.vercel.app/",
   tags: ["AI", "Mechatronics", "WebDev", "Product"]
@@ -92,9 +93,16 @@ const projects: Project[] = [
     link: "/projects/auto-pipette",
     tags: ["Mechatronics", "Manufacturing", "PCB Design", "Controls"]
   },
+  {
+    title: "Printer Tending | 2026",
+    description: <>Automated printer tending pipeline using custom <strong>pick-and-place ACT policy</strong> on Almond&apos;s bimanual axol robot.</>,
+    image: "/printertending.jpg",
+    link: "/projects/printer-tending",
+    tags: ["AI", "Mechatronics", "Controls"]
+  },
       {
-    title: "PlanROS | 2026-Now",
-    description: <>Visual planner for <strong>ROS 2</strong>. Lay out nodes and export a base project. In Progress.</>,
+    title: "PlanROS | 2026",
+    description: <>Visual planner for <strong>ROS 2</strong>. Lay out nodes and export a base project.</>,
     image: "/planros.png",
     link: "https://planros.vercel.app/",
     tags: ["WebDev", "Controls"]

@@ -26,6 +26,11 @@ export default function ProjectPage() {
         src: "/pipsqueaksch.png",
         description: "PCB schematic",
       },
+      {
+        type: "image",
+        src: "/pipsqueakenclosure.jpg",
+        description: "Electronics enclosure.",
+      },
     ],
   };
 
