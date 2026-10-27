@@ -54,24 +54,24 @@ export default function Page() {
           <ProjectPhoto project={orderedProjects[2]} index={2} />
           <ProjectPhoto project={orderedProjects[3]} index={3} />
           <Note href="/about/experience" title="my work experience" action="more info">
-            <p>most recently, i worked on robotics at <strong>Conduit Industries</strong> and mechanical design at <strong>Bambu Lab</strong></p>
+            <p>incoming at <strong>Etched</strong> and <strong>SpaceX Starlink</strong>; previously at <strong>Conduit</strong> and <strong>Bambu Lab</strong></p>
           </Note>
           <Note href="/about/skills" title="my skillset" action="learn more">
             <p>mechanical, electrical, software, ml, and robotics</p>
           </Note>
+          <ProjectPhoto project={orderedProjects[4]} index={4} />
+          <ProjectPhoto project={orderedProjects[5]} index={5} />
           <ProjectPhoto project={orderedProjects[6]} index={6} />
           <ProjectPhoto project={orderedProjects[7]} index={7} />
-          <ProjectPhoto project={orderedProjects[4]} index={4} />
           <Note href="/about/publications" title="publications" action="take a look">
             <p>remote sensing &amp; machine learning: neurips, icdm, geoindustry</p>
           </Note>
-          {orderedProjects.slice(8, 12).map((project, i) => <ProjectPhoto key={project.title} project={project} index={i + 8} />)}
+          {orderedProjects.slice(8, 11).map((project, i) => <ProjectPhoto key={project.title} project={project} index={i + 8} />)}
         </div>
         <details className={styles.archive}>
           <summary>archived projects ({orderedProjects.length - 11})</summary>
           <div className={styles.archiveGrid}>
-            <ProjectPhoto project={orderedProjects[5]} index={5} />
-            {orderedProjects.slice(12).map((project, i) => <ProjectPhoto key={project.title} project={project} index={i + 12} />)}
+            {orderedProjects.slice(11).map((project, i) => <ProjectPhoto key={project.title} project={project} index={i + 11} />)}
           </div>
         </details>
       </main>

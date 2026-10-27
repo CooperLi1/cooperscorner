@@ -6,6 +6,8 @@ function SectionHeading({ id, children }: { id: string; children: ReactNode }) {
 }
 
 const experience = [
+  { organization: 'SpaceX · Starlink', role: 'Incoming Electromechanical Intern', dates: 'Summer 2027' },
+  { organization: 'Etched', role: 'Incoming Platform Intern', dates: 'Spring 2027' },
   { organization: 'Conduit', role: 'Robotics Intern', dates: 'July 2026 - Present' },
   { organization: 'Bambu Lab', role: 'Mechanical Design Intern', dates: 'June 2026 - July 2026' },
   { organization: 'Arculus Solutions', role: 'Mechatronics Intern', dates: 'July 2025 - August 2025' },
